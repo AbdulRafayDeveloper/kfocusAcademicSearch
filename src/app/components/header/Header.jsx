@@ -1,0 +1,326 @@
+"use client";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
+
+const Header = () => {
+  return (
+    <header>
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 ">
+        <div className="flex flex-wrap items-center mx-auto ">
+          <Link href="https://flowbite.com" className="flex items-center">
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              className="mr-3 h-6 sm:h-9 ml-10"
+              alt="Flowbite Logo"
+            />
+          </Link>
+          <div className="flex ml-auto items-center lg:order-2 justify-center">
+            <a
+              href="#"
+              className="text-gray-800  hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none "
+            >
+              Melayu
+            </a>
+
+            <a
+              href="#"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none"
+            >
+              <div className="flex flex-row items-center justify-center">
+                <p className="pr-1">3</p>
+                {/* Circle Wrapper for Icon */}
+                <div className="flex items-center justify-center w-6 h-6 border-[0.5px] border-blue-500 rounded-full">
+                  <FontAwesomeIcon
+                    icon={faTrophy}
+                    className="text-blue-600"
+                  ></FontAwesomeIcon>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none"
+            >
+              <div className="flex flex-row items-center justify-center relative">
+                <p className="pr-1">Journals</p>
+                {/* Circle Wrapper for Icon */}
+                <div className="flex items-center justify-center w-6 h-6 relative">
+                  <FontAwesomeIcon
+                    icon={faMobileScreen}
+                    className="text-blue-600 w-[20px] h-[20px]"
+                  ></FontAwesomeIcon>
+                  {/* Red Dot */}
+                  <span className="absolute top-0 right-0 w-2 h-2 bg-red-600 rounded-full border border-white"></span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="#"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1 py-2 lg:py-2.5 mr-2 focus:outline-none"
+            >
+              <div className="flex flex-row items-center justify-center">
+                {/* Circle Wrapper for Icon */}
+                <FontAwesomeIcon
+                  icon={faFilter}
+                  className="text-blue-600 w-4 h-4"
+                ></FontAwesomeIcon>
+                <span className="ml-2 text-xs">Filter</span>
+              </div>
+            </a>
+
+            <button
+              data-collapse-toggle="mobile-menu-2"
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+              aria-controls="mobile-menu-2"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+              <svg
+                className="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            className="ml-20 hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            id="mobile-menu-2"
+          >
+            <div className="flex items-center justify-center space-x-2 ml-14">
+              {/* Keywords Button */}
+              <button className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center">
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="text-blue-600 text-sm mr-2"
+                />
+                <p className="text-blue-600 text-xs font-serif">Keywords</p>
+              </button>
+
+              {/* Search Bar */}
+              <div className="flex rounded-full border-[1px] overflow-hidden max-w-[800px] w-[500px] mx-auto font-[sans-serif]">
+                <input
+                  type="text"
+                  placeholder="Search Something..."
+                  className="flex-grow outline-none bg-white text-gray-600 text-sm px-4 py-2"
+                />
+
+                <div className="w-[1px] bg-gray-300 mx-1 mt-2 mb-2"></div>
+
+                <button className="flex items-center justify-center">
+                  <img
+                    src="/icons/icons8-ai-32.png"
+                    className=" w-6 h-6"
+                    alt="AI Icon"
+                  />
+                </button>
+                <div className="w-[1px] h-[60%] bg-gray-300 mx-1 self-center"></div>
+                <button
+                  type="button"
+                  className="flex items-center justify-center bg-[#017fba] px-4 border-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 192.904 192.904"
+                    width="16px"
+                    className="fill-white"
+                  >
+                    <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div className="flex flex-wrap items-center mx-auto bg-[url('/images/header_background.jpg')] bg-cover pr-10 pl-10">
+        {/* Header Items Section */}
+        <div className="w-full mt-2 mb-2 text-white">
+          <ul className="flex space-x-4 overflow-x-auto items-center justify-center">
+            <li className="flex flex-col items-center pr-2 min-h-[60px] flex-grow ">
+              <div className="flex justify-between w-full">
+                <div className="flex flex-col items-center">
+                  <p className="font-normal text-base text-center pt-2">ALL</p>
+                  <span className="text-white font-light text-sm">914,952</span>
+                </div>
+              </div>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.1px] border-gray-400 min-h-[60px] flex-grow w-[250px]">
+              <a
+                href="#journal-articles"
+                className="font-light text-sm text-center"
+              >
+                Chinese
+              </a>
+              <p className="font-light text-sm text-center pt-[18px] underline">
+                other Languages
+              </p>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a
+                href="#journal-articles"
+                className="font-light text-sm text-center"
+              >
+                Journal Articles
+              </a>
+              <span>
+                <p className="font-light text-sm text-center">914,952</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a
+                href="#theses-dissertations"
+                className="font-light text-sm text-center"
+              >
+                Theses & Dissertations
+              </a>
+              <span>
+                <p className="font-light text-sm text-center">211,169</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a
+                href="#udlislamic-books"
+                className="font-light text-sm text-center"
+              >
+                UDLislamic Books
+              </a>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#conferences" className="font-light text-sm text-center">
+                Conferences
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  42,039
+                </p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#newspapers" className="font-light text-sm text-center">
+                Newspapers
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  101,857
+                </p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#books" className="font-light text-sm text-center">
+                Books
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">0</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#patents" className="font-light text-sm text-center">
+                Patents
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">251</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#standards" className="font-light text-sm text-center">
+                Standards
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  5,883
+                </p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a href="#law-cases" className="font-light text-sm text-center">
+                Law Cases
+              </a>
+              <span>
+                <p className="font-light text-sm text-center ">57,587</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a
+                href="#monographic-serials"
+                className="font-light text-sm text-center"
+              >
+                Monographic Serials
+              </a>
+              <span>
+                <p className="font-light text-sm text-center">2,387</p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+              <a
+                href="#reference-works"
+                className="font-light text-sm text-center"
+              >
+                Reference Works
+              </a>
+            </li>
+
+            <li className="flex flex-col items-center pr-2 flex-grow min-h-[60px] ">
+              <a href="#dataset" className="font-light text-sm text-center">
+                Dataset
+              </a>
+              <span>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  115,339
+                </p>
+              </span>
+            </li>
+
+            <li className="flex flex-col items-center pr-2">
+              <span>
+                <FontAwesomeIcon
+                  icon={faAngleDoubleDown}
+                  className="text-white w-5 h-5"
+                />
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
