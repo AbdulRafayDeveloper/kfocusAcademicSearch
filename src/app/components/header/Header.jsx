@@ -13,8 +13,8 @@ const Header = () => {
         <div className="flex flex-wrap items-center mx-auto ">
           <Link href="https://flowbite.com" className="flex items-center">
             <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-6 sm:h-9 ml-10"
+              src="/icons/future_logo.png"
+              className="h-8 sm:h-8 ml-10"
               alt="Flowbite Logo"
             />
           </Link>
@@ -112,7 +112,7 @@ const Header = () => {
             className="ml-20 hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <div className="flex items-center justify-center space-x-2 ml-14">
+            <div className="flex items-center justify-center space-x-2 ">
               {/* Keywords Button */}
               <button className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center">
                 <FontAwesomeIcon

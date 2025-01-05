@@ -15,7 +15,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
       options: ["Science", "Technology", "Engineering", "Math"],
     },
     {
-      name: "Sustainable Development Goals",
+      name: "Development Goals",
       options: ["Goal 1", "Goal 2", "Goal 3"],
     },
     { name: "Source Title", options: ["Source A", "Source B", "Source C"] },
@@ -51,7 +51,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
   };
 
   return (
-    <div className="w-full bg-white p-4 pb-60">
+    <div className="w-full bg-white p-4 pb-96">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
