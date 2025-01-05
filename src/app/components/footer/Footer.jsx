@@ -7,11 +7,11 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons";
 const Footer = () => {
   return (
     <div className="w-full">
-      <header className="w-full pt-4 flex items-center justify-center">
+      <header className="w-full pt-12 pb-4 flex items-center justify-center">
         <div className="max-w-screen-xl mx-auto px-4 md:px-8  flex justify-between">
           <div className="flex flex-row items-center">
             <div
-              className="text-gray-800 text-normal font-semibold mb-4 self-start"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-lr",
                 transform: "rotate(360deg)",
@@ -40,7 +40,7 @@ const Footer = () => {
 
           <div className="flex flex-row items-center mx-8">
             <div
-              className="text-gray-800 text-normal font-semibold mb-4 self-start"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
@@ -88,7 +88,7 @@ const Footer = () => {
 
           <div className="flex flex-row items-center">
             <div
-              className="text-gray-800 text-normal font-semibold mb-4 self-start"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
