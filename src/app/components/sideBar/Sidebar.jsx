@@ -51,16 +51,26 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
   };
 
   return (
-    <div className="w-full bg-white p-4 pb-96">
+    <div className="w-full bg-white p-4 pb-40">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
-          <div className="flex flex-row items-center pb-6">
-            <FontAwesomeIcon
-              icon={faFilter}
-              className="text-gray-800 pr-4 font-normal text-base"
-            />
-            <h2 className="text-base underline text-gray-800  font-normal">
+          <div className="flex flex-row items-center pb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              class="size-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+              />
+            </svg>
+            <h2 className="text-sm underline text-gray-800  font-normal">
               Filter
             </h2>
           </div>
@@ -70,11 +80,11 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
       {/* Sidebar Item for 'Person' */}
 
       {/* Render filter categories */}
-      <ul className="space-y-4">
+      <ul className="space-y-2 overflow-y-auto">
         {categoriesToDisplay.map((category) => (
           <li key={category.name}>
             <button
-              className={`flex items-center justify-between w-full text-gray-800 font-medium text-base hover:text-blue-600 border-b-[0.5px] pb-4 ${
+              className={`flex items-center justify-between w-full text-gray-800 font-medium text-sm hover:text-blue-600 border-b-[0.5px] pb-4 ${
                 activeCategory === category.name
                   ? "text-blue-600 font-bold"
                   : ""
@@ -85,7 +95,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
               }}
             >
               <span>{category.name}</span>
-              <span className="text-xl">
+              <span className="text-base">
                 {expandedFilters[category.name] ? "-" : "+"}
               </span>
             </button>
@@ -124,10 +134,21 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
                 <span className="font-light">History</span>
               </div>
               <div className="border-b-[0.5px] pb-4 px-6 flex-grow hover:border-b-gray-800">
-                <FontAwesomeIcon
-                  icon={faBookmark}
-                  className="text-gray-800 pr-2"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+                  />
+                </svg>
+
                 <span className="font-light">Lists</span>
               </div>
             </li>

@@ -154,9 +154,9 @@ const Footer = () => {
                     className="flex items-center space-x-3"
                   >
                     <img
-                      src="https://flowbite.com/docs/images/logo.svg"
+                      src="/images/udl_logo.png"
                       className="h-8"
-                      alt="Flowbite Logo"
+                      alt="udl Logo"
                     />
                   </a>
                 </div>

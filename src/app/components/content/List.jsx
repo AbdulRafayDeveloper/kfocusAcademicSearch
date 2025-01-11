@@ -1,4 +1,7 @@
+import Home from "@/app/page";
 import React from "react";
+import { useRef } from "react";
+import HomePage from "../home/Home";
 
 const ListView = () => {
   const products = [
@@ -73,26 +76,44 @@ const ListView = () => {
   ];
 
   return (
-    <div className="relative overflow-x-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+    <div className="relative max-h-[316px] overflow-y-auto ref={listRef}">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 h-1/2">
         <thead className="text-xs text-gray-700 uppercase">
           <tr>
-            <th scope="col" className="px-4 py-3 w-1/12">
+            <th
+              scope="col"
+              className=" px-4 py-1 w-1/12 border border-b-[#0076fa]"
+            >
               {/* Checkbox column */}
             </th>
-            <th scope="col" className="px-4 py-3 w-8/12">
+            <th
+              scope="col"
+              className="px-4 py-1 w-8/12 border border-b-[#0076fa]"
+            >
               Document Title
             </th>
-            <th scope="col" className="px-4 py-3 w-2/12">
+            <th
+              scope="col"
+              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+            >
               Authors
             </th>
-            <th scope="col" className="px-4 py-3 w-1/12">
+            <th
+              scope="col"
+              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+            >
               Year
             </th>
-            <th scope="col" className="px-4 py-3 w-2/12">
+            <th
+              scope="col"
+              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+            >
               Source
             </th>
-            <th scope="col" className="px-4 py-3 w-1/12">
+            <th
+              scope="col"
+              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+            >
               Cited by
             </th>
           </tr>
@@ -108,10 +129,10 @@ const ListView = () => {
               <td className="px-4 py-4 text-left align-top">
                 <input type="checkbox" />
               </td>
-              <td className="px-4 py-4 text-left align-top">
+              <td className="px-4 py-2 text-left align-top">
                 <p className="text-xs text-gray-500">Article</p>
                 <div className="font-medium text-gray-900">{product.title}</div>
-                <div className="text-xs text-blue-600 space-x-2 mt-8">
+                <div className="text-xs text-blue-600 space-x-2 mt-10">
                   {product.details.map((detail, i) => (
                     <span key={i} className="cursor-pointer hover:underline">
                       {detail}

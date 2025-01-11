@@ -9,7 +9,7 @@ import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 ">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2 ">
         <div className="flex flex-wrap items-center mx-auto ">
           <Link href="https://flowbite.com" className="flex items-center">
             <img
@@ -117,9 +117,9 @@ const Header = () => {
               <button className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center">
                 <FontAwesomeIcon
                   icon={faSearch}
-                  className="text-blue-600 text-sm mr-2"
+                  className="text-[#0076fa] text-sm mr-2"
                 />
-                <p className="text-blue-600 text-xs font-serif">Keywords</p>
+                <p className="text-[#0076fa] text-xs font-serif">Keywords</p>
               </button>
 
               {/* Search Bar */}
@@ -142,7 +142,7 @@ const Header = () => {
                 <div className="w-[1px] h-[60%] bg-gray-300 mx-1 self-center"></div>
                 <button
                   type="button"
-                  className="flex items-center justify-center bg-[#017fba] px-4 border-0"
+                  className="flex items-center justify-center bg-[#0076fa] px-4 border-0"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -158,9 +158,9 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-wrap items-center mx-auto bg-[url('/images/header_background.jpg')] bg-cover pr-10 pl-10">
+      <div className="flex flex-wrap items-center mx-auto bg-[#0076fa] bg-cover pr-10 pl-10">
         {/* Header Items Section */}
-        <div className="w-full mt-2 mb-2 text-white">
+        <div className="w-full mb-1 mt-1 text-white">
           <ul className="flex space-x-4 overflow-x-auto items-center justify-center">
             <li className="flex flex-col items-center pr-2 min-h-[60px] flex-grow ">
               <div className="flex justify-between w-full">
@@ -170,17 +170,18 @@ const Header = () => {
                 </div>
               </div>
             </li>
-
-            <li className="flex flex-col items-center pr-2 border-r-[0.1px] border-gray-400 min-h-[60px] flex-grow w-[250px]">
+            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
                 href="#journal-articles"
                 className="font-light text-sm text-center"
               >
                 Chinese
               </a>
-              <p className="font-light text-sm text-center pt-[18px] underline">
-                other Languages
-              </p>
+              <span>
+                <p className="font-light text-xs text-center underline">
+                  other languages
+                </p>
+              </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">

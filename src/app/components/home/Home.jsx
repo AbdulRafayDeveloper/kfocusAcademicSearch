@@ -19,6 +19,7 @@ import {
   faTh,
   faListUl,
   faBars,
+  faArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
 import SidebarFilters from "../sideBar/Sidebar";
 import { useState } from "react";
@@ -38,7 +39,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col h-screen">
         <Header />
 
         <div className="flex flex-grow overflow-hidden">
@@ -48,7 +49,20 @@ const HomePage = () => {
               className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
               onClick={toggleSidebar}
             >
-              <FontAwesomeIcon icon={faChevronCircleLeft} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
             </a>
             <a
               href="#filter"
@@ -59,7 +73,20 @@ const HomePage = () => {
               }`}
               onClick={() => changeActiveCategory("filter")}
             >
-              <FontAwesomeIcon icon={faFilter} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+                />
+              </svg>
             </a>
 
             <a
@@ -71,14 +98,40 @@ const HomePage = () => {
               }`}
               onClick={() => changeActiveCategory("person")}
             >
-              <FontAwesomeIcon icon={faPerson} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                />
+              </svg>
             </a>
             <a
               href="#info"
               className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
               onClick={() => changeActiveCategory("info")}
             >
-              <FontAwesomeIcon icon={faInfo} />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                />
+              </svg>
             </a>
             <a
               href="#ellipsis"
@@ -104,9 +157,9 @@ const HomePage = () => {
               </div>
 
               {/* Main Content Area */}
-              <div className="flex flex-col flex-grow">
+              <div className="flex flex-col flex-grow h-2/3">
                 {/* Header */}
-                <div className="bg-white pt-4 pb-4 pr-1 pl-1 flex flex-row justify-between space-x-2">
+                <div className="bg-white pt-2 pb-2 pr-1 pl-1 flex flex-row justify-between space-x-2">
                   <div>
                     <FontAwesomeIcon
                       icon={faChartSimple}
@@ -122,39 +175,39 @@ const HomePage = () => {
 
                   <div className="flex flex-row ">
                     <div className="flex flex-row pr-2">
-                      <p className="text-sm pr-1">Sort on: </p>
-                      <p className="text-cyan-700 text-sm pr-1">
+                      <p className="text-xs pr-1">Sort on: </p>
+                      <p className="text-cyan-700 text-xs pr-1">
                         Date (newest)
                       </p>
                       <FontAwesomeIcon
                         icon={faChevronDown}
-                        className="p-1 bg-cyan-700 text-white text-sm"
+                        className="p-1 bg-cyan-700 text-white text-xs"
                       ></FontAwesomeIcon>
                     </div>
                     <div className="flex flex-row">
-                      <p className="text-sm text-gray-700 pr-1">Total: </p>
-                      <p className="text-blue-700 text-sm pr-1">1,525,452</p>
-                      <p className="text-sm text-gray-700">articles </p>
+                      <p className="text-xs text-gray-700 pr-1">Total: </p>
+                      <p className="text-blue-700 text-xs pr-1">1,525,452</p>
+                      <p className="text-xs text-gray-700">articles </p>
                     </div>
                     <div className="flex flex-row pl-2">
-                      <p className="text-sm pr-1">2/2600</p>
+                      <p className="text-xs pr-1">2/2600</p>
 
                       <FontAwesomeIcon
                         icon={faChevronLeft}
-                        className="p-1 bg-gray-100 text-gray-700 text-sm mr-2 border-[0.5px]"
+                        className="p-1 bg-gray-100 text-gray-700 text-xs mr-2 border-[0.5px]"
                       ></FontAwesomeIcon>
                       <FontAwesomeIcon
                         icon={faChevronRight}
-                        className="p-1 bg-gray-100 text-gray-700 text-sm border-[0.5px]"
+                        className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px]"
                       ></FontAwesomeIcon>
                     </div>
                   </div>
                 </div>
 
                 {/* Fixed Size Content Area */}
-                <div className="flex-1  pr-2 pl-2 pb-8 w-full mx-auto">
-                  <nav className="mb-6">
-                    <div className="pt-4 flex flex-row justify-between items-center space-x-2">
+                <div className="flex-1 pr-2 pl-2 pb-2 w-full mx-auto">
+                  <nav className="mb-1">
+                    <div className="pt-1 flex flex-row justify-between items-center space-x-2">
                       {/* Left Section */}
                       <div className="flex items-center space-x-2">
                         <input
@@ -264,117 +317,129 @@ const HomePage = () => {
                     </div>
                   </nav>
 
-                  <div className="bg-white w-full h-full">
+                  <div className="bg-white w-full">
                     <div>
                       <ListView />
                     </div>
                   </div>
+                  <footer
+                    className={`bg-white z-10 p-[26px] text-gray-800 mt-auto flex justify-center items-center absolute ${
+                      isSidebarVisible ? "w-[940px]" : "w-full"
+                    }`}
+                  >
+                    <nav aria-label="Page navigation example">
+                      <ul className="flex items-center space-x-2 h-6 text-base">
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            First
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Prev
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            1
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            2
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            aria-current="page"
+                            className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                          >
+                            3
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            4
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            5
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            6
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            7
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            8
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            9
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Next
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                    <div className="pb-6">
+                      <a
+                        href="#"
+                        className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5]"
+                      >
+                        <FontAwesomeIcon icon={faArrowUp} />
+                      </a>
+                    </div>
+                  </footer>
                 </div>
 
                 {/* Footer */}
-                <footer className="bg-white text-gray-800 p-8 pt-28 mt-auto flex justify-center items-center">
-                  <nav aria-label="Page navigation example">
-                    <ul className="flex items-center space-x-2 h-10 text-base">
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          First
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          Prev
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          1
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          2
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          aria-current="page"
-                          className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-                        >
-                          3
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          4
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          5
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          6
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          7
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          8
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          9
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                        >
-                          Next
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </footer>
               </div>
             </div>
           </div>
