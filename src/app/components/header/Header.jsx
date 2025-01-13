@@ -5,8 +5,14 @@ import { faFilter, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Header = () => {
+  const [isFilterVisible, setFilterVisible] = useState(false);
+
+  const toggleFilter = () => {
+    setFilterVisible(!isFilterVisible);
+  };
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2 ">

@@ -78,7 +78,7 @@ const ListView = () => {
   return (
     <div className="relative max-h-[316px] overflow-y-auto ref={listRef}">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 h-1/2">
-        <thead className="text-xs text-gray-700 uppercase">
+        <thead className="text-xs text-gray-700 uppercase bg-white">
           <tr>
             <th
               scope="col"

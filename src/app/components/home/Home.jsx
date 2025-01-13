@@ -2,19 +2,13 @@
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import {
-  faFilter,
-  faChevronCircleLeft,
-  faPerson,
-  faInfo,
   faEllipsis,
   faChartSimple,
   faChevronDown,
   faChevronLeft,
   faChevronRight,
-  faPrint,
-  faEnvelope,
-  faFilePdf,
   faArrowDown,
   faTh,
   faListUl,
@@ -24,10 +18,17 @@ import {
 import SidebarFilters from "../sideBar/Sidebar";
 import { useState } from "react";
 import ListView from "../content/List";
+import GridView from "../content/Grid";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [activeCategory, setActiveCategory] = useState("filter");
+
+  const [isGridVisible, setIsGridVisible] = useState(false);
+
+  // Handlers to switch views
+  const showGridView = () => setIsGridVisible(true);
+  const showListView = () => setIsGridVisible(false);
 
   const toggleSidebar = () => {
     setIsSidebarVisible((prevState) => !prevState);
@@ -234,18 +235,50 @@ const HomePage = () => {
                         <span className="font-normal text-gray-600 text-xs border-r border-gray-600 pr-2">
                           Save to list
                         </span>
-                        <FontAwesomeIcon
-                          icon={faPrint}
-                          className="text-xs text-gray-600"
-                        />
-                        <FontAwesomeIcon
-                          icon={faEnvelope}
-                          className="text-xs text-gray-600"
-                        />
-                        <FontAwesomeIcon
-                          icon={faFilePdf}
-                          className="text-xs text-gray-600"
-                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          class="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"
+                          />
+                        </svg>
+
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          class="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                          />
+                        </svg>
+
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          class="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                          />
+                        </svg>
                       </div>
 
                       {/* Right Section */}
@@ -300,14 +333,20 @@ const HomePage = () => {
 
                         {/* Layout Options */}
                         <div className="flex items-center space-x-2">
-                          <FontAwesomeIcon
-                            icon={faTh}
-                            className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
-                          />
-                          <FontAwesomeIcon
-                            icon={faListUl}
-                            className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
-                          />
+                          <button onClick={showListView}>
+                            <FontAwesomeIcon
+                              icon={faTh}
+                              className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
+                            />
+                          </button>
+
+                          {/* Button to show List View */}
+                          <button onClick={showGridView}>
+                            <FontAwesomeIcon
+                              icon={faListUl}
+                              className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
+                            />
+                          </button>
                           <FontAwesomeIcon
                             icon={faBars}
                             className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
@@ -317,10 +356,8 @@ const HomePage = () => {
                     </div>
                   </nav>
 
-                  <div className="bg-white w-full">
-                    <div>
-                      <ListView />
-                    </div>
+                  <div className=" w-full">
+                    {isGridVisible ? <GridView /> : <ListView />}
                   </div>
                   <footer
                     className={`bg-white z-10 p-[26px] text-gray-800 mt-auto flex justify-center items-center absolute ${

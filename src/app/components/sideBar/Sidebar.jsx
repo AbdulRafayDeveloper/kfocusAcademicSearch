@@ -131,7 +131,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
                   icon={faHistory}
                   className="text-gray-800 pr-2"
                 />
-                <span className="font-light">History</span>
+                <span className="font-light ">History</span>
               </div>
               <div className="border-b-[0.5px] pb-4 px-6 flex-grow hover:border-b-gray-800">
                 <svg
