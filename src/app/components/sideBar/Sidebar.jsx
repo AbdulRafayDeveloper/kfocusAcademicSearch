@@ -41,14 +41,8 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
     }));
   };
 
-  // Determine categories to display based on the active category
   const categoriesToDisplay =
     activeCategory === "person" ? personCategories : filterCategories;
-
-  // Handle icon click for "person"
-  const handlePersonIconClick = () => {
-    changeActiveCategory("person");
-  };
 
   return (
     <div className="w-full bg-white p-4 pb-40">

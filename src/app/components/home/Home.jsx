@@ -19,10 +19,12 @@ import SidebarFilters from "../sideBar/Sidebar";
 import { useState } from "react";
 import ListView from "../content/List";
 import GridView from "../content/Grid";
+import Filters from "../filters/Filters";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [activeCategory, setActiveCategory] = useState("filter");
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
 
   const [isGridVisible, setIsGridVisible] = useState(false);
 
@@ -38,11 +40,20 @@ const HomePage = () => {
     setActiveCategory(category);
   };
 
+  const toggleFilterSidebar = () => {
+    setIsFilterSidebarOpen((prevState) => !prevState);
+  };
   return (
     <>
       <div className="flex flex-col h-screen">
-        <Header />
-
+        <Header toggleFilterSidebar={toggleFilterSidebar} />
+        <div
+          className={`fixed top-0 right-0 z-40 bg-white transition-transform duration-300 ${
+            isFilterSidebarOpen ? "translate-x-0 w-72" : "hidden"
+          }`}
+        >
+          <Filters toggleFilterSidebar={toggleFilterSidebar} />
+        </div>
         <div className="flex flex-grow overflow-hidden">
           <div className="w-1/16 pt-[0.5px] overflow-y-auto flex flex-col ">
             <a
