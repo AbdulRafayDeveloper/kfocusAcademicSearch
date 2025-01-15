@@ -1,13 +1,16 @@
 "use client";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Header = ({ toggleFilterSidebar }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2 ">
@@ -114,14 +117,72 @@ const Header = ({ toggleFilterSidebar }) => {
             id="mobile-menu-2"
           >
             <div className="flex items-center justify-center space-x-2 ">
+              <div className="relative">
+                <button
+                  className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center"
+                  onClick={toggleDropdown}
+                >
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    className="text-[#0076fa] text-sm mr-2"
+                  />
+                  <p className="text-[#0076fa] text-xs font-serif">Keywords</p>
+                </button>
+                {isOpen && (
+                  <div className="absolute mt-2 py-2 bg-white rounded-lg border-[0.5px] border-gray-300 z-[99999] w-48 shadow-xl">
+                    <div className="flex justify-end pt-2 pr-2">
+                      <button
+                        onClick={toggleDropdown}
+                        className="text-gray-600 text-sm hover:text-gray-800"
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    </div>
+                    <ul className=" text-xs">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300 ">
+                        Title
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Title, Keyword, and Abstract
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Abstract
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Keyword
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Author
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Affiliation
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Full Text
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Reference
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Literature Source
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Sustainable Development Goals
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        Subject
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                        DOI
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        Copilot-AI
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
               {/* Keywords Button */}
-              <button className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center">
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  className="text-[#0076fa] text-sm mr-2"
-                />
-                <p className="text-[#0076fa] text-xs font-serif">Keywords</p>
-              </button>
 
               {/* Search Bar */}
               <div className="flex rounded-full border-[1px] overflow-hidden max-w-[800px] w-[500px] mx-auto font-[sans-serif]">

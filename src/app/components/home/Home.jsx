@@ -20,11 +20,13 @@ import { useState } from "react";
 import ListView from "../content/List";
 import GridView from "../content/Grid";
 import Filters from "../filters/Filters";
+import AskPaper from "../askPaper/AskPaper";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [activeCategory, setActiveCategory] = useState("filter");
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
+  const [isAskPaperOpen, setAskPaperOpen] = useState(false);
 
   const [isGridVisible, setIsGridVisible] = useState(false);
 
@@ -43,6 +45,57 @@ const HomePage = () => {
   const toggleFilterSidebar = () => {
     setIsFilterSidebarOpen((prevState) => !prevState);
   };
+
+  const [selectedPaperIndex, setSelectedPaperIndex] = useState(false);
+  const toggleAskPaper = (index) => {
+    console.log(index);
+    setAskPaperOpen(true); // Open the AskPaper component
+    setSelectedPaperIndex(index); // Store the selected index
+  };
+
+  const cancerResearchPapers = [
+    {
+      id: 1,
+      title: "Cancer Immunotherapy: The Next Frontier",
+      authors: "Dr. Alex Martinez, Dr. Lisa Green",
+      year: 2024,
+      introduction:
+        "This paper delves into the role of immunotherapy in treating cancer, highlighting new advancements in personalized cancer treatment.",
+      summary:
+        "An analysis of the latest developments in cancer immunotherapy and its potential to revolutionize cancer treatment by boosting the body’s immune response.",
+    },
+    {
+      id: 2,
+      title: "Genetic Mutations and Cancer Development",
+      authors: "Dr. Emily White, Dr. James Scott",
+      year: 2023,
+      introduction:
+        "This study focuses on the link between genetic mutations and the onset of various cancers, with an emphasis on genetic screening for early detection.",
+      summary:
+        "A comprehensive overview of how genetic mutations contribute to the development of cancers like breast and lung cancer, and how genetic screening can aid early detection.",
+    },
+    {
+      id: 3,
+      title: "Advances in Early Cancer Detection",
+      authors: "Dr. Rachel Black, Dr. Steven Clark",
+      year: 2022,
+      introduction:
+        "This research explores recent technological innovations that enhance early detection of cancers, improving survival rates through earlier intervention.",
+      summary:
+        "Exploring the cutting-edge tools and techniques used to detect cancer at its earliest stages, including imaging technologies and biomarker research.",
+    },
+    {
+      id: 4,
+      title: "Cancer and Lifestyle Factors: Prevention and Risk Reduction",
+      authors: "Dr. Olivia Brown, Dr. Matthew Lewis",
+      year: 2025,
+      introduction:
+        "Focusing on how lifestyle choices such as diet, exercise, and environmental factors can impact the likelihood of developing cancer, this paper aims to highlight prevention strategies.",
+      summary:
+        "Examining the significant role of lifestyle factors in cancer prevention, with recommendations for individuals to reduce their cancer risk through healthier choices.",
+    },
+  ];
+
   return (
     <>
       <div className="flex flex-col h-screen">
@@ -344,7 +397,12 @@ const HomePage = () => {
 
                         {/* Layout Options */}
                         <div className="flex items-center space-x-2">
-                          <button onClick={showListView}>
+                          <button
+                            onClick={() => {
+                              showGridView();
+                              setAskPaperOpen(false);
+                            }}
+                          >
                             <FontAwesomeIcon
                               icon={faTh}
                               className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
@@ -352,7 +410,12 @@ const HomePage = () => {
                           </button>
 
                           {/* Button to show List View */}
-                          <button onClick={showGridView}>
+                          <button
+                            onClick={() => {
+                              showListView();
+                              setAskPaperOpen(false);
+                            }}
+                          >
                             <FontAwesomeIcon
                               icon={faListUl}
                               className="p-1 bg-gray-100 text-gray-700 text-xs border rounded cursor-pointer"
@@ -367,8 +430,16 @@ const HomePage = () => {
                     </div>
                   </nav>
 
-                  <div className=" w-full">
-                    {isGridVisible ? <GridView /> : <ListView />}
+                  <div className="w-full">
+                    {isAskPaperOpen ? (
+                      <AskPaper
+                        selectedPaper={cancerResearchPapers[selectedPaperIndex]}
+                      />
+                    ) : isGridVisible ? (
+                      <GridView />
+                    ) : (
+                      <ListView toggleAskPaper={toggleAskPaper} />
+                    )}
                   </div>
                   <footer
                     className={`bg-white z-10 p-[26px] text-gray-800 mt-auto flex justify-center items-center absolute ${

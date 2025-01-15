@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getNames } from "country-list";
 import {
   faXmark,
   faChevronDown,
@@ -26,8 +27,73 @@ const Filters = ({ toggleFilterSidebar }) => {
   const [rating3, setRating3] = useState(2);
   const [rating4, setRating4] = useState(1);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [checkedDomains, setCheckedDomains] = useState([]);
+  const [domains] = useState([
+    "Agricultural, Food Sciences",
+    "Art",
+    "Biology",
+    "Business",
+    "Chemistry",
+    "Computer Science",
+    "Economics",
+    "Education",
+    "Engineering",
+    "Environmental Science",
+    "Geography",
+    "Geology",
+    "History",
+    "Law",
+    "Linguistics",
+    "Materials Science",
+    "Mathematics",
+    "Medicine",
+  ]);
+
+  const filteredDomains = domains.filter((domain) =>
+    domain.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleCheckboxChange = (domain) => {
+    setCheckedDomains((prevChecked) =>
+      prevChecked.includes(domain)
+        ? prevChecked.filter((d) => d !== domain)
+        : [...prevChecked, domain]
+    );
+  };
+
+  const countryNames = getNames();
+  const [expandedCountryFilters, setCountryExpandedFilters] = useState({
+    countries: false,
+  });
+  const [searchCountryTerm, setCountrySearchTerm] = useState("");
+  const [filteredCountries, setFilteredCountries] = useState(countryNames);
+  const [checkedCountries, setCheckedCountries] = useState([]);
+
+  const toggleCountryFilter = (filterName) => {
+    setCountryExpandedFilters((prev) => ({
+      ...prev,
+      [filterName]: !prev[filterName],
+    }));
+  };
+
+  const handleCountrySearch = (term) => {
+    setCountrySearchTerm(term); // Use setCountrySearchTerm here
+    const filtered = countryNames.filter((country) =>
+      country.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredCountries(filtered);
+  };
+  const handleCountryCheckboxChange = (country) => {
+    setCheckedCountries((prev) =>
+      prev.includes(country)
+        ? prev.filter((item) => item !== country)
+        : [...prev, country]
+    );
+  };
+
   return (
-    <div className="p-4 bg-white z-100 h-screen overflow-auto shadow-lg">
+    <div className="p-4 bg-white z-[99999] h-screen overflow-auto shadow-lg">
       <div className="flex flex-row items-center justify-between mb-4">
         <div className="text-sm font-semibold">Apply Filters</div>
         <button onClick={toggleFilterSidebar} className="p-2 transition">
@@ -154,24 +220,196 @@ const Filters = ({ toggleFilterSidebar }) => {
             className="ml-2 text-xs"
           />
         </button>
-
         {expandedFilters.method && (
-          <div className="mt-2 pl-4">
-            <ul className="space-y-2">
-              {["Science", "Technology", "Engineering", "Math"].map(
-                (option) => (
-                  <li key={option}>
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox h-4 w-4 text-blue-600"
-                      />
-                      <span className="text-sm text-gray-600">{option}</span>
-                    </label>
-                  </li>
-                )
-              )}
-            </ul>
+          <div className="mt-4 space-y-2 ">
+            <div class="flex flex-row items-center pt-3 pb-3">
+              <div class="text-sm font-semibold text-gray-900">Study types</div>
+              <div class="pl-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                value="Science"
+                className="text-green-600"
+              />
+              <div className="border border-[#3bcdaa] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/meta_analysis.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">Meta Analysis</span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                value="Technology"
+                className="text-green-600"
+              />
+              <div className="border border-[#3bcdaa] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/file-folder_3356685.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">
+                  Systematic Review
+                </span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                value="Engineering"
+                className="text-green-600"
+              />
+              <div className="border border-[#3bcdaa] rounded-md px-2 py-1 flex flex-row">
+                <img src="/icons/rtc.png" className="w-5 h-5" alt="" />
+                <span className="text-sm font-normal pl-2">RTC</span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#feba21] rounded-md px-2 py-1 flex flex-row">
+                <img src="/icons/nonrtc.png" className="w-4 h-4" alt="" />
+                <span className="text-sm font-normal pl-2">Non-RTC Trial</span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#feba21] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/search-book_18075456.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">
+                  Observational Study
+                </span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#feba21] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/learning_4185714.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">
+                  Literature Review
+                </span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#f06767] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/report_3029337.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">Case Report</span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#f06767] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/mouse_11259907.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">Animal Trial</span>
+              </div>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input type="checkbox" value="Math" className="text-green-600" />
+              <div className="border border-[#f06767] rounded-md px-2 py-1 flex flex-row">
+                <img
+                  src="/icons/bacteria_7407691.png"
+                  className="w-5 h-5"
+                  alt=""
+                />
+                <span className="text-sm font-normal pl-2">In Vitro Trial</span>
+              </div>
+            </label>
+            <div class="flex flex-row items-center pt-3 pb-3">
+              <div class="text-sm font-semibold text-gray-900">
+                Study details
+              </div>
+              <div class="pl-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <label class="inline-flex w-full cursor-pointer items-center justify-between ">
+              <div>
+                <span class="text-sm font-normal text-gray-900">
+                  Controlled studies
+                </span>
+              </div>
+
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              </div>
+            </label>
+
+            <label class="inline-flex w-full cursor-pointer justify-between items-center ">
+              <div class="flex flex-row items-center">
+                <div class="text-sm font-normal text-gray-900">
+                  Human studies
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              </div>
+            </label>
+            <div class="relative pt-1">
+              <span class=" text-sm font-normal text-gray-900">
+                Sample size ≥
+              </span>
+              <input
+                type="number"
+                min="1"
+                placeholder="1"
+                class="w-full py-1 px-4 pl-10 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="text-gray-500"></span>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -396,7 +634,8 @@ const Filters = ({ toggleFilterSidebar }) => {
       </div>
 
       {/* Domains Filter Section */}
-      <div className="mb-4  border-b-[0.5px]  border-b-gray-300 pb-4">
+      <div className="mb-4 border-b-[0.5px] border-b-gray-300 pb-4 ">
+        {/* Toggle Button */}
         <button
           className="flex items-center justify-between w-full text-gray-800 font-medium text-sm hover:text-blue-600"
           onClick={() => toggleFilter("domains")}
@@ -408,30 +647,45 @@ const Filters = ({ toggleFilterSidebar }) => {
           />
         </button>
 
+        {/* Search and Checkboxes */}
         {expandedFilters.domains && (
-          <div className="mt-2 pl-4">
-            <ul className="space-y-2">
-              {["Goal 1", "Goal 2", "Goal 3"].map((option) => (
-                <li key={option}>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span className="text-sm text-gray-600">{option}</span>
-                  </label>
-                </li>
-              ))}
-            </ul>
+          <div className="pt-4">
+            {/* Search Field */}
+            <input
+              type="text"
+              placeholder="Search domains..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-3 py-1 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {/* Checkboxes */}
+            <div>
+              <ul className="space-y-2">
+                {filteredDomains.map((domain) => (
+                  <li key={domain}>
+                    <label className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 text-blue-600"
+                        checked={checkedDomains.includes(domain)}
+                        onChange={() => handleCheckboxChange(domain)}
+                      />
+                      <span className="text-sm text-gray-600">{domain}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>
 
       {/* Country Filter Section */}
-      <div className="mb-4 border-b-[0.5px]  border-b-gray-300  pb-10">
+      <div className=" border-b-[0.5px] border-b-gray-300 mb-12 pb-4">
         <button
           className="flex items-center justify-between w-full text-gray-800 font-medium text-sm hover:text-blue-600"
-          onClick={() => toggleFilter("country")}
+          onClick={() => toggleCountryFilter("countries")}
         >
           <div className="flex flex-row">
             <div>
@@ -451,26 +705,43 @@ const Filters = ({ toggleFilterSidebar }) => {
             <div>Country</div>
           </div>
           <FontAwesomeIcon
-            icon={expandedFilters.country ? faChevronUp : faChevronDown}
+            icon={
+              expandedCountryFilters.countries ? faChevronUp : faChevronDown
+            }
             className="ml-2 text-xs"
           />
         </button>
 
-        {expandedFilters.country && (
-          <div className="mt-2 pl-4">
-            <ul className="space-y-2">
-              {["Publisher 1", "Publisher 2"].map((option) => (
-                <li key={option}>
-                  <label className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox h-4 w-4 text-blue-600"
-                    />
-                    <span className="text-sm text-gray-600">{option}</span>
-                  </label>
-                </li>
-              ))}
-            </ul>
+        {/* Search and Checkboxes */}
+        {expandedCountryFilters.countries && (
+          <div className="pt-4">
+            {/* Search Field */}
+            <input
+              type="text"
+              placeholder="Search countries..."
+              value={searchCountryTerm}
+              onChange={(e) => handleCountrySearch(e.target.value)}
+              className="w-full px-3 py-1 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {/* Checkboxes */}
+            <div>
+              <ul className="space-y-2">
+                {filteredCountries.map((country) => (
+                  <li key={country}>
+                    <label className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 text-blue-600"
+                        checked={checkedCountries.includes(country)}
+                        onChange={() => handleCountryCheckboxChange(country)}
+                      />
+                      <span className="text-sm text-gray-600">{country}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>

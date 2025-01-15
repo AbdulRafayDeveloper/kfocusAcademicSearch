@@ -30,7 +30,7 @@ const GridView = () => {
   ];
 
   return (
-    <div className="relative max-h-[316px] overflow-y-auto max-w-[1210px]">
+    <div className="relative max-h-[316px] overflow-y-auto max-w-[1210px] ">
       <div className="w-full">
         {products.map((product, index) => (
           <div

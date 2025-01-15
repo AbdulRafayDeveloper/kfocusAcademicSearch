@@ -3,7 +3,7 @@ import React from "react";
 import { useRef } from "react";
 import HomePage from "../home/Home";
 
-const ListView = () => {
+const ListView = ({ toggleAskPaper }) => {
   const products = [
     {
       title: "The coffee-mango association promotes favorable soil conditions",
@@ -135,7 +135,16 @@ const ListView = () => {
                 <div className="text-xs text-blue-600 space-x-2 mt-10">
                   {product.details.map((detail, i) => (
                     <span key={i} className="cursor-pointer hover:underline">
-                      {detail}
+                      {detail === "Ask this paper" ? (
+                        <button
+                          onClick={() => toggleAskPaper(index)}
+                          className="text-blue-600 hover:underline focus:outline-none"
+                        >
+                          {detail}
+                        </button>
+                      ) : (
+                        detail
+                      )}
                     </span>
                   ))}
                 </div>
