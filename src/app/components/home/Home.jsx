@@ -21,6 +21,7 @@ import ListView from "../content/List";
 import GridView from "../content/Grid";
 import Filters from "../filters/Filters";
 import AskPaper from "../askPaper/AskPaper";
+import MoreFilters from "../moreFilters/MoreFilters";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -49,9 +50,73 @@ const HomePage = () => {
   const [selectedPaperIndex, setSelectedPaperIndex] = useState(false);
   const toggleAskPaper = (index) => {
     console.log(index);
-    setAskPaperOpen(true); // Open the AskPaper component
-    setSelectedPaperIndex(index); // Store the selected index
+    setAskPaperOpen(true);
+    setSelectedPaperIndex(index);
   };
+
+  const [selectedFilter, setSelectedFilter] = useState(false);
+  const [selectedFilterindex, setSelectedFilterIndex] = useState(false);
+  const toggleSideFilter = (index) => {
+    console.log(index);
+    setSelectedFilter(!selectedFilter);
+    setSelectedFilterIndex(index);
+  };
+
+  const filterCategories = [
+    { name: "Year", options: ["2023", "2022", "2021", "2020"] },
+    {
+      name: "Subject",
+      options: ["Science", "Technology", "Engineering", "Math"],
+    },
+    {
+      name: "Development Goals",
+      options: ["Goal 1", "Goal 2", "Goal 3"],
+    },
+    { name: "Source Title", options: ["Source A", "Source B", "Source C"] },
+    { name: "Publisher", options: ["Publisher 1", "Publisher 2"] },
+    { name: "Author", options: ["Author A", "Author B"] },
+    {
+      name: "Language",
+      options: [
+        "English",
+        "Spanish",
+        "French",
+        "English",
+        "Spanish",
+        "French",
+        "English",
+        "Spanish",
+        "French",
+        "English",
+        "French",
+        "English",
+        "Spanish",
+        "French",
+        "English",
+        "French",
+        "English",
+        "Spanish",
+        "French",
+        "English",
+      ],
+    },
+  ];
+
+  const categoryMatch = filterCategories.find(
+    (category, index) => category.name === selectedFilterindex
+  );
+  console.log("categoryMatch:", categoryMatch);
+
+  let selectedFilterOptions =
+    selectedFilterindex !== null ? categoryMatch?.options : [];
+  console.log("selectedFilterOptions:", selectedFilterOptions);
+
+  console.log("selected filer: ", selectedFilterOptions);
+  if (Array.isArray(selectedFilterOptions)) {
+    selectedFilterOptions = [...selectedFilterOptions, selectedFilterindex];
+  } else {
+    selectedFilterOptions = [selectedFilterindex];
+  }
 
   const cancerResearchPapers = [
     {
@@ -106,6 +171,16 @@ const HomePage = () => {
           }`}
         >
           <Filters toggleFilterSidebar={toggleFilterSidebar} />
+        </div>
+        <div
+          className={`fixed top-[200px] right-0 z-40 bg-white transition-transform duration-300 ${
+            selectedFilter ? "translate-x-0 w-[730px]" : "hidden"
+          }`}
+        >
+          <MoreFilters
+            ListOfFilters={selectedFilterOptions}
+            toggleSideFilter={toggleSideFilter}
+          />
         </div>
         <div className="flex flex-grow overflow-hidden">
           <div className="w-1/16 pt-[0.5px] overflow-y-auto flex flex-col ">
@@ -218,6 +293,8 @@ const HomePage = () => {
                 <SidebarFilters
                   activeCategory={activeCategory}
                   changeActiveCategory={changeActiveCategory}
+                  toggleSideFilter={toggleSideFilter}
+                  className="overflow-y-scroll"
                 />
               </div>
 

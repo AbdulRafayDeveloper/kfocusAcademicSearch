@@ -2,12 +2,16 @@
 import {
   faFilter,
   faHistory,
-  faBookmark,
-} from "@fortawesome/free-solid-svg-icons"; // Added the user icon
+  faEllipsis,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
+const SidebarFilters = ({
+  activeCategory,
+  changeActiveCategory,
+  toggleSideFilter,
+}) => {
   const filterCategories = [
     { name: "Year", options: ["2023", "2022", "2021", "2020"] },
     {
@@ -45,7 +49,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
     activeCategory === "person" ? personCategories : filterCategories;
 
   return (
-    <div className="w-full bg-white p-4 pb-40">
+    <div className="w-full bg-white p-4 overflow-y-auto h-[465px]">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
@@ -74,7 +78,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
       {/* Sidebar Item for 'Person' */}
 
       {/* Render filter categories */}
-      <ul className="space-y-2 overflow-y-auto">
+      <ul className="space-y-2 ">
         {categoriesToDisplay.map((category) => (
           <li key={category.name}>
             <button
@@ -98,15 +102,31 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
                 <ul className="space-y-2">
                   {category.options.map((option) => (
                     <li key={option}>
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-4 w-4 text-blue-600"
-                        />
-                        <span className="text-sm text-gray-600">{option}</span>
-                      </label>
+                      <div className="flex flex-col">
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="checkbox"
+                            className="form-checkbox h-4 w-4 text-blue-600"
+                          />
+                          <span className="text-sm text-gray-600">
+                            {option}
+                          </span>
+                        </label>
+                      </div>
                     </li>
                   ))}
+                  <div className="flex flex-row justify-between items-center">
+                    <button className="p-1 px-2 bg-blue-500 text-white text-xs rounded-sm">
+                      Refine
+                    </button>
+                    <button
+                      className="flex flex-row items-center p-1 text-blue-500 "
+                      onClick={() => toggleSideFilter(category.name)}
+                    >
+                      <FontAwesomeIcon icon={faEllipsis} />
+                      <div className="pl-1 text-xs">Load More</div>
+                    </button>
+                  </div>
                 </ul>
               </div>
             )}
@@ -117,7 +137,7 @@ const SidebarFilters = ({ activeCategory, changeActiveCategory }) => {
       {/* Render additional items when 'person' category is active */}
       {activeCategory === "person" && (
         <div className="mt-4 pb-60">
-          <ul className="space-y-2">
+          <ul className="space-y-2 overflow-auto">
             {/* History and Lists items, shown once */}
             <li className="flex flex-row items-center justify-between pl-2 pr-2">
               <div className="border-b-[1.5px] pb-4 px-6 flex-grow border-b-gray-800">
