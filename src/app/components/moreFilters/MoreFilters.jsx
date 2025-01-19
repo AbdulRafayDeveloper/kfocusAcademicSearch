@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getNames } from "country-list";
 import {
@@ -27,6 +27,22 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
     setIsCheckedItems(updatedChecked);
   };
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter the ListOfFilters based on the search query
+  const filteredFilters = ListOfFilters.filter(
+    (filter) =>
+      typeof filter === "string" &&
+      filter.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filtersRef = useRef(null);
+
+  const scrollToTop = () => {
+    if (filtersRef.current) {
+      filtersRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div className="p-4 bg-white z-[99999] h-[400px] overflow-y-scroll shadow-lg border border-black">
       <div className="flex flex-row items-center justify-between mb-4 border-b border-b-gray-300">
@@ -48,16 +64,18 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
           <FontAwesomeIcon icon={faXmark} className="text-sm" />
         </button>
       </div>
-      <div>
+      <div ref={filtersRef}>
         <form class="max-w-full mx-auto">
           <div class="flex">
             <div class="relative w-full">
               <input
                 type="search"
                 id="search-dropdown"
-                class="block p-2 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-100 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+                className="block p-2 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-100 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search Mockups, Logos, Design Templates..."
                 required
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} // Update search query
               />
               <button
                 type="submit"
@@ -112,12 +130,13 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </span>
       </label>
       <div className="pt-5 flex flex-wrap gap-28">
-        {Array(Math.ceil(ListOfFilters.length / 8))
+        {Array(Math.ceil(filteredFilters.length / 8)) // Use filteredFilters here
           .fill()
           .map((_, columnIndex) => (
             <div key={columnIndex} className="grid grid-rows-8 gap-1">
-              {ListOfFilters.slice(columnIndex * 8, (columnIndex + 1) * 8).map(
-                (filter, index) => (
+              {filteredFilters
+                .slice(columnIndex * 8, (columnIndex + 1) * 8) // Also update this to use filteredFilters
+                .map((filter, index) => (
                   <div key={index} className="flex items-center">
                     <input
                       type="checkbox"
@@ -128,8 +147,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                     />
                     <span className="font-normal text-base pl-2">{filter}</span>
                   </div>
-                )
-              )}
+                ))}
             </div>
           ))}
       </div>
@@ -140,6 +158,13 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
       <br />
       <button className=" mt-4 px-4 py-2 border bg-blue-500 rounded-md text-white hover:bg-blue-700">
         Apply
+      </button>
+
+      <button
+        onClick={scrollToTop}
+        className="absolute bottom-4 right-4 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 mr-4"
+      >
+        <FontAwesomeIcon icon={faChevronUp} />
       </button>
     </div>
   );

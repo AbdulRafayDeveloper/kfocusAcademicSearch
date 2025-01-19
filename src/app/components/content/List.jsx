@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const ListView = ({ toggleAskPaper }) => {
   const [expandedRowIndex, setExpandedRowIndex] = useState(null); // Track which row is expanded
@@ -20,6 +22,15 @@ const ListView = ({ toggleAskPaper }) => {
         "Ask this paper",
         "SDGs: 3",
       ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
     },
 
     {
@@ -38,22 +49,14 @@ const ListView = ({ toggleAskPaper }) => {
         "Ask this paper",
         "SDGs: 3",
       ],
-    },
-    {
-      title: "The coffee-mango association promotes favorable soil conditions",
-      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
-      afiliated_nation: "5",
-      year: 2020,
-      source: "Nature Communications 11(1):318",
-      citedBy: 20,
-      indexIn: "20 | Q1",
-      ref: "54",
-      details: [
-        "View abstract",
-        "View at Publisher",
-        "Related documents",
-        "Ask this paper",
-        "SDGs: 3",
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
       ],
     },
     {
@@ -71,6 +74,41 @@ const ListView = ({ toggleAskPaper }) => {
         "Related documents",
         "Ask this paper",
         "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
       ],
     },
     // Add more product objects here...
@@ -197,14 +235,47 @@ const ListView = ({ toggleAskPaper }) => {
                 </td>
               </tr>
               {expandedRowIndex === index && (
-                <tr>
-                  <td colSpan={6} className="bg-gray-100 px-4 py-4">
-                    <div className="text-gray-800">
-                      <h4 className="text-lg font-semibold">Abstract</h4>
-                      <p>
-                        This is a placeholder for the abstract details of "
-                        {product.title}".
-                      </p>
+                <tr className="border-b-gray-500">
+                  <td colSpan={6} className="bg-white px-3 py-4 pl-16">
+                    <div className="relative flex flex-col">
+                      {/* Close button */}
+                      <div className="flex flex-row border-b-[#c59b7d] border-b-2 pb-1">
+                        <div className="flex flex-row items-center space-x-2">
+                          <button
+                            onClick={() => toggleAbstract(index)}
+                            className="text-[#c59b7d] text-xs font-semibold hover:text-[#c59b9d]"
+                          >
+                            <div className="flex flex-row items-center space-x-2">
+                              <p> Hide abstract</p>
+                              <FontAwesomeIcon
+                                icon={faChevronUp}
+                                className="text-xs text-[#c59b7d]"
+                              />
+                            </div>
+                          </button>
+                        </div>
+                        <button className="ml-4 text-blue-600  px-4 border border-gray-600 text-xs">
+                          Full Text
+                        </button>
+                        <button className="ml-4 text-gray-700 text-xs">
+                          View at Publisher
+                        </button>
+                      </div>
+                      {/* Abstract content */}
+                      <div className="text-gray-800 mt-4 pl-2">
+                        <p>{product.abstract || "No abstract available."}</p>
+                      </div>
+                      {/* Keywords section */}
+                      {product.keywords && product.keywords.length > 0 && (
+                        <div className="mt-3 flex items-start pl-2">
+                          <h5 className="text-md font-semibold text-gray-700 mr-2">
+                            Keywords:
+                          </h5>
+                          <p className="text-gray-600 text-sm">
+                            {product.keywords.join("; ")}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </td>
                 </tr>
