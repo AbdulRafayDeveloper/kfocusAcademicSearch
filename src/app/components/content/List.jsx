@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const ListView = ({ toggleAskPaper }) => {
-  const [expandedRowIndex, setExpandedRowIndex] = useState(null); // Track which row is expanded
+  const [expandedRowIndex, setExpandedRowIndex] = useState(null);
 
   const products = [
     {
@@ -111,51 +111,155 @@ const ListView = ({ toggleAskPaper }) => {
         "agriculture",
       ],
     },
-    // Add more product objects here...
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
   ];
 
   const toggleAbstract = (index) => {
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
   };
 
+  //max-h-[316px]
   return (
-    <div className="relative max-h-[316px] overflow-y-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 h-1/2">
+    <div className="h-screen overflow-y-auto lg:max-h-[63vh] sm:max-h-[33vh]">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-white">
           <tr>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               {/* Checkbox column */}
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-8/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-8/12 border-b border-b-[#0076fa]"
             >
               Document Title
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-2/12 border-b border-b-[#0076fa]"
             >
               Authors
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               Year
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-2/12 border-b border-b-[#0076fa]"
             >
               Source
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               Cited by
             </th>

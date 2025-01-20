@@ -1,15 +1,21 @@
 "use client";
 import HomePage from "../app/components/home/Home";
+import Footer from "./components/footer/Footer";
 
 export default function Home() {
   return (
     <div
-      className="bg-cover bg-center min-h-screen"
+      className="bg-cover bg-center"
       style={{
         backgroundImage: `url('/images/bg.jpg')`,
       }}
     >
-      <HomePage />
+      <div>
+        <HomePage />
+      </div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

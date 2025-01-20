@@ -15,7 +15,7 @@ const Header = ({ toggleFilterSidebar }) => {
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2 ">
         <div className="flex flex-wrap items-center mx-auto ">
-          <Link href="https://flowbite.com" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
               src="/icons/future_logo.png"
               className="h-8 sm:h-8 ml-10"
@@ -41,6 +41,7 @@ const Header = ({ toggleFilterSidebar }) => {
                   <FontAwesomeIcon
                     icon={faTrophy}
                     className="text-blue-600"
+                    style={{ fontSize: "16px", width: "16px", height: "16px" }}
                   ></FontAwesomeIcon>
                 </div>
               </div>
@@ -125,54 +126,47 @@ const Header = ({ toggleFilterSidebar }) => {
                   <FontAwesomeIcon
                     icon={faSearch}
                     className="text-[#0076fa] text-sm mr-2"
+                    style={{ fontSize: "16px", width: "16px", height: "16px" }}
                   />
                   <p className="text-[#0076fa] text-xs font-serif">Keywords</p>
                 </button>
                 {isOpen && (
                   <div className="absolute mt-2 py-2 bg-white rounded-lg border-[0.5px] border-gray-300 z-[99999] w-48 shadow-xl">
-                    <div className="flex justify-end pt-2 pr-2">
-                      <button
-                        onClick={toggleDropdown}
-                        className="text-gray-600 text-sm hover:text-gray-800"
-                      >
-                        <FontAwesomeIcon icon={faTimes} />
-                      </button>
-                    </div>
                     <ul className=" text-xs">
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300 ">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer ">
                         Title
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Title, Keyword, and Abstract
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer ">
                         Abstract
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Keyword
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Author
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer ">
                         Affiliation
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Full Text
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer ">
                         Reference
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Literature Source
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Sustainable Development Goals
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                         Subject
                       </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
+                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer ">
                         DOI
                       </li>
                       <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
@@ -232,19 +226,6 @@ const Header = ({ toggleFilterSidebar }) => {
                 </div>
               </div>
             </li>
-            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a
-                href="#journal-articles"
-                className="font-light text-sm text-center"
-              >
-                Chinese
-              </a>
-              <span>
-                <p className="font-light text-xs text-center underline">
-                  other languages
-                </p>
-              </span>
-            </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
@@ -254,7 +235,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Journal Articles
               </a>
               <span>
-                <p className="font-light text-sm text-center">914,952</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  914,952
+                </p>
               </span>
             </li>
 
@@ -266,7 +249,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Theses & Dissertations
               </a>
               <span>
-                <p className="font-light text-sm text-center">211,169</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  211,169
+                </p>
               </span>
             </li>
 
@@ -335,7 +320,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Law Cases
               </a>
               <span>
-                <p className="font-light text-sm text-center ">57,587</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  57,587
+                </p>
               </span>
             </li>
 
@@ -347,7 +334,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Monographic Serials
               </a>
               <span>
-                <p className="font-light text-sm text-center">2,387</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  2,387
+                </p>
               </span>
             </li>
 

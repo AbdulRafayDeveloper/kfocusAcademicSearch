@@ -29,7 +29,6 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter the ListOfFilters based on the search query
   const filteredFilters = ListOfFilters.filter(
     (filter) =>
       typeof filter === "string" &&
@@ -44,14 +43,14 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
     }
   };
   return (
-    <div className="p-4 bg-white z-[99999] h-[400px] overflow-y-scroll shadow-lg border border-black">
+    <div className="p-4 bg-white z-[99999] lg:max-h-[90vh] sm:max-h-[33vh] h-screen overflow-y-auto  shadow-lg border border-black">
       <div className="flex flex-row items-center justify-between mb-4 border-b border-b-gray-300">
         <div className="flex flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="size-6"
+            className="size-6"
           >
             <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
           </svg>
@@ -65,9 +64,9 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </button>
       </div>
       <div ref={filtersRef}>
-        <form class="max-w-full mx-auto">
-          <div class="flex">
-            <div class="relative w-full">
+        <form className="max-w-full mx-auto">
+          <div className="flex">
+            <div className="relative w-full">
               <input
                 type="search"
                 id="search-dropdown"
@@ -75,15 +74,15 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                 placeholder="Search Mockups, Logos, Design Templates..."
                 required
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 type="submit"
-                class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-200 rounded-e-lg border border-blue-200 hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-200 rounded-e-lg border border-blue-200 hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300"
               >
                 <svg
-                  class="w-4 h-4"
-                  ariaHidden="true"
+                  className="w-4 h-4"
+                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 20 20"
@@ -96,7 +95,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
-                <span class="sr-only">Search</span>
+                <span className="sr-only">Search</span>
               </button>
             </div>
           </div>
@@ -130,12 +129,12 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </span>
       </label>
       <div className="pt-5 flex flex-wrap gap-28">
-        {Array(Math.ceil(filteredFilters.length / 8)) // Use filteredFilters here
+        {Array(Math.ceil(filteredFilters.length / 8))
           .fill()
           .map((_, columnIndex) => (
             <div key={columnIndex} className="grid grid-rows-8 gap-1">
               {filteredFilters
-                .slice(columnIndex * 8, (columnIndex + 1) * 8) // Also update this to use filteredFilters
+                .slice(columnIndex * 8, (columnIndex + 1) * 8)
                 .map((filter, index) => (
                   <div key={index} className="flex items-center">
                     <input
