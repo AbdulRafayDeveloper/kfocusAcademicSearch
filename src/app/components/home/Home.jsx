@@ -328,8 +328,8 @@ const HomePage = () => {
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow h-screen">
               {/* Header */}
-              <div className="bg-white pt-2 pb-2 pr-1 pl-1 flex flex-row justify-between space-x-2">
-                <div className="flex flex-row items-center flex-shrink-0">
+              <div className="bg-white pt-2 pb-2 pr-1 pl-1 flex flex-row lg:justify-between lg:space-x-2">
+                <div className="flex flex-row lg:items-center items-start flex-shrink-0">
                   <FontAwesomeIcon
                     icon={faChartSimple}
                     className="text-[#017fba] pr-1"
@@ -339,17 +339,17 @@ const HomePage = () => {
                       height: "16px",
                     }}
                   />
-                  <span className="font-normal text-sm pr-4 flex-shrink-0 whitespace-nowrap">
+                  <span className="font-normal lg:text-sm pr-4 flex-shrink-0 whitespace-nowrap text-xs">
                     Analyze search results
                   </span>
-                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0 whitespace-nowrap">
+                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0 whitespace-nowrap hidden lg:block">
                     Search History
                   </span>
                 </div>
 
-                <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row lg:items-center lg:justify-between items-end w-full">
                   {/* Sort on Section */}
-                  <div className="flex flex-row items-center pr-4 space-x-1">
+                  <div className="flex flex-row items-center pr-4 space-x-1 hidden lg:block">
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
                     <p className="text-cyan-700 text-xs whitespace-nowrap">
                       Date (newest)
@@ -366,7 +366,7 @@ const HomePage = () => {
                   </div>
 
                   {/* Total Section */}
-                  <div className="flex flex-row items-center space-x-1">
+                  <div className="flex flex-row items-center space-x-1 hidden lg:block">
                     <p className="text-xs text-gray-700 whitespace-nowrap">
                       Total:
                     </p>
@@ -379,25 +379,15 @@ const HomePage = () => {
                   </div>
 
                   {/* Pagination Section */}
-                  <div className="flex flex-row items-center pl-4 space-x-2">
+                  <div className="flex flex-row items-center pl-4 space-x-2 justify-end">
                     <p className="text-xs whitespace-nowrap">2/2600</p>
                     <FontAwesomeIcon
                       icon={faChevronLeft}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm"
-                      style={{
-                        fontSize: "14px",
-                        width: "14px",
-                        height: "14px",
-                      }}
+                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm lg:w-[14px] lg:h-[14px]"
                     />
                     <FontAwesomeIcon
                       icon={faChevronRight}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm"
-                      style={{
-                        fontSize: "14px",
-                        width: "14px",
-                        height: "14px",
-                      }}
+                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm lg:w-[14px] lg:h-[14px]"
                     />
                   </div>
                 </div>

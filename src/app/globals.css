@@ -55,3 +55,16 @@
   animation: fadeIn 4s ease-in-out;
 }
 
+/* Thin scrollbar for modern browsers */
+ul::-webkit-scrollbar {
+  height: 6px; /* Adjust height for horizontal scrollbars */
+}
+
+ul::-webkit-scrollbar-thumb {
+  background: #9ca3af; /* Gray color for scrollbar thumb */
+  border-radius: 4px; /* Rounded edges */
+}
+
+ul::-webkit-scrollbar-track {
+  background: #f3f4f6; /* Lighter gray for track */
+}
