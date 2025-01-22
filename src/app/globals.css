@@ -68,3 +68,176 @@ ul::-webkit-scrollbar-thumb {
 ul::-webkit-scrollbar-track {
   background: #f3f4f6; /* Lighter gray for track */
 }
+
+@media (min-width: 1024px) and (min-height: 650px) {
+  .listheight {
+    max-height: 40vh; 
+  }
+  .listfilter{
+    max-height: 72.5vh;
+  }
+}
+
+@media (min-width: 1024px) and (min-height: 1025px) {
+  .listheight {
+    max-height: 66.8vh; 
+  }
+  .listfilter{
+    max-height: 81vh;
+  }
+}
+
+@media (min-width: 1240px) and (min-height: 650px) {
+  .listheight {
+    max-height: 50vh; 
+  }
+  .listfilter{
+    max-height: 72.5vh;
+  }
+}
+
+@media (min-width: 1283px) and (min-height: 650px) {
+  .listheight {
+    max-height: 55vh; 
+  }
+  .listfilter{
+    max-height: 77.8vh;
+  }
+}
+
+@media (min-width: 1294px) and (min-height: 650px) {
+  .listheight {
+    max-height: 55.5vh; 
+  }
+  .listfilter{
+    max-height: 77.8vh;
+  }
+}
+
+@media (min-width: 1366px) and (min-height: 768px) {
+  .listheight {
+    max-height: 60vh; 
+  }
+  .listfilter {
+    max-height: 80vh; 
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 900px) {
+  .listheight {
+    max-height: 69vh; 
+  }
+  .listfilter {
+    max-height: 85vh; 
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 951px) {
+  .listheight {
+    max-height: 69.3vh; 
+  }
+  .listfilter {
+    max-height: 84.8vh; 
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 980px) {
+  .listheight {
+    max-height: 70vh; 
+  }
+  .listfilter {
+    max-height: 85vh; 
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 1000px) {
+  .listheight {
+    max-height: 70.8vh; 
+  }
+  .listfilter {
+    max-height: 85.8vh; 
+  }
+}
+@media (min-width: 1440px) and (min-height: 1024px) {
+  .listheight {
+    max-height: 71.4vh; 
+  }
+  .listfilter {
+    max-height: 85.8vh; 
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 1026px) {
+  .listheight {
+    max-height: 71.8vh; 
+  }
+  .listfilter {
+    max-height: 86vh; 
+  }
+}
+
+@media (min-width: 1600px) and (min-height: 900px) {
+  .listheight {
+    max-height: 69vh; 
+  }
+  .listfilter {
+    max-height: 85vh; 
+  }
+}
+
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .listheight {
+    max-height: 73vh; 
+  }
+  .listfilter {
+    max-height: 86.5vh; 
+  }
+}
+
+@media (min-width: 2560px) and (min-height: 1440px) {
+  .listheight {
+    max-height: 80vh; 
+  }
+  .listfilter {
+    max-height: 90.4vh; 
+  }
+}
+
+@media (min-width: 3840px) and (min-height: 2160px) {
+  .listheight {
+    max-height: 85vh; 
+  }
+  .listfilter {
+    max-height: 100vh; 
+  }
+}
+
+@media (min-width: 2560px) and (min-height: 1025px) {
+  .listheight {
+    max-height: 71.8vh; 
+  }
+  .listfilter {
+    max-height: 86.5vh; 
+  }
+}
+
+@media (min-width: 1240px) and (min-height: 1025px) {
+  .listheight {
+    max-height: 71.8vh; 
+  }
+  .listfilter {
+    max-height: 86.5vh; 
+  }
+}
+
+@media (max-width: 1542px) {
+  .searchinput{
+    width: 270px;
+  }
+}
+
+@media (min-width: 1543px) {
+  .searchinput{
+    width: 800px;
+  }
+}

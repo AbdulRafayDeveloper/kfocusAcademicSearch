@@ -23,12 +23,12 @@ const Header = ({ toggleFilterSidebar }) => {
   const toggleDropdown = () => setIsOpen(!isOpen);
   return (
     <header>
-      <nav className="bg-white border-gray-200 lg:px-6 py-2 sm:px-0">
+      <nav className="bg-white border-gray-200 lg:px-6 py-2 sm:px-0 custom-navbar">
         <div className="flex flex-wrap items-center mx-auto ">
           <Link href="/" className="flex items-center">
             <img
               src="/icons/future_logo.png"
-              className="h-6 lg:h-8 lg:ml-10 ml-0"
+              className="h-6 lg:h-8  ml-0 logo"
               alt="Flowbite Logo"
             />
           </Link>
@@ -167,7 +167,7 @@ const Header = ({ toggleFilterSidebar }) => {
               {/* Keywords Button */}
 
               {/* Search Bar */}
-              <div className="flex rounded-full border-[1px] overflow-hidden max-w-[800px] w-[500px] mx-auto font-[sans-serif]">
+              <div className="flex rounded-full border-[1px] overflow-hidden searchinput mx-auto font-[sans-serif]">
                 <input
                   type="text"
                   placeholder="Search Something..."
