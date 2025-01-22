@@ -143,49 +143,49 @@ const Filters = ({ toggleFilterSidebar }) => {
                 </button>
               ))}
             </div>
-            <label className="inline-flex w-full cursor-pointer items-center justify-between pt-2">
+            <label class="inline-flex w-full cursor-pointer items-center justify-between pt-2">
               <div>
-                <span className="text-sm font-normal text-gray-900">
+                <span class="text-sm font-normal text-gray-900">
                   Open Access
                 </span>
               </div>
 
-              <div className="flex items-center">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
               </div>
             </label>
 
-            <label className="inline-flex w-full cursor-pointer justify-between items-center pt-2">
-              <div className="flex flex-row items-center">
-                <div className="text-sm font-normal text-gray-900">
+            <label class="inline-flex w-full cursor-pointer justify-between items-center pt-2">
+              <div class="flex flex-row items-center">
+                <div class="text-sm font-normal text-gray-900">
                   Ask Paper available
                 </div>
-                <div className="pl-1">
-                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-100 font-normal text-xs rounded-md">
+                <div class="pl-1">
+                  <span class="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-100 font-normal text-xs rounded-md">
                     Beta
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
               </div>
             </label>
 
-            <div className="relative pt-4">
-              <span className=" text-sm font-normal text-gray-900">
+            <div class="relative pt-4">
+              <span class=" text-sm font-normal text-gray-900">
                 Citations ≥
               </span>
               <input
                 type="number"
                 min="1"
                 placeholder="1"
-                className="w-full py-1 px-4 pl-10 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full py-1 px-4 pl-10 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-500"></span>
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="text-gray-500"></span>
               </div>
             </div>
           </div>
@@ -204,7 +204,7 @@ const Filters = ({ toggleFilterSidebar }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="size-6 text-green-500"
+                class="size-6 text-green-500"
               >
                 <path
                   fillRule="evenodd"
@@ -222,18 +222,16 @@ const Filters = ({ toggleFilterSidebar }) => {
         </button>
         {expandedFilters.method && (
           <div className="mt-4 space-y-2 ">
-            <div className="flex flex-row items-center pt-3 pb-3">
-              <div className="text-sm font-semibold text-gray-900">
-                Study types
-              </div>
-              <div className="pl-1">
+            <div class="flex flex-row items-center pt-3 pb-3">
+              <div class="text-sm font-semibold text-gray-900">Study types</div>
+              <div class="pl-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-4"
+                  class="size-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -352,18 +350,18 @@ const Filters = ({ toggleFilterSidebar }) => {
                 <span className="text-sm font-normal pl-2">In Vitro Trial</span>
               </div>
             </label>
-            <div className="flex flex-row items-center pt-3 pb-3">
-              <div className="text-sm font-semibold text-gray-900">
+            <div class="flex flex-row items-center pt-3 pb-3">
+              <div class="text-sm font-semibold text-gray-900">
                 Study details
               </div>
-              <div className="pl-1">
+              <div class="pl-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-4"
+                  class="size-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -373,43 +371,43 @@ const Filters = ({ toggleFilterSidebar }) => {
                 </svg>
               </div>
             </div>
-            <label className="inline-flex w-full cursor-pointer items-center justify-between ">
+            <label class="inline-flex w-full cursor-pointer items-center justify-between ">
               <div>
-                <span className="text-sm font-normal text-gray-900">
+                <span class="text-sm font-normal text-gray-900">
                   Controlled studies
                 </span>
               </div>
 
-              <div className="flex items-center">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
               </div>
             </label>
 
-            <label className="inline-flex w-full cursor-pointer justify-between items-center ">
-              <div className="flex flex-row items-center">
-                <div className="text-sm font-normal text-gray-900">
+            <label class="inline-flex w-full cursor-pointer justify-between items-center ">
+              <div class="flex flex-row items-center">
+                <div class="text-sm font-normal text-gray-900">
                   Human studies
                 </div>
               </div>
 
-              <div className="flex items-center">
-                <input type="checkbox" value="" className="sr-only peer" />
-                <div className="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
+              <div class="flex items-center">
+                <input type="checkbox" value="" class="sr-only peer" />
+                <div class="relative w-8 h-4 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:start-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-blue-600"></div>
               </div>
             </label>
-            <div className="relative pt-1">
-              <span className=" text-sm font-normal text-gray-900">
+            <div class="relative pt-1">
+              <span class=" text-sm font-normal text-gray-900">
                 Sample size ≥
               </span>
               <input
                 type="number"
                 min="1"
                 placeholder="1"
-                className="w-full py-1 px-4 pl-10 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full py-1 px-4 pl-10 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-500"></span>
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="text-gray-500"></span>
               </div>
             </div>
           </div>
@@ -431,18 +429,18 @@ const Filters = ({ toggleFilterSidebar }) => {
 
         {expandedFilters.journals && (
           <div>
-            <div className="flex flex-row items-center pt-3 pb-3">
-              <div className="text-xs font-semibold text-gray-900">
+            <div class="flex flex-row items-center pt-3 pb-3">
+              <div class="text-xs font-semibold text-gray-900">
                 SJR quartile ratings
               </div>
-              <div className="pl-1">
+              <div class="pl-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-4"
+                  class="size-4"
                 >
                   <path
                     strokeLinecap="round"
@@ -695,7 +693,7 @@ const Filters = ({ toggleFilterSidebar }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="size-6 text-green-500"
+                class="size-6 text-green-500"
               >
                 <path
                   fillRule="evenodd"

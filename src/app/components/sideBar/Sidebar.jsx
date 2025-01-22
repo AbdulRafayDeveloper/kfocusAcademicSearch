@@ -13,52 +13,24 @@ const SidebarFilters = ({
   toggleSideFilter,
 }) => {
   const filterCategories = [
+    { name: "Year", options: ["2023", "2022", "2021", "2020"] },
     {
-      name: "Date Range",
-      options: ["Last 5 years", "Last 10 years", "Custom"],
-    },
-    {
-      name: "Content Type",
-      options: ["Article", "Conference", "Report", "Book"],
-    },
-    { name: "Quick Filters", options: ["Recent", "Popular", "Highly Cited"] },
-    { name: "Publication Years", options: ["2023", "2022", "2021", "2020"] },
-    { name: "Keywords", options: ["Keyword 1", "Keyword 2", "Keyword 3"] },
-    { name: "KeyWords Plus", options: ["Keyword Plus 1", "Keyword Plus 2"] },
-    { name: "Research Areas", options: ["Area 1", "Area 2", "Area 3"] },
-    {
-      name: "Subject Area / Disciplines",
+      name: "Subject",
       options: ["Science", "Technology", "Engineering", "Math"],
     },
     {
-      name: "Sustainable Development Goals",
+      name: "Development Goals",
       options: ["Goal 1", "Goal 2", "Goal 3"],
     },
     { name: "Source Title", options: ["Source A", "Source B", "Source C"] },
-    {
-      name: "Source Type",
-      options: ["Journal", "Conference Proceedings", "Thesis"],
-    },
     { name: "Publisher", options: ["Publisher 1", "Publisher 2"] },
-    { name: "Author(s)", options: ["Author A", "Author B"] },
-    {
-      name: "Institute / Affiliations",
-      options: ["Institute 1", "Institute 2"],
-    },
-    { name: "Funder", options: ["Funder 1", "Funder 2"] },
-    { name: "Country/Territory", options: ["USA", "Canada", "UK", "India"] },
-    { name: "MeSH Heading", options: ["MeSH 1", "MeSH 2"] },
-    { name: "Chemical Substance", options: ["Substance 1", "Substance 2"] },
+    { name: "Author", options: ["Author A", "Author B"] },
     { name: "Language", options: ["English", "Spanish", "French"] },
-    { name: "Article Status", options: ["Published", "In Progress", "Draft"] },
-    {
-      name: "Top Institutions Logo Grid",
-      options: ["Institution 1", "Institution 2"],
-    },
   ];
 
   const personCategories = [];
 
+  // Extra items to display when the "person" category is active
   const additionalPersonItems = [
     "Can cement become a 'smart' material?",
     "Report create about cancer",
@@ -76,9 +48,8 @@ const SidebarFilters = ({
   const categoriesToDisplay =
     activeCategory === "person" ? personCategories : filterCategories;
 
-  //h-[465px]
   return (
-    <div className="w-full bg-white p-4 overflow-y-auto h-screen lg:max-h-[90vh] sm:max-h-[33vh] pb-12">
+    <div className="w-full bg-white p-4 overflow-y-auto h-[465px]">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
@@ -89,7 +60,7 @@ const SidebarFilters = ({
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="size-4"
+              class="size-4"
             >
               <path
                 strokeLinecap="round"
@@ -103,6 +74,8 @@ const SidebarFilters = ({
           </div>
         )}
       </div>
+
+      {/* Sidebar Item for 'Person' */}
 
       {/* Render filter categories */}
       <ul className="space-y-2 ">
@@ -167,12 +140,12 @@ const SidebarFilters = ({
           <ul className="space-y-2 overflow-auto">
             {/* History and Lists items, shown once */}
             <li className="flex flex-row items-center justify-between pl-2 pr-2">
-              <div className="border-b-[1.5px] pb-4 px-6 flex-grow flex flex-col border-b-gray-800">
+              <div className="border-b-[1.5px] pb-4 px-6 flex-grow border-b-gray-800">
                 <FontAwesomeIcon
                   icon={faHistory}
-                  className="text-gray-800 pr-9 text-sm"
+                  className="text-gray-800 pr-2"
                 />
-                <span className="font-light">History</span>
+                <span className="font-light ">History</span>
               </div>
               <div className="border-b-[0.5px] pb-4 px-6 flex-grow hover:border-b-gray-800">
                 <svg
@@ -181,7 +154,7 @@ const SidebarFilters = ({
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-4"
+                  class="size-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -196,7 +169,7 @@ const SidebarFilters = ({
             <p className="font-normal text-sm text-blue-500 pb-4 pt-4">Today</p>
             {/* The rest of the additional items */}
             {additionalPersonItems.map((item, index) => (
-              <li key={index} className="text-sm text-gray-600 pb-1">
+              <li key={index} className="text-sm text-gray-600 pb-2">
                 {item}
               </li>
             ))}

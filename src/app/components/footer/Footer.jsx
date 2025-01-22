@@ -6,8 +6,8 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <div className="w-full ">
-      <header className="w-full pt-6 pb-4 flex items-center justify-center">
+    <div className="w-full">
+      <header className="w-full pt-12 pb-4 flex items-center justify-center">
         <div className="max-w-screen-xl mx-auto px-4 md:px-8  flex justify-between">
           <div className="flex flex-row items-center">
             <div
