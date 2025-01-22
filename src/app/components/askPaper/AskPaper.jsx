@@ -2,11 +2,20 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-const AskPaper = ({ selectedPaper }) => {
-  if (!selectedPaper) return null; // If no paper is selected, return nothing
+const AskPaper = () => {
+  // Dummy data for selectedPaper
+  const selectedPaper = {
+    title: "Research on AI in Healthcare",
+    authors: "John Doe, Jane Smith, Alice Johnson",
+    year: 2023,
+    introduction:
+      "This paper explores the application of artificial intelligence in the healthcare industry, focusing on predictive models for patient diagnosis and treatment optimization.",
+    summary:
+      "The research discusses various AI methodologies, including machine learning and natural language processing, to improve patient care and streamline medical workflows. The paper highlights case studies from hospitals and healthcare institutions that have successfully integrated AI solutions.",
+  };
 
   return (
-    <div className="relative max-w-[1200px] overflow-y-auto bg-blue-50 p-6 shadow-md">
+    <div className="relative max-w-[1200px] lg:max-h-[81.5vh] sm:max-h-[33vh] h-screen overflow-y-auto bg-blue-50 p-6 shadow-md">
       <div className="w-full">
         <h2 className="text-2xl font-bold mb-4">{selectedPaper.title}</h2>
         <p className="text-sm text-gray-600 mb-2">

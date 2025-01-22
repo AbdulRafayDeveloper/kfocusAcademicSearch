@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const ListView = ({ toggleAskPaper }) => {
-  const [expandedRowIndex, setExpandedRowIndex] = useState(null); // Track which row is expanded
+const ListView = ({ toggleAskPaper, selectedValue }) => {
+  const [expandedRowIndex, setExpandedRowIndex] = useState(null);
+  console.log(selectedValue);
 
   const products = [
     {
@@ -32,7 +33,6 @@ const ListView = ({ toggleAskPaper }) => {
         "agriculture",
       ],
     },
-
     {
       title: "The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
@@ -111,63 +111,506 @@ const ListView = ({ toggleAskPaper }) => {
         "agriculture",
       ],
     },
-    // Add more product objects here...
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "This study explores the impact of coffee-mango associations on soil conditions, promoting microbial diversity.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
   ];
+
+  const recordsToDisplay = products.slice(0, selectedValue);
 
   const toggleAbstract = (index) => {
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
   };
 
+  //max-h-[316px]
   return (
-    <div className="relative max-h-[316px] overflow-y-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 h-1/2">
+    <div className="h-screen overflow-y-auto lg:max-h-[70vh] sm:max-h-[33vh]">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-white">
           <tr>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               {/* Checkbox column */}
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-8/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-8/12 border-b border-b-[#0076fa]"
             >
               Document Title
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-2/12 border-b border-b-[#0076fa]"
             >
               Authors
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               Year
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-2/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-2/12 border-b border-b-[#0076fa]"
             >
               Source
             </th>
             <th
               scope="col"
-              className="px-4 py-1 w-1/12 border border-b-[#0076fa]"
+              className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
             >
               Cited by
             </th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
+          {recordsToDisplay.map((product, index) => (
             <React.Fragment key={index}>
               <tr
-                className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } border-b`}
+                className={`
+                   bg-white hover:bg-gray-50 border-b`}
               >
                 <td className="px-4 py-4 text-left align-top">
                   <input type="checkbox" />
@@ -186,12 +629,17 @@ const ListView = ({ toggleAskPaper }) => {
                             className="text-blue-600 hover:underline focus:outline-none"
                           >
                             {detail}
+                            <FontAwesomeIcon
+                              icon={
+                                expandedRowIndex === index
+                                  ? faChevronUp
+                                  : faChevronDown
+                              }
+                              className="ml-1 text-xs"
+                            />
                           </button>
                         ) : detail === "Ask this paper" ? (
-                          <button
-                            onClick={() => toggleAskPaper(index)}
-                            className="text-blue-600 hover:underline focus:outline-none"
-                          >
+                          <button className="text-blue-600 hover:underline focus:outline-none">
                             {detail}
                           </button>
                         ) : (
@@ -236,33 +684,12 @@ const ListView = ({ toggleAskPaper }) => {
               </tr>
               {expandedRowIndex === index && (
                 <tr className="border-b-gray-500">
-                  <td colSpan={6} className="bg-white px-3 py-4 pl-16">
+                  <td colSpan={6} className="bg-gray-100 px-3 py-4 pl-16">
                     <div className="relative flex flex-col">
                       {/* Close button */}
-                      <div className="flex flex-row border-b-[#c59b7d] border-b-2 pb-1">
-                        <div className="flex flex-row items-center space-x-2">
-                          <button
-                            onClick={() => toggleAbstract(index)}
-                            className="text-[#c59b7d] text-xs font-semibold hover:text-[#c59b9d]"
-                          >
-                            <div className="flex flex-row items-center space-x-2">
-                              <p> Hide abstract</p>
-                              <FontAwesomeIcon
-                                icon={faChevronUp}
-                                className="text-xs text-[#c59b7d]"
-                              />
-                            </div>
-                          </button>
-                        </div>
-                        <button className="ml-4 text-blue-600  px-4 border border-gray-600 text-xs">
-                          Full Text
-                        </button>
-                        <button className="ml-4 text-gray-700 text-xs">
-                          View at Publisher
-                        </button>
-                      </div>
+
                       {/* Abstract content */}
-                      <div className="text-gray-800 mt-4 pl-2">
+                      <div className="text-gray-800 mt-2 pl-2">
                         <p>{product.abstract || "No abstract available."}</p>
                       </div>
                       {/* Keywords section */}

@@ -9,30 +9,40 @@ import { useState } from "react";
 
 const Header = ({ toggleFilterSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const toggleHeader = () => {
+    setIsHeaderVisible((prevState) => !prevState);
+  };
+
+  const [selectedKeyword, setSelectedKeyword] = useState("Keywords");
+  const handleSelectKeyword = (keyword) => {
+    setSelectedKeyword(keyword);
+    setIsOpen(false); // Close the dropdown after selection
+  };
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2 ">
+      <nav className="bg-white border-gray-200 lg:px-6 py-2 sm:px-0">
         <div className="flex flex-wrap items-center mx-auto ">
-          <Link href="https://flowbite.com" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
               src="/icons/future_logo.png"
-              className="h-8 sm:h-8 ml-10"
+              className="h-6 lg:h-8 lg:ml-10 ml-0"
               alt="Flowbite Logo"
             />
           </Link>
           <div className="flex ml-auto items-center lg:order-2 justify-center">
             <a
               href="#"
-              className="text-gray-800  hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none "
+              className="text-gray-800  hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1 hidden lg:block py-2 lg:py-2.5 mr-2 focus:outline-none "
             >
               Melayu
             </a>
 
             <a
               href="#"
-              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1 hidden lg:block py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               <div className="flex flex-row items-center justify-center">
                 <p className="pr-1">3</p>
@@ -41,6 +51,7 @@ const Header = ({ toggleFilterSidebar }) => {
                   <FontAwesomeIcon
                     icon={faTrophy}
                     className="text-blue-600"
+                    style={{ fontSize: "16px", width: "16px", height: "16px" }}
                   ></FontAwesomeIcon>
                 </div>
               </div>
@@ -48,7 +59,7 @@ const Header = ({ toggleFilterSidebar }) => {
 
             <a
               href="#"
-              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1  py-2 lg:py-2.5 mr-2 focus:outline-none"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-normal rounded-lg text-xs lg:px-1 lg:block hidden py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
               <div className="flex flex-row items-center justify-center relative">
                 <p className="pr-1">Journals</p>
@@ -70,10 +81,21 @@ const Header = ({ toggleFilterSidebar }) => {
             >
               <div className="flex flex-row items-center justify-center">
                 {/* Circle Wrapper for Icon */}
-                <FontAwesomeIcon
-                  icon={faFilter}
-                  className="text-blue-600 w-4 h-4"
-                ></FontAwesomeIcon>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="blue"
+                  className="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+                  />
+                </svg>
+
                 <span className="ml-2 text-xs">Filter</span>
               </div>
             </button>
@@ -83,40 +105,21 @@ const Header = ({ toggleFilterSidebar }) => {
               type="button"
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
               aria-controls="mobile-menu-2"
-              aria-expanded="false"
+              aria-expanded={isHeaderVisible} // Dynamically set
+              onClick={toggleHeader}
             >
               <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              <svg
-                className="hidden w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <FontAwesomeIcon
+                icon={faAngleDoubleDown}
+                className="text-blue-600 w-4 h-4"
+              />
             </button>
           </div>
           <div
             className="ml-20 hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <div className="flex items-center justify-center space-x-2 ">
+            <div className="flex items-center justify-center space-x-2 pl-24">
               <div className="relative">
                 <button
                   className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center"
@@ -125,59 +128,38 @@ const Header = ({ toggleFilterSidebar }) => {
                   <FontAwesomeIcon
                     icon={faSearch}
                     className="text-[#0076fa] text-sm mr-2"
+                    style={{ fontSize: "16px", width: "16px", height: "16px" }}
                   />
-                  <p className="text-[#0076fa] text-xs font-serif">Keywords</p>
+                  <p className="text-[#0076fa] text-xs font-serif">
+                    {selectedKeyword}
+                  </p>
                 </button>
                 {isOpen && (
                   <div className="absolute mt-2 py-2 bg-white rounded-lg border-[0.5px] border-gray-300 z-[99999] w-48 shadow-xl">
-                    <div className="flex justify-end pt-2 pr-2">
-                      <button
-                        onClick={toggleDropdown}
-                        className="text-gray-600 text-sm hover:text-gray-800"
-                      >
-                        <FontAwesomeIcon icon={faTimes} />
-                      </button>
-                    </div>
-                    <ul className=" text-xs">
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300 ">
-                        Title
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Title, Keyword, and Abstract
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Abstract
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Keyword
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Author
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Affiliation
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Full Text
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Reference
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Literature Source
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Sustainable Development Goals
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        Subject
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-[0.5px]  border-b-gray-300">
-                        DOI
-                      </li>
-                      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                        Copilot-AI
-                      </li>
+                    <ul className="text-xs">
+                      {[
+                        "Title",
+                        "Title, Keyword, and Abstract",
+                        "Abstract",
+                        "Keyword",
+                        "Author",
+                        "Affiliation",
+                        "Full Text",
+                        "Reference",
+                        "Literature Source",
+                        "Sustainable Development Goals",
+                        "Subject",
+                        "DOI",
+                        "Copilot-AI",
+                      ].map((keyword, index) => (
+                        <li
+                          key={index}
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => handleSelectKeyword(keyword)}
+                        >
+                          {keyword}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 )}
@@ -220,11 +202,18 @@ const Header = ({ toggleFilterSidebar }) => {
           </div>
         </div>
       </nav>
-      <div className="flex flex-wrap items-center mx-auto bg-[#0076fa] bg-cover pr-10 pl-10">
+      <div
+        className={`${
+          isHeaderVisible ? "flex" : "hidden"
+        } lg:flex flex-wrap items-center mx-auto bg-[#0076fa] bg-cover lg:pr-10 lg:pl-10 pr-1 pl-1`}
+      >
         {/* Header Items Section */}
         <div className="w-full mb-1 mt-1 text-white">
-          <ul className="flex space-x-4 overflow-x-auto items-center justify-center">
-            <li className="flex flex-col items-center pr-2 min-h-[60px] flex-grow ">
+          <ul
+            className="flex space-x-4 overflow-x-auto scrollbar-thin items-center justify-start"
+            style={{ whiteSpace: "nowrap" }}
+          >
+            <li className="flex flex-col items-center pr-2 min-h-[60px] flex-grow">
               <div className="flex justify-between w-full">
                 <div className="flex flex-col items-center">
                   <p className="font-normal text-base text-center pt-2">ALL</p>
@@ -232,29 +221,19 @@ const Header = ({ toggleFilterSidebar }) => {
                 </div>
               </div>
             </li>
-            <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a
-                href="#journal-articles"
-                className="font-light text-sm text-center"
-              >
-                Chinese
-              </a>
-              <span>
-                <p className="font-light text-xs text-center underline">
-                  other languages
-                </p>
-              </span>
-            </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
                 href="#journal-articles"
                 className="font-light text-sm text-center"
               >
-                Journal Articles
+                Journal <br />
+                Articles
               </a>
               <span>
-                <p className="font-light text-sm text-center">914,952</p>
+                <p className="font-light text-sm text-center pt-1 lg:pt-[12px]">
+                  914,952
+                </p>
               </span>
             </li>
 
@@ -263,10 +242,12 @@ const Header = ({ toggleFilterSidebar }) => {
                 href="#theses-dissertations"
                 className="font-light text-sm text-center"
               >
-                Theses & Dissertations
+                Theses & <br /> Dissertations
               </a>
               <span>
-                <p className="font-light text-sm text-center">211,169</p>
+                <p className="font-light text-sm text-center pt-1 lg:pt-[12px]">
+                  211,169
+                </p>
               </span>
             </li>
 
@@ -335,7 +316,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Law Cases
               </a>
               <span>
-                <p className="font-light text-sm text-center ">57,587</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  57,587
+                </p>
               </span>
             </li>
 
@@ -347,7 +330,9 @@ const Header = ({ toggleFilterSidebar }) => {
                 Monographic Serials
               </a>
               <span>
-                <p className="font-light text-sm text-center">2,387</p>
+                <p className="font-light text-sm text-center pt-[18px]">
+                  2,387
+                </p>
               </span>
             </li>
 
@@ -360,7 +345,7 @@ const Header = ({ toggleFilterSidebar }) => {
               </a>
             </li>
 
-            <li className="flex flex-col items-center pr-2 flex-grow min-h-[60px] ">
+            <li className="flex flex-col items-center pr-2 flex-grow min-h-[60px]">
               <a href="#dataset" className="font-light text-sm text-center">
                 Dataset
               </a>
