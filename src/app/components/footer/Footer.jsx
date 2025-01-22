@@ -8,11 +8,10 @@ const Footer = () => {
   return (
     <div className="w-full ">
       <header className="w-full pt-6 pb-4 flex items-center justify-center">
-        <div className="max-w-screen-xl mx-auto px-4 md:px-8 flex flex-wrap justify-between">
-          {/* About Us Section */}
-          <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
+        <div className="max-w-screen-xl mx-auto px-4 md:px-8  flex justify-between">
+          <div className="flex flex-row items-center">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-lr",
                 transform: "rotate(360deg)",
@@ -39,10 +38,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support Center Section */}
-          <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0 mx-0 md:mx-8">
+          <div className="flex flex-row items-center mx-8">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
@@ -50,7 +48,7 @@ const Footer = () => {
             >
               Support Center
             </div>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-row gap-4">
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>
                   <a href="#" className="hover:underline">
@@ -88,10 +86,9 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Partnerships Section */}
-          <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
+          <div className="flex flex-row items-center">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 self-start"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
@@ -117,9 +114,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-
-          {/* Social Media Section */}
-          <div className="flex flex-row justify-center md:justify-start items-center space-x-4">
+          <div className="flex flex-row items-center space-x-4 pl-8">
             <div className="flex flex-col items-center">
               <FontAwesomeIcon
                 icon={faFacebookF}
