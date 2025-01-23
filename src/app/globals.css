@@ -241,3 +241,24 @@ ul::-webkit-scrollbar-track {
     width: 800px;
   }
 }
+
+@media (min-width: 1025px) and (min-height: 590px) {
+  .listheight {
+    max-height: 50vh; 
+  }
+  .listfilter {
+    max-height: 75vh; 
+  }
+  .searchinput{
+    width: 500px;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 1024px) {
+  .listheight {
+    max-height: 71.4vh; 
+  }
+  .listfilter {
+    max-height: 85.8vh; 
+  }
+}

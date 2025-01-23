@@ -11,52 +11,8 @@ const SidebarFilters = ({
   activeCategory,
   changeActiveCategory,
   toggleSideFilter,
+  filterCategories,
 }) => {
-  const filterCategories = [
-    {
-      name: "Date Range",
-      options: ["Last 5 years", "Last 10 years", "Custom"],
-    },
-    {
-      name: "Content Type",
-      options: ["Article", "Conference", "Report", "Book"],
-    },
-    { name: "Quick Filters", options: ["Recent", "Popular", "Highly Cited"] },
-    { name: "Publication Years", options: ["2023", "2022", "2021", "2020"] },
-    { name: "Keywords", options: ["Keyword 1", "Keyword 2", "Keyword 3"] },
-    { name: "KeyWords Plus", options: ["Keyword Plus 1", "Keyword Plus 2"] },
-    { name: "Research Areas", options: ["Area 1", "Area 2", "Area 3"] },
-    {
-      name: "Subject Area / Disciplines",
-      options: ["Science", "Technology", "Engineering", "Math"],
-    },
-    {
-      name: "Sustainable Development Goals",
-      options: ["Goal 1", "Goal 2", "Goal 3"],
-    },
-    { name: "Source Title", options: ["Source A", "Source B", "Source C"] },
-    {
-      name: "Source Type",
-      options: ["Journal", "Conference Proceedings", "Thesis"],
-    },
-    { name: "Publisher", options: ["Publisher 1", "Publisher 2"] },
-    { name: "Author(s)", options: ["Author A", "Author B"] },
-    {
-      name: "Institute / Affiliations",
-      options: ["Institute 1", "Institute 2"],
-    },
-    { name: "Funder", options: ["Funder 1", "Funder 2"] },
-    { name: "Country/Territory", options: ["USA", "Canada", "UK", "India"] },
-    { name: "MeSH Heading", options: ["MeSH 1", "MeSH 2"] },
-    { name: "Chemical Substance", options: ["Substance 1", "Substance 2"] },
-    { name: "Language", options: ["English", "Spanish", "French"] },
-    { name: "Article Status", options: ["Published", "In Progress", "Draft"] },
-    {
-      name: "Top Institutions Logo Grid",
-      options: ["Institution 1", "Institution 2"],
-    },
-  ];
-
   const personCategories = [];
 
   const additionalPersonItems = [
@@ -64,13 +20,12 @@ const SidebarFilters = ({
     "Report create about cancer",
   ];
 
-  const [expandedFilters, setExpandedFilters] = useState({});
+  const [expandedFilters, setExpandedFilters] = useState(null); // Hold only one category name
 
   const toggleFilter = (category) => {
-    setExpandedFilters((prevState) => ({
-      ...prevState,
-      [category]: !prevState[category],
-    }));
+    setExpandedFilters(
+      (prevCategory) => (prevCategory === category ? null : category) // Close the category if it's already open, else open the new category
+    );
   };
 
   const categoriesToDisplay =
@@ -105,7 +60,7 @@ const SidebarFilters = ({
       </div>
 
       {/* Render filter categories */}
-      <ul className="space-y-2 ">
+      <ul className="space-y-2">
         {categoriesToDisplay.map((category) => (
           <li key={category.name}>
             <button
@@ -116,19 +71,20 @@ const SidebarFilters = ({
               }`}
               onClick={() => {
                 changeActiveCategory(category.name);
-                toggleFilter(category.name);
+                toggleFilter(category.name); // Toggle filter when category is clicked
               }}
             >
               <span>{category.name}</span>
               <span className="text-base">
-                {expandedFilters[category.name] ? "-" : "+"}
+                {expandedFilters === category.name ? "-" : "+"}
               </span>
             </button>
-            {expandedFilters[category.name] && (
-              <div className="mt-2 pl-4">
+            {expandedFilters === category.name && (
+              <div className="mt-2 pl-4 border-b-[0.5px] pb-2">
                 <ul className="space-y-2">
-                  {category.options.map((option) => (
-                    <li key={option}>
+                  {/* Show up to 5 labels */}
+                  {category.options.slice(0, 5).map((option) => (
+                    <li key={option.value}>
                       <div className="flex flex-col">
                         <label className="flex items-center space-x-2">
                           <input
@@ -136,7 +92,7 @@ const SidebarFilters = ({
                             className="form-checkbox h-4 w-4 text-blue-600"
                           />
                           <span className="text-sm text-gray-600">
-                            {option}
+                            {option.label}
                           </span>
                         </label>
                       </div>
@@ -147,7 +103,7 @@ const SidebarFilters = ({
                       Refine
                     </button>
                     <button
-                      className="flex flex-row items-center p-1 text-blue-500 "
+                      className="flex flex-row items-center p-1 text-blue-500"
                       onClick={() => toggleSideFilter(category.name)}
                     >
                       <FontAwesomeIcon icon={faEllipsis} />

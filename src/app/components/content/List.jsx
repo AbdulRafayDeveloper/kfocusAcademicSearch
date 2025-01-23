@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const ListView = ({ toggleAskPaper, selectedValue }) => {
+const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
   const [expandedRowIndex, setExpandedRowIndex] = useState(null);
   console.log(selectedValue);
 
@@ -610,11 +610,15 @@ const ListView = ({ toggleAskPaper, selectedValue }) => {
             <React.Fragment key={index}>
               <tr
                 className={`
-                   bg-white hover:bg-gray-50 border-b`}
+                   bg-white hover:bg-gray-100 border-b`}
               >
                 <td className="px-4 py-4 text-left align-top">
-                  <input type="checkbox" />
+                  <div className="flex items-center">
+                    <input type="checkbox" className="mr-2" />
+                    <span>{index + 1}</span>
+                  </div>
                 </td>
+
                 <td className="px-4 py-2 text-left align-top">
                   <p className="text-xs text-gray-500">Article</p>
                   <div className="font-medium text-gray-900">
@@ -639,9 +643,12 @@ const ListView = ({ toggleAskPaper, selectedValue }) => {
                             />
                           </button>
                         ) : detail === "Ask this paper" ? (
-                          <button className="text-blue-600 hover:underline focus:outline-none">
+                          <a
+                            href={`../../pdfPage/${index}`} // Navigate to the web route
+                            className="text-blue-600 hover:underline focus:outline-none"
+                          >
                             {detail}
-                          </button>
+                          </a>
                         ) : (
                           detail
                         )}
@@ -684,7 +691,7 @@ const ListView = ({ toggleAskPaper, selectedValue }) => {
               </tr>
               {expandedRowIndex === index && (
                 <tr className="border-b-gray-500">
-                  <td colSpan={6} className="bg-gray-100 px-3 py-4 pl-16">
+                  <td colSpan={6} className="bg-gray-100 px-3 py-4 pl-[87px]">
                     <div className="relative flex flex-col">
                       {/* Close button */}
 

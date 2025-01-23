@@ -24,6 +24,7 @@ import Filters from "../filters/Filters";
 import AskPaper from "../askPaper/AskPaper";
 import MoreFilters from "../moreFilters/MoreFilters";
 import Loader from "../loader/Loader";
+import PdfViewer from "../pdfViewer/ViewPdf";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -37,6 +38,34 @@ const HomePage = () => {
 
   const showGridView = () => setIsGridVisible(true);
   const showListView = () => setIsGridVisible(false);
+  const [showPdf, setShowPdf] = useState(false);
+  const [pdfIndex, setPdfIndex] = useState();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState("Date (newest)");
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleSortChange = (sortOption) => {
+    setSelectedSort(sortOption);
+    setIsDropdownOpen(false); // Close the dropdown after selecting an option
+  };
+
+  const sortOptions = [
+    "Date (newest)",
+    "Date (oldest)",
+    "Relevance",
+    "Popularity",
+  ];
+
+  const togglePdf = (index) => {
+    setShowPdf(!showPdf);
+    setPdfIndex(index);
+    console.log("document number:", index);
+  };
+
+  console.log("show pdf: ", showPdf);
 
   const toggleSidebar = () => {
     setIsSidebarVisible((prevState) => !prevState);
@@ -312,7 +341,7 @@ const HomePage = () => {
         <Filters toggleFilterSidebar={toggleFilterSidebar} />
       </div>
       <div
-        className={`absolute top-[200px] right-0 z-40 bg-white transition-transform duration-300 ${
+        className={`absolute top-[138px] right-0 z-40 bg-white transition-transform duration-300 ${
           selectedFilter ? "translate-x-0 w-[730px]" : "hidden"
         }`}
       >
@@ -431,20 +460,27 @@ const HomePage = () => {
             <div
               className={`${
                 isSidebarVisible ? "w-[300px]" : "w-0"
-              } transition-all duration-300 overflow-`}
+              } transition-all duration-300 overflow-hidden ${
+                showPdf ? "hidden" : ""
+              }`}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
                 changeActiveCategory={changeActiveCategory}
                 toggleSideFilter={toggleSideFilter}
                 className="overflow-y-scroll"
+                filterCategories={filterCategories}
               />
             </div>
 
             {/* Main Content Area */}
             <div className="flex flex-col flex-grow h-screen">
               {/* Header */}
-              <div className="bg-white pt-2 pb-2 pr-1 pl-1 flex flex-row justify-between items-center">
+              <div
+                className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center ${
+                  showPdf ? "hidden" : ""
+                }`}
+              >
                 {/* Left Section */}
                 <div className="flex flex-row items-center flex-shrink-0 space-x-2">
                   <FontAwesomeIcon
@@ -467,20 +503,42 @@ const HomePage = () => {
                 {/* Right Section */}
                 <div className="flex flex-row items-center space-x-4">
                   {/* Sort on Section */}
-                  <div className="flex flex-row items-center pr-4 space-x-1">
+                  <div className="relative flex flex-row items-center pr-4 space-x-1">
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
-                    <p className="text-cyan-700 text-xs whitespace-nowrap">
-                      Date (newest)
-                    </p>
-                    <FontAwesomeIcon
-                      icon={faChevronDown}
-                      className="p-1 bg-cyan-700 text-white text-xs rounded-sm"
-                      style={{
-                        fontSize: "12px",
-                        width: "12px",
-                        height: "12px",
-                      }}
-                    />
+                    <button
+                      className="flex items-center space-x-1 text-cyan-700 text-xs whitespace-nowrap focus:outline-none"
+                      onClick={toggleDropdown}
+                    >
+                      <span>{selectedSort}</span>
+                      <FontAwesomeIcon
+                        icon={faChevronDown}
+                        className="p-1 bg-[#0076fa] text-white text-xs rounded-sm"
+                        style={{
+                          fontSize: "12px",
+                          width: "12px",
+                          height: "12px",
+                        }}
+                      />
+                    </button>
+
+                    {/* Dropdown menu */}
+                    {isDropdownOpen && (
+                      <div className="absolute top-full mt-1 bg-white rounded-lg shadow-lg border-[0.5px] border-gray-300 z-[9999] w-40">
+                        <ul className="text-xs">
+                          {sortOptions.map((option, index) => (
+                            <li
+                              key={index}
+                              className={`px-4 py-2 hover:bg-gray-100 cursor-pointer ${
+                                selectedSort === option ? "font-semibold" : ""
+                              }`}
+                              onClick={() => handleSortChange(option)}
+                            >
+                              {option}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
 
                   {/* Total Section */}
@@ -514,7 +572,13 @@ const HomePage = () => {
               {/* Fixed Size Content Area pb-2*/}
               <div className="flex-1 pr-2 pl-2 w-full mx-auto h-screen">
                 <nav className="mb-1">
-                  <div className="pt-1 flex flex-row justify-between items-center space-x-2">
+                  <div
+                    className={` ${
+                      showPdf
+                        ? "hidden"
+                        : "pt-1 flex flex-row justify-between items-center space-x-2"
+                    }`}
+                  >
                     {/* Left Section */}
                     <div className="flex items-center space-x-2">
                       <input
@@ -693,17 +757,22 @@ const HomePage = () => {
                       />
                     ) : isGridVisible ? (
                       <GridView selectedValue={selectedValue} />
+                    ) : showPdf ? (
+                      <PdfViewer index={pdfIndex} togglePdf={togglePdf} />
                     ) : (
                       <ListView
                         toggleAskPaper={toggleAskPaper}
                         selectedValue={selectedValue}
+                        togglePdf={togglePdf}
                       />
                     )}
                   </div>
+
                   <footer
                     className={`bg-white z-10 p-[26px] text-gray-800 mt-auto flex justify-center items-center relative ${
                       isSidebarVisible ? "w-full" : "w-full"
-                    } ${askThisPaper ? "hidden" : "w-full"}`}
+                    } ${askThisPaper ? "hidden" : "w-full"}
+                    ${showPdf ? "hidden" : "w-full"}`}
                   >
                     <nav aria-label="Page navigation example">
                       <ul className="flex items-center space-x-2 h-6 text-base">

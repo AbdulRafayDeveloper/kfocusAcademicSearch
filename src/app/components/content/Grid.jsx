@@ -215,7 +215,7 @@ const GridView = ({ selectedValue }) => {
   const recordsToDisplay = products.slice(0, selectedValue);
 
   return (
-    <div className="relative lg:max-h-[75vh] sm:max-h-[33vh] h-screen overflow-y-auto max-w-[1210px]">
+    <div className="relative listheight h-screen overflow-y-auto max-w-[1210px]">
       <div className="w-full">
         {recordsToDisplay.map((product, index) => (
           <div
@@ -288,7 +288,14 @@ const GridView = ({ selectedValue }) => {
                     />
                   </svg>
                 </div>
-                <div className="text-xs text-blue-600">Ask this paper</div>
+                <div className="text-xs text-blue-600">
+                  <a
+                    href={`../../pdfPage/${index}`} // Navigate to the web route
+                    className="text-blue-600 hover:underline focus:outline-none"
+                  >
+                    {"Ask this paper"}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

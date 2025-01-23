@@ -5,7 +5,7 @@ import { faFilter, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Header = ({ toggleFilterSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,10 +15,26 @@ const Header = ({ toggleFilterSidebar }) => {
   };
 
   const [selectedKeyword, setSelectedKeyword] = useState("Keywords");
+
+  const dropdownRef = useRef(null);
   const handleSelectKeyword = (keyword) => {
     setSelectedKeyword(keyword);
     setIsOpen(false); // Close the dropdown after selection
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close dropdown if clicking outside of it
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   return (
@@ -119,7 +135,10 @@ const Header = ({ toggleFilterSidebar }) => {
             className="ml-20 hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <div className="flex items-center justify-center space-x-2 pl-24">
+            <div
+              className="flex items-center justify-center space-x-2 pl-24"
+              ref={dropdownRef}
+            >
               <div className="relative">
                 <button
                   className="py-[4px] px-4 border-[0.5px] rounded-full flex items-center justify-center"
@@ -130,7 +149,15 @@ const Header = ({ toggleFilterSidebar }) => {
                     className="text-[#0076fa] text-sm mr-2"
                     style={{ fontSize: "16px", width: "16px", height: "16px" }}
                   />
-                  <p className="text-[#0076fa] text-xs font-serif">
+                  <p
+                    className="text-[#0076fa] text-xs font-serif truncate"
+                    style={{
+                      maxWidth: "48px", // Set the max width of the text container
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
                     {selectedKeyword}
                   </p>
                 </button>
@@ -164,9 +191,8 @@ const Header = ({ toggleFilterSidebar }) => {
                   </div>
                 )}
               </div>
-              {/* Keywords Button */}
 
-              {/* Search Bar */}
+              {/* Keywords Button */}
               <div className="flex rounded-full border-[1px] overflow-hidden searchinput mx-auto font-[sans-serif]">
                 <input
                   type="text"
@@ -213,14 +239,34 @@ const Header = ({ toggleFilterSidebar }) => {
             className="flex space-x-4 overflow-x-auto scrollbar-thin items-center justify-start"
             style={{ whiteSpace: "nowrap" }}
           >
-            <li className="flex flex-col items-center pr-2 min-h-[60px] flex-grow">
-              <div className="flex justify-between w-full">
-                <div className="flex flex-col items-center">
-                  <p className="font-normal text-base text-center pt-2">ALL</p>
-                  <span className="text-white font-light text-sm">914,952</span>
+            <div className="flex flex-row">
+              <li className="flex flex-col items-center min-h-[60px] flex-grow">
+                <div className="flex justify-between w-full h-full">
+                  <div className="flex flex-col items-center bg-white bg-opacity-40 pl-2 pr-2 h-full pb-[14px] rounded-tl-md">
+                    <p className="font-normal text-base text-center pt-2">
+                      ALL
+                    </p>
+                    <span className="text-white font-light text-sm">
+                      914,952
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
+
+              <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
+                <a
+                  href="#journal-articles"
+                  className="font-light text-sm text-center bg-white bg-opacity-40 pb-2  w-full rounded-tr-md"
+                >
+                  English
+                </a>
+                <span>
+                  <p className="font-light text-xs text-center pt-1 lg:pt-[18px] pl-2 underline">
+                    Advance Search
+                  </p>
+                </span>
+              </li>
+            </div>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
@@ -231,7 +277,7 @@ const Header = ({ toggleFilterSidebar }) => {
                 Articles
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-1 lg:pt-[12px]">
+                <p className="font-light text-sm text-center pt-1 lg:pt-[4px] pb-1">
                   914,952
                 </p>
               </span>
@@ -245,7 +291,7 @@ const Header = ({ toggleFilterSidebar }) => {
                 Theses & <br /> Dissertations
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-1 lg:pt-[12px]">
+                <p className="font-light text-sm text-center pt-1 lg:pt-[4px] pb-1">
                   211,169
                 </p>
               </span>
@@ -254,69 +300,88 @@ const Header = ({ toggleFilterSidebar }) => {
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
                 href="#udlislamic-books"
-                className="font-light text-sm text-center"
+                className="font-light text-sm text-center "
               >
-                UDLislamic Books
+                UDLislamic
+                <br />
+                Books
               </a>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#conferences" className="font-light text-sm text-center">
+              <a
+                href="#conferences"
+                className="font-light text-sm text-center pb-2"
+              >
                 Conferences
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center pt-[10px]">
                   42,039
                 </p>
               </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#newspapers" className="font-light text-sm text-center">
+              <a
+                href="#newspapers"
+                className="font-light text-sm text-center pb-2"
+              >
                 Newspapers
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center pt-[10px]">
                   101,857
                 </p>
               </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#books" className="font-light text-sm text-center">
+              <a href="#books" className="font-light text-sm text-center pb-2">
                 Books
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">0</p>
+                <p className="font-light text-sm text-center pt-[10px]">0</p>
               </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#patents" className="font-light text-sm text-center">
+              <a
+                href="#patents"
+                className="font-light text-sm text-center pb-2"
+              >
                 Patents
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">251</p>
+                <p className="font-light text-sm text-center pt-[10px]">251</p>
               </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#standards" className="font-light text-sm text-center">
+              <a
+                href="#standards"
+                className="font-light text-sm text-center pb-2"
+              >
                 Standards
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center pt-[10px]">
                   5,883
                 </p>
               </span>
             </li>
 
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
-              <a href="#law-cases" className="font-light text-sm text-center">
-                Law Cases
+              <a
+                href="#law-cases"
+                className="font-light text-sm text-center pb-1"
+              >
+                Law
+                <br />
+                Cases
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center lg:pt-[2px] pb-1">
                   57,587
                 </p>
               </span>
@@ -327,10 +392,12 @@ const Header = ({ toggleFilterSidebar }) => {
                 href="#monographic-serials"
                 className="font-light text-sm text-center"
               >
-                Monographic Serials
+                Monographic
+                <br />
+                Serials
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center lg:pt-[6px] pb-1">
                   2,387
                 </p>
               </span>
@@ -339,18 +406,23 @@ const Header = ({ toggleFilterSidebar }) => {
             <li className="flex flex-col items-center pr-2 border-r-[0.2px] border-gray-400 min-h-[60px] flex-grow">
               <a
                 href="#reference-works"
-                className="font-light text-sm text-center"
+                className="font-light text-sm text-center pb-6"
               >
-                Reference Works
+                Reference
+                <br />
+                Works
               </a>
             </li>
 
             <li className="flex flex-col items-center pr-2 flex-grow min-h-[60px]">
-              <a href="#dataset" className="font-light text-sm text-center">
+              <a
+                href="#dataset"
+                className="font-light text-sm text-center pb-2"
+              >
                 Dataset
               </a>
               <span>
-                <p className="font-light text-sm text-center pt-[18px]">
+                <p className="font-light text-sm text-center pt-[10px]">
                   115,339
                 </p>
               </span>
