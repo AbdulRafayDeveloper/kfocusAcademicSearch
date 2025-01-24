@@ -15,7 +15,7 @@ const AskPaper = () => {
   };
 
   return (
-    <div className="relative max-w-[1200px] lg:max-h-[81.5vh] sm:max-h-[33vh] h-screen overflow-y-auto bg-blue-50 p-6 shadow-md">
+    <div className="relative max-w-[1200px] askPaper h-screen overflow-y-auto bg-blue-50 p-6 shadow-md">
       <div className="w-full">
         <h2 className="text-2xl font-bold mb-4">{selectedPaper.title}</h2>
         <p className="text-sm text-gray-600 mb-2">

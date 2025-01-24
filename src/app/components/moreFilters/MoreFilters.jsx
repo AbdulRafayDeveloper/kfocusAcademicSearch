@@ -47,7 +47,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
 
   // Effect to reset visibleCount when the filters list changes
   useEffect(() => {
-    setVisibleCount(5); // Reset visible count whenever filters change
+    setVisibleCount(8); // Reset visible count whenever filters change
   }, [ListOfFilters]);
 
   return (
@@ -121,8 +121,8 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         {/* Render the first column */}
         <div>
           {firstColumn.map((filter, index) => (
-            <div key={index} className="flex items-center justify-between mb-2">
-              <div className="flex items-center">
+            <div key={index} className="flex items-center mb-2">
+              <div className="flex items-center mr-40">
                 <input
                   type="checkbox"
                   checked={isCheckedItems[index]}
@@ -131,7 +131,12 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                 />
                 <span className="text-base">{filter.label}</span>
               </div>
-              <span className="text-sm text-gray-600">({filter.value})</span>
+              <span
+                className="text-sm text-gray-600 text-right"
+                style={{ minWidth: "30px", display: "inline-block" }}
+              >
+                ({filter.value})
+              </span>
             </div>
           ))}
         </div>
@@ -139,8 +144,8 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         {/* Render the second column */}
         <div>
           {secondColumn.map((filter, index) => (
-            <div key={index} className="flex items-center justify-between mb-2">
-              <div className="flex items-center">
+            <div key={index} className="flex items-center  mb-2">
+              <div className="flex items-center mr-40">
                 <input
                   type="checkbox"
                   checked={isCheckedItems[index]}
@@ -149,7 +154,12 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                 />
                 <span className="text-base">{filter.label}</span>
               </div>
-              <span className="text-sm text-gray-600">({filter.value})</span>
+              <span
+                className="text-sm text-gray-600 text-right"
+                style={{ minWidth: "30px", display: "inline-block" }}
+              >
+                ({filter.value})
+              </span>
             </div>
           ))}
         </div>

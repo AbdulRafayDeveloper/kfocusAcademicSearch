@@ -152,7 +152,7 @@ const Header = ({ toggleFilterSidebar }) => {
                   <p
                     className="text-[#0076fa] text-xs font-serif truncate"
                     style={{
-                      maxWidth: "48px", // Set the max width of the text container
+                      maxWidth: "88px", // Set the max width of the text container
                       overflow: "hidden",
                       whiteSpace: "nowrap",
                       textOverflow: "ellipsis",

@@ -5,16 +5,568 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import SidebarFilters from "../../components/sideBar/Sidebar";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Filters from "../../components/filters/Filters";
 import MoreFilters from "../../components/moreFilters/MoreFilters";
-import Loader from "../../components/loader/Loader";
+import Footer from "@/app/components/footer/Footer";
+import DataDisplayToPDF from "@/app/components/dataToPdf/DataDisplayToPDF";
+import { useSearchParams, usePathname } from "next/navigation";
 
 const page = ({ params }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState();
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const products = [
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+    {
+      title: "The coffee-mango association promotes favorable soil conditions",
+      authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
+      afiliated_nation: "5",
+      year: 2020,
+      source: "Nature Communications 11(1):318",
+      citedBy: 20,
+      indexIn: "20 | Q1",
+      ref: "54",
+      details: [
+        "View abstract",
+        "View at Publisher",
+        "Related documents",
+        "Ask this paper",
+        "SDGs: 3",
+      ],
+      abstract:
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+      keywords: [
+        "coffee-mango association",
+        "soil conditions",
+        "microbial diversity",
+        "sustainability",
+        "agriculture",
+      ],
+    },
+  ];
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleSidebar = () => {
     setIsSidebarVisible((prevState) => !prevState);
@@ -202,21 +754,40 @@ const page = ({ params }) => {
     selectedFilterOptions = [selectedFilterindex];
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+  const [loading, setLoading] = useState(true); // Track loading state
 
-    return () => clearTimeout(timer);
+  const param = React.use(params); // Correct way to unwrap params in Next.js 13+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const product = products[param.id]; // Fetch product by ID from the products array
+        setSelectedProduct(product); // Set the selected product
+        setLoading(false); // Data is loaded, set loading to false
+      } catch (e) {
+        console.log("Error fetching data:", e);
+        setLoading(false); // Even on error, stop loading
+      }
+    };
+
+    if (param && param.id) {
+      fetchData();
+    }
   }, []);
 
-  if (isLoading) {
-    return <Loader />;
+  if (loading) {
+    return <p>Loading product...</p>;
+  }
+
+  if (!selectedProduct) {
+    return <p>Product not found or there was an error.</p>;
   }
 
   return (
-    <div className="flex flex-col max-h-screen ">
-      <Header toggleFilterSidebar={toggleFilterSidebar} />
+    <div
+      className="flex flex-col min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url(/images/bg.jpg)" }}
+    >
       <div
         className={`absolute top-0 right-0 z-40 bg-white transition-transform duration-300 ${
           isFilterSidebarOpen ? "translate-x-0 w-72" : "hidden"
@@ -343,23 +914,180 @@ const page = ({ params }) => {
             {/* Sidebar */}
             <div
               className={`${
-                isSidebarVisible ? "w-[300px]" : "w-0"
-              } transition-all duration-300 overflow-hidden `}
+                isSidebarVisible ? "w-[300px] " : "w-0"
+              } fixed transition-all duration-300 overflow-hidden z-[999] `}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
                 changeActiveCategory={changeActiveCategory}
                 toggleSideFilter={toggleSideFilter}
-                className="overflow-y-scroll"
+                className="overflow-y-scroll "
                 filterCategories={filterCategories}
               />
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-col flex-grow h-screen"></div>
+            <div className="flex flex-row h-screen">
+              {/* Left section with more width */}
+              <div className="flex-grow w-1/2">
+                <DataDisplayToPDF data={selectedProduct} />
+              </div>
+
+              {/* Right section with more width */}
+              <div className="w-1/4 bg-white flex flex-col h-screen overflow-y-auto">
+                <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4 p-4">
+                  <div className="flex flex-row items-end gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-7"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                      />
+                    </svg>
+                    <p>Ask paper</p>
+                    <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-100 font-normal text-xs flex-shrink-0 rounded-lg mb-[2px]">
+                      Beta
+                    </span>
+                  </div>
+                  <button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Centered text */}
+                <div className="flex-grow flex justify-center items-center text-center">
+                  <p className="text-[#7295a7]">
+                    What would you like to know
+                    <br />
+                    about this paper?
+                  </p>
+                </div>
+
+                {/* Footer at the bottom */}
+                <div className="flex flex-col items-center gap-4 p-4 ">
+                  <div className="flex flex-col gap-2">
+                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
+                      <p className="text-base truncate font-light">
+                        Summarize the paper in few sentence
+                      </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
+
+                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
+                      <p className="text-base truncate font-light">
+                        Were there any conflicts of interest?
+                      </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
+
+                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
+                      <p className="text-base truncate font-light">
+                        Did the author mention limitations?
+                      </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5 "
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <form className="max-w-md mx-auto w-full">
+                    <div className="relative">
+                      <input
+                        type="search"
+                        id="default-search"
+                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Ask this paper..."
+                        required
+                      />
+                      <button
+                        type="submit"
+                        className="text-white absolute end-2.5 bottom-2.5 bg-[#79c2f7] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-3 mt-2"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                  <p className="text-[#c7d9e1] text-center text-xs">
+                    4 messages left,Reset to 10 on January 12th
+                    <span className="underline"> Upgrade for unlimited</span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

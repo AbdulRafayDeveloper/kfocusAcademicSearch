@@ -24,7 +24,6 @@ import Filters from "../filters/Filters";
 import AskPaper from "../askPaper/AskPaper";
 import MoreFilters from "../moreFilters/MoreFilters";
 import Loader from "../loader/Loader";
-import PdfViewer from "../pdfViewer/ViewPdf";
 
 const HomePage = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -485,7 +484,7 @@ const HomePage = () => {
                 <div className="flex flex-row items-center flex-shrink-0 space-x-2">
                   <FontAwesomeIcon
                     icon={faChartSimple}
-                    className="text-[#017fba] pr-1"
+                    className="text-[#0076fa] pr-1"
                     style={{
                       fontSize: "16px",
                       width: "16px",
@@ -586,7 +585,7 @@ const HomePage = () => {
                         id="analyzeCheckbox"
                         className="w-4 h-4 accent-blue-600 cursor-pointer"
                       />
-                      <span className="font-normal text-xs text-[#017fba]">
+                      <span className="font-normal text-xs text-[#0076fa]">
                         All
                       </span>
                       <FontAwesomeIcon

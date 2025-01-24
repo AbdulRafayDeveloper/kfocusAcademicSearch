@@ -600,6 +600,7 @@ const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
             <th
               scope="col"
               className="px-4 py-1 w-1/12 border-b border-b-[#0076fa]"
+              style={{ whiteSpace: "nowrap" }}
             >
               Cited by
             </th>

@@ -12,7 +12,7 @@ const Footer = () => {
           {/* About Us Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
               style={{
                 writingMode: "vertical-lr",
                 transform: "rotate(360deg)",
@@ -42,7 +42,7 @@ const Footer = () => {
           {/* Support Center Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0 mx-0 md:mx-8">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
@@ -91,7 +91,7 @@ const Footer = () => {
           {/* Partnerships Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-4"
+              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(360deg)",
@@ -119,7 +119,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Section */}
-          <div className="flex flex-row justify-center md:justify-start items-center space-x-4">
+          <div className="flex flex-row justify-center md:justify-start items-center space-x-4 pl-20">
             <div className="flex flex-col items-center">
               <FontAwesomeIcon
                 icon={faFacebookF}

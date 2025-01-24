@@ -62,11 +62,11 @@ ul::-webkit-scrollbar {
 
 ul::-webkit-scrollbar-thumb {
   background: #9ca3af; /* Gray color for scrollbar thumb */
-  border-radius: 4px; /* Rounded edges */
+  border-radius: 4px; 
 }
 
 ul::-webkit-scrollbar-track {
-  background: #f3f4f6; /* Lighter gray for track */
+  background: #f3f4f6;
 }
 
 @media (min-width: 1024px) and (min-height: 650px) {
@@ -129,6 +129,9 @@ ul::-webkit-scrollbar-track {
   }
   .listfilter {
     max-height: 85vh; 
+  }
+  .askPaper{
+    height: 120vh;
   }
 }
 
@@ -247,10 +250,16 @@ ul::-webkit-scrollbar-track {
     max-height: 50vh; 
   }
   .listfilter {
-    max-height: 75vh; 
+    max-height: 72.4vh; 
   }
   .searchinput{
     width: 500px;
+  }
+  .pdfHeight{
+    height: 100vh;
+  }
+  .askPaper{
+    height: 60vh;
   }
 }
 
@@ -260,5 +269,86 @@ ul::-webkit-scrollbar-track {
   }
   .listfilter {
     max-height: 85.8vh; 
+  }
+  .pdfHeight{
+    height: 100vh;
+  }
+  .pdfFilter{
+    height: 160vh;
+  }
+  .askPaper{
+    height: 78.9vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 650px) {
+  .listheight {
+    max-height: 56vh; 
+  }
+  .listfilter {
+    max-height: 79vh; 
+  }
+  .askPaper{
+    height: 68vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 667px) {
+  .listheight {
+    max-height: 57vh; 
+  }
+  .listfilter {
+    max-height: 79vh; 
+  }
+  .askPaper{
+    height: 68vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 684px) {
+  .listheight {
+    max-height: 58vh; 
+  }
+  .listfilter {
+    max-height: 80vh; 
+  }
+  .askPaper{
+    height: 68vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 699px) {
+  .listheight {
+    max-height: 59vh; 
+  }
+  .listfilter {
+    max-height: 80vh; 
+  }
+  .askPaper{
+    height: 68vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 719px) {
+  .listheight {
+    max-height: 60vh; 
+  }
+  .listfilter {
+    max-height: 81vh; 
+  }
+  .askPaper{
+    height: 70vh;
+  }
+}
+
+@media (min-width: 1440px) and (min-height: 912px) {
+  .listheight {
+    max-height: 69vh; 
+  }
+  .listfilter {
+    max-height: 85vh; 
+  }
+  .askPaper{
+    height: 77vh;
   }
 }
