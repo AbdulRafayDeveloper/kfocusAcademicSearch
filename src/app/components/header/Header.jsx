@@ -39,12 +39,12 @@ const Header = ({ toggleFilterSidebar }) => {
   const toggleDropdown = () => setIsOpen(!isOpen);
   return (
     <header>
-      <nav className="bg-white border-gray-200 lg:px-6 py-2 sm:px-0 custom-navbar">
+      <nav className="bg-white border-gray-200 lg:px-6 py-2 mobile:px-0 custom-navbar">
         <div className="flex flex-wrap items-center mx-auto ">
           <Link href="/" className="flex items-center">
             <img
               src="/icons/future_logo.png"
-              className="h-6 lg:h-8  ml-0 logo"
+              className="h-6 lg:h-8 mobile:ml-2 ml-0 logo"
               alt="Flowbite Logo"
             />
           </Link>

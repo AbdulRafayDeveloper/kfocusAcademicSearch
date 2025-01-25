@@ -48,7 +48,7 @@ const HomePage = () => {
 
   const handleSortChange = (sortOption) => {
     setSelectedSort(sortOption);
-    setIsDropdownOpen(false); // Close the dropdown after selecting an option
+    setIsDropdownOpen(false);
   };
 
   const sortOptions = [
@@ -317,6 +317,11 @@ const HomePage = () => {
     },
   ];
 
+  const [showOptions, setShowOptions] = useState(false); // State for mobile options visibility
+
+  const toggleOptions = () => {
+    setShowOptions((prevState) => !prevState); // Toggle visibility
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -330,7 +335,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="flex flex-col max-h-screen ">
+    <div className="flex flex-col min-h-screen flex-grow ">
       <Header toggleFilterSidebar={toggleFilterSidebar} />
       <div
         className={`absolute top-0 right-0 z-40 bg-white transition-transform duration-300 ${
@@ -341,7 +346,9 @@ const HomePage = () => {
       </div>
       <div
         className={`absolute top-[138px] right-0 z-40 bg-white transition-transform duration-300 ${
-          selectedFilter ? "translate-x-0 w-[730px]" : "hidden"
+          selectedFilter
+            ? "translate-x-0 laptop:w-[730px] mobile:w-[300px]"
+            : "hidden"
         }`}
       >
         <MoreFilters
@@ -350,10 +357,10 @@ const HomePage = () => {
         />
       </div>
 
-      <div className="flex flex-grow overflow-">
-        <div className="w-1/16 pt-[0.5px] overflow-y-auto flex flex-col ">
+      <div className="flex flex-grow ">
+        <div className="laptop:w-[5%] mobile:w-[13%] pt-[0.5px] overflow-y-auto flex flex-col">
           <a
-            href="#chevron"
+            href="#"
             className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => {
               toggleSidebar();
@@ -376,7 +383,7 @@ const HomePage = () => {
             </svg>
           </a>
           <a
-            href="#filter"
+            href="#"
             className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
               activeCategory === "filter"
                 ? "bg-white"
@@ -401,7 +408,7 @@ const HomePage = () => {
           </a>
 
           <a
-            href="#filter"
+            href="#"
             className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
               activeCategory === "person"
                 ? "bg-white"
@@ -425,7 +432,7 @@ const HomePage = () => {
             </svg>
           </a>
           <a
-            href="#info"
+            href="#"
             className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => changeActiveCategory("info")}
           >
@@ -445,7 +452,7 @@ const HomePage = () => {
             </svg>
           </a>
           <a
-            href="#ellipsis"
+            href="#"
             className="flex items-center justify-center text-xl text-gray-800 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => changeActiveCategory("ellipsis")}
           >
@@ -453,15 +460,17 @@ const HomePage = () => {
           </a>
         </div>
 
-        <div className="flex w-full flex-col ">
+        <div className="flex flex-col mobile:w-[88%] laptop:w-full">
           <div className="flex w-full">
             {/* Sidebar */}
             <div
-              className={`${
-                isSidebarVisible ? "w-[300px]" : "w-0"
-              } transition-all duration-300 overflow-hidden ${
+              className={`transition-all duration-300 overflow-hidden ${
+                isSidebarVisible
+                  ? "laptop:w-[300px] mobile:w-[200px] z-[9999] bg-white shadow-lg"
+                  : "laptop:w-0 w-0"
+              } ${
                 showPdf ? "hidden" : ""
-              }`}
+              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 h-full`}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
@@ -473,7 +482,7 @@ const HomePage = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-col flex-grow h-screen">
+            <div className="flex flex-col flex-grow h-screen laptop:flex mobile:overflow-y-auto">
               {/* Header */}
               <div
                 className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center ${
@@ -484,25 +493,25 @@ const HomePage = () => {
                 <div className="flex flex-row items-center flex-shrink-0 space-x-2">
                   <FontAwesomeIcon
                     icon={faChartSimple}
-                    className="text-[#0076fa] pr-1"
+                    className="text-[#0076fa] laptop:pr-1 mobile:pr-0"
                     style={{
                       fontSize: "16px",
                       width: "16px",
                       height: "16px",
                     }}
                   />
-                  <span className="font-normal text-sm pr-4 flex-shrink-0">
+                  <span className="font-normal laptop:block laptop:text-sm mobile:text-xs pr-4 flex-shrink-0 ">
                     Analyze search results
                   </span>
-                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0">
+                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0 mobile:hidden laptop:block tablet:block">
                     Search History
                   </span>
                 </div>
 
                 {/* Right Section */}
-                <div className="flex flex-row items-center space-x-4">
+                <div className="flex flex-row items-center laptop:space-x-4 mobile:space-x-0">
                   {/* Sort on Section */}
-                  <div className="relative flex flex-row items-center pr-4 space-x-1">
+                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden laptop:flex">
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
                     <button
                       className="flex items-center space-x-1 text-cyan-700 text-xs whitespace-nowrap focus:outline-none"
@@ -541,28 +550,28 @@ const HomePage = () => {
                   </div>
 
                   {/* Total Section */}
-                  <div className="flex flex-row items-center space-x-2">
-                    <p className="text-xs text-gray-700 whitespace-nowrap">
+                  <div className="flex flex-row items-center laptop:space-x-2 mobile:space-x-1">
+                    <p className="laptop:text-xs mobile:text-xs text-gray-700 whitespace-nowrap ">
                       Total:
                     </p>
                     <p className="text-blue-700 text-xs whitespace-nowrap">
                       1,525,452
                     </p>
-                    <p className="text-xs text-gray-700 whitespace-nowrap">
+                    <p className="laptop:text-xs laptop:block text-gray-700 whitespace-nowrap mobile:hidden">
                       articles
                     </p>
                   </div>
 
                   {/* Pagination Section */}
-                  <div className="flex flex-row items-center pl-4 space-x-2">
+                  <div className="flex flex-row items-center laptop:pl-4 mobile:pl-2 laptop:space-x-2 mobile:space-x-1">
                     <p className="text-xs whitespace-nowrap">2/2600</p>
                     <FontAwesomeIcon
                       icon={faChevronLeft}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm w-[14px] h-[14px]"
+                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px]"
                     />
                     <FontAwesomeIcon
                       icon={faChevronRight}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm w-[14px] h-[14px]"
+                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px]"
                     />
                   </div>
                 </div>
@@ -575,27 +584,22 @@ const HomePage = () => {
                     className={` ${
                       showPdf
                         ? "hidden"
-                        : "pt-1 flex flex-row justify-between items-center space-x-2"
+                        : "pt-1 flex flex-row justify-between items-center space-x-2 mobile:overflow-y-auto "
                     }`}
                   >
                     {/* Left Section */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center laptop:space-x-2 mobile:space-x-1 ">
                       <input
                         type="checkbox"
                         id="analyzeCheckbox"
-                        className="w-4 h-4 accent-blue-600 cursor-pointer"
+                        className="laptop:w-4 laptop:h-4 mobile:w-2 mobile:h-2 accent-blue-600 cursor-pointer"
                       />
                       <span className="font-normal text-xs text-[#0076fa]">
                         All
                       </span>
                       <FontAwesomeIcon
                         icon={faChevronDown}
-                        className="text-[#017fba] text-xs"
-                        style={{
-                          fontSize: "16px",
-                          width: "16px",
-                          height: "16px",
-                        }}
+                        className="text-[#017fba] mobile:text-xs laptop:w-[16px] laptop:h-[16px]"
                       />
                       <span className="font-normal text-xs text-gray-600">
                         Export
@@ -603,19 +607,21 @@ const HomePage = () => {
                       <span className="font-normal text-xs text-gray-600">
                         Download
                       </span>
-                      <span className="font-normal text-xs text-gray-600">
+                      <span className="font-normal text-xs mobile:hidden laptop:block  text-gray-600">
                         View citation overview
                       </span>
-                      <span className="font-normal text-gray-600 text-xs border-r border-gray-600 pr-2">
+                      <span className="font-normal text-gray-600 mobile:hidden laptop:block text-xs border-r border-gray-600 laptop:pr-2">
                         Save to list
                       </span>
+
+                      {/* Desktop Icons */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4"
+                        className="size-4 mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -623,14 +629,13 @@ const HomePage = () => {
                           d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"
                         />
                       </svg>
-
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4"
+                        className="size-4 mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -645,7 +650,7 @@ const HomePage = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4"
+                        className="size-4 mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -653,12 +658,103 @@ const HomePage = () => {
                           d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
                         />
                       </svg>
-                    </div>
 
+                      {/* Mobile Button for toggling options */}
+                      <button
+                        className="mobile:block laptop:hidden text-xs text-[#017fba] "
+                        onClick={toggleOptions}
+                      >
+                        {showOptions ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                          </svg>
+                        )}
+                      </button>
+
+                      {/* Mobile-specific options */}
+                      {showOptions && (
+                        <div className="laptop:hidden mt-2 mobile:flex mobile:flex-row mobile:space-x-2 mobile:mb-1">
+                          <span className="font-normal text-xs text-gray-600">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-4 "
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z"
+                              />
+                            </svg>
+                          </span>
+                          <span className="font-normal text-xs text-gray-600">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-4 "
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                              />
+                            </svg>
+                          </span>
+                          <span className="font-normal text-xs text-gray-600">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="size-4 "
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                      )}
+                    </div>
                     {/* Right Section */}
                     <div className="flex flex-row items-center space-x-4">
                       {/* Overall Dropdown */}
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-1 laptop:flex mobile:hidden">
                         <p className="text-xs text-blue-600">Overall</p>
                         <FontAwesomeIcon
                           icon={faArrowDown}
@@ -668,10 +764,12 @@ const HomePage = () => {
 
                       {/* Records/Page Dropdown */}
                       <div className="flex items-center space-x-1">
-                        <p className="text-xs text-gray-700">Records/Page</p>
-                        <div className="relative">
+                        <p className="text-xs text-gray-700 laptop:block mobile:hidden">
+                          Records/Page
+                        </p>
+                        <div className="relative mobile:pb-1">
                           <button
-                            className="flex items-center bg-gray-100 border border-gray-300 rounded px-2 py-1 text-xs text-blue-700 hover:bg-gray-200"
+                            className="flex items-center bg-gray-50 border border-gray-300 rounded laptop:px-2 laptop:py-1 mobile:px-[0.5px] mobile:py-[2px] text-xs text-blue-700 hover:bg-gray-200"
                             type="button"
                             onClick={handleToggle}
                           >
@@ -690,7 +788,7 @@ const HomePage = () => {
                             </svg>
                           </button>
                           {isOpen && (
-                            <ul className="absolute mt-1 bg-white border border-gray-300 rounded shadow-lg text-gray-700 text-xs w-full">
+                            <ul className="fixed mt-1 bg-white border border-gray-300 rounded shadow-lg text-gray-700 text-xs w-[50px] z-[999999]">
                               {[10, 20, 50, 100].map((value) => (
                                 <li
                                   key={value}
@@ -768,121 +866,66 @@ const HomePage = () => {
                   </div>
 
                   <footer
-                    className={`bg-white z-10 p-[26px] text-gray-800 mt-auto flex justify-center items-center relative ${
+                    className={`bg-white z-10 text-gray-800 mt-auto flex flex-col justify-center items-center relative p-4 ${
                       isSidebarVisible ? "w-full" : "w-full"
                     } ${askThisPaper ? "hidden" : "w-full"}
-                    ${showPdf ? "hidden" : "w-full"}`}
+  ${showPdf ? "hidden" : "w-full"}`}
                   >
-                    <nav aria-label="Page navigation example">
-                      <ul className="flex items-center space-x-2 h-6 text-base">
-                        <li>
+                    <nav
+                      aria-label="Page navigation example"
+                      className="w-full"
+                    >
+                      <ul className="flex flex-wrap items-center justify-center space-x-2 space-y-2 h-auto text-base">
+                        <li className="pt-2">
                           <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            href=""
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
                           >
                             First
                           </a>
                         </li>
                         <li>
                           <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            href=""
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
                           >
                             Prev
                           </a>
                         </li>
+                        {/* Page numbers */}
+                        {Array.from({ length: 9 }, (_, index) => (
+                          <li key={index}>
+                            <a
+                              href=""
+                              className={`flex items-center justify-center leading-tight ${
+                                index === 0
+                                  ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                                  : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                              } laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6`}
+                            >
+                              {index + 1}
+                            </a>
+                          </li>
+                        ))}
                         <li>
                           <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight  
-                            text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 "
-                          >
-                            1
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            2
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            aria-current="page"
-                            className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            3
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            4
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            5
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            6
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            7
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            8
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            9
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            href=""
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
                           >
                             Next
                           </a>
                         </li>
+                        {/* Arrow Up button in the same row */}
+                        <li className="flex items-center">
+                          <a
+                            href=""
+                            className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8  mobile:text-sm mobile:px-2 mobile:h-6"
+                          >
+                            <FontAwesomeIcon icon={faArrowUp} />
+                          </a>
+                        </li>
                       </ul>
                     </nav>
-                    <div className="pb-6">
-                      <a
-                        href="#"
-                        className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5]"
-                      >
-                        <FontAwesomeIcon icon={faArrowUp} />
-                      </a>
-                    </div>
                   </footer>
                 </div>
               </div>

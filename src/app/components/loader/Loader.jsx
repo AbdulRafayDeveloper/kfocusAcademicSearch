@@ -3,11 +3,7 @@ import React from "react";
 const Loader = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      <img
-        src="/icons/future_logo.png"
-        alt="Loading"
-        className="heartbeat h-12 sm:h-8 ml-4 animate-heartbeat"
-      />
+      <div className="w-12 h-12 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
     </div>
   );
 };

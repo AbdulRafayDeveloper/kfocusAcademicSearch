@@ -352,3 +352,10 @@ ul::-webkit-scrollbar-track {
     height: 77vh;
   }
 }
+
+@media (min-width: 425px) and (min-height: 640px) {
+  .listheight{
+    overflow-x: scroll;
+    height: 50vh;
+  }
+}

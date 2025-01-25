@@ -1,3 +1,5 @@
+import { laptop } from "fontawesome";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -10,6 +12,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      screens: {
+        mobile: "425px",
+        tablet: "768px",
+        laptop: "1024px",
       },
     },
   },

@@ -11,6 +11,7 @@ import MoreFilters from "../../components/moreFilters/MoreFilters";
 import Footer from "@/app/components/footer/Footer";
 import DataDisplayToPDF from "@/app/components/dataToPdf/DataDisplayToPDF";
 import { useSearchParams, usePathname } from "next/navigation";
+import Loader from "@/app/components/loader/Loader";
 
 const page = ({ params }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -776,9 +777,8 @@ const page = ({ params }) => {
   }, []);
 
   if (loading) {
-    return <p>Loading product...</p>;
+    return <Loader />;
   }
-
   if (!selectedProduct) {
     return <p>Product not found or there was an error.</p>;
   }
@@ -809,7 +809,7 @@ const page = ({ params }) => {
       <div className="flex flex-grow overflow-">
         <div className="w-1/16 pt-[0.5px] overflow-y-auto flex flex-col ">
           <a
-            href="#chevron"
+            href=""
             className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => {
               toggleSidebar();
@@ -832,7 +832,7 @@ const page = ({ params }) => {
             </svg>
           </a>
           <a
-            href="#filter"
+            href="#"
             className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
               activeCategory === "filter"
                 ? "bg-white"
@@ -857,7 +857,7 @@ const page = ({ params }) => {
           </a>
 
           <a
-            href="#filter"
+            href="#"
             className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
               activeCategory === "person"
                 ? "bg-white"
@@ -881,7 +881,7 @@ const page = ({ params }) => {
             </svg>
           </a>
           <a
-            href="#info"
+            href=""
             className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => changeActiveCategory("info")}
           >
@@ -901,7 +901,7 @@ const page = ({ params }) => {
             </svg>
           </a>
           <a
-            href="#ellipsis"
+            href=""
             className="flex items-center justify-center text-xl text-gray-800 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => changeActiveCategory("ellipsis")}
           >

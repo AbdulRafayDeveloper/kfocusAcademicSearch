@@ -6,33 +6,41 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <div className="w-full ">
-      <header className="w-full pt-6 pb-4 flex items-center justify-center">
+    <div className="w-full">
+      <header className="w-full laptop:pt-6 laptop:pb-4 mobile:pt-4 mobile:pb-2 flex items-center justify-center">
         <div className="max-w-screen-xl mx-auto px-4 md:px-8 flex flex-wrap justify-between">
           {/* About Us Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
+              className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "vertical-lr",
-                transform: "rotate(360deg)",
+                writingMode: "horizontal-tb", // Default for mobile view
               }}
             >
-              About Us
+              <span className="block md:hidden text-sm">About us</span>
+              <span
+                className="hidden md:block"
+                style={{
+                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  transform: "rotate(360deg)",
+                }}
+              >
+                About us
+              </span>
             </div>
-            <ul className="text-sm text-gray-600 space-y-2">
+            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Introduction
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Project
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Products & Services
                 </a>
               </li>
@@ -42,45 +50,55 @@ const Footer = () => {
           {/* Support Center Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0 mx-0 md:mx-8">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
+              className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(360deg)",
+                writingMode: "horizontal-tb", // Default for mobile view
               }}
             >
-              Support Center
+              <span className="block md:hidden mobile:text-sm">
+                Support Center
+              </span>
+              <span
+                className="hidden md:block"
+                style={{
+                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  transform: "rotate(360deg)",
+                }}
+              >
+                Support Center
+              </span>
             </div>
-            <div className="flex flex-col md:flex-row gap-4">
-              <ul className="text-sm text-gray-600 space-y-2">
+            <div className="flex flex-col md:flex-row laptop:gap-4 mobile:gap-0">
+              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     User Guide
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     Download Center
                   </a>
                 </li>
               </ul>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     Contact Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     Product Trails
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="#" className="hover:underline mobile:text-xs">
                     Feedbacks
                   </a>
                 </li>
@@ -91,27 +109,38 @@ const Footer = () => {
           {/* Partnerships Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
             <div
-              className="text-[#001727] text-normal font-semibold mb-4 md:mb-0 md:mr-2"
+              className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(360deg)",
+                writingMode: "horizontal-tb", // Default for mobile view
               }}
             >
-              Partnerships
+              <span className="block md:hidden mobile:text-sm">
+                Partnerships
+              </span>
+              <span
+                className="hidden md:block"
+                style={{
+                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  transform: "rotate(360deg)",
+                }}
+              >
+                Partnerships
+              </span>
             </div>
-            <ul className="text-sm text-gray-600 space-y-2">
+
+            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Introduction
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Project
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline mobile:text-xs">
                   Products & Services
                 </a>
               </li>
@@ -119,7 +148,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Section */}
-          <div className="flex flex-row justify-center md:justify-start items-center space-x-4 pl-20">
+          <div className="flex flex-row justify-center md:justify-start items-center space-x-4 pl-20 mobile:space-x-2 mobile:pl-32">
             <div className="flex flex-col items-center">
               <FontAwesomeIcon
                 icon={faFacebookF}
@@ -147,7 +176,7 @@ const Footer = () => {
         </div>
       </header>
 
-      <footer className="w-full flex flex-col">
+      <footer className="w-full flex flex-col ">
         <div className="bg-[#001727] w-full py-4">
           <div className="w-full max-w-screen-xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between lg:pr-60 lg:pl-60 pr-10 pl-10">
             {/* Left Section */}
@@ -181,11 +210,12 @@ const Footer = () => {
             </div>
 
             {/* Right Section */}
-            <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 text-sm font-medium text-white">
+            <ul className="flex flex-col mobile:flex-row space-y-2 md:space-y-0 md:space-x-2 text-sm font-medium text-white items-center">
               <li>
                 <a
                   href="#"
-                  className="hover:underline font-light text-sm px-2 py-0.1 border-b md:border-b-0 md:border-r-[1px] border-white"
+                  className="hover:underline font-light text-sm mobile:text-xs px-2 py-0.1  md:border-r-[1px] border-white"
+                  style={{ whiteSpace: "nowrap" }}
                 >
                   © UDLedge
                 </a>
@@ -193,7 +223,8 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="hover:underline font-light text-sm px-2 py-0.1 border-b md:border-b-0 md:border-r-[1px] border-white"
+                  className="hover:underline font-light text-sm px-2 py-0.1 mobile:text-xs  md:border-r-[1px] border-white"
+                  style={{ whiteSpace: "nowrap" }}
                 >
                   Terms of Use & Privacy
                 </a>
@@ -201,7 +232,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="hover:underline text-sm font-light px-2 py-0.1"
+                  className="hover:underline text-sm mobile:text-xs font-light px-2 py-0.1"
                 >
                   Cookies Preferences
                 </a>
