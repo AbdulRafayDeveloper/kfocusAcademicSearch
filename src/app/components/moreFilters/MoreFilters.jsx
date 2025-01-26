@@ -152,7 +152,9 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                   onChange={() => handleCheckboxChangeItems(index)}
                   className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-base">{filter.label}</span>
+                <span className="text-base" style={{ whiteSpace: "nowrap" }}>
+                  {filter.label}
+                </span>
               </div>
               <span
                 className="text-sm text-gray-600 text-right"

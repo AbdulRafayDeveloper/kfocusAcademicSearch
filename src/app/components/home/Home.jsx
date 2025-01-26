@@ -41,6 +41,12 @@ const HomePage = () => {
   const [pdfIndex, setPdfIndex] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Date (newest)");
+  const [moveUp, setMoveUp] = useState(false);
+
+  const toggleUp = () => {
+    setMoveUp(!moveUp);
+    console.log(moveUp);
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -141,119 +147,119 @@ const HomePage = () => {
       name: "Keywords",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Keyword ${index + 1}`,
-        value: `keyword_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "KeyWords Plus",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Keyword Plus ${index + 1}`,
-        value: `keyword_plus_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Research Areas",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Area ${index + 1}`,
-        value: `area_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Subject Area / Disciplines",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Subject ${index + 1}`,
-        value: `subject_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Sustainable Development Goals",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Goal ${index + 1}`,
-        value: `goal_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Source Title",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Source ${index + 1}`,
-        value: `source_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Source Type",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Source Type ${index + 1}`,
-        value: `source_type_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Publisher",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Publisher ${index + 1}`,
-        value: `publisher_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Author(s)",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Author ${index + 1}`,
-        value: `author_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Institute / Affiliations",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Institute ${index + 1}`,
-        value: `institute_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Funder",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Funder ${index + 1}`,
-        value: `funder_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Country/Territory",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Country ${index + 1}`,
-        value: `country_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "MeSH Heading",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `MeSH Heading ${index + 1}`,
-        value: `mesh_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Chemical Substance",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Substance ${index + 1}`,
-        value: `substance_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Language",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Language ${index + 1}`,
-        value: `language_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Article Status",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Article Status ${index + 1}`,
-        value: `article_status_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Top Institutions Logo Grid",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Institution ${index + 1}`,
-        value: `institution_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
   ];
@@ -466,7 +472,7 @@ const HomePage = () => {
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] shadow-lg"
+                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] "
                   : "laptop:w-0 mobile:w-0"
               }  laptop:block laptop:static mobile:fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 `}
             >
@@ -857,7 +863,11 @@ const HomePage = () => {
                         selectedPaper={cancerResearchPapers[selectedPaperIndex]}
                       />
                     ) : isGridVisible ? (
-                      <GridView selectedValue={selectedValue} />
+                      <GridView
+                        selectedValue={selectedValue}
+                        moveUp={moveUp}
+                        toggleUp={toggleUp}
+                      />
                     ) : showPdf ? (
                       <PdfViewer index={pdfIndex} togglePdf={togglePdf} />
                     ) : (
@@ -865,6 +875,8 @@ const HomePage = () => {
                         toggleAskPaper={toggleAskPaper}
                         selectedValue={selectedValue}
                         togglePdf={togglePdf}
+                        moveUp={moveUp}
+                        toggleUp={toggleUp}
                       />
                     )}
                   </div>
@@ -931,14 +943,14 @@ const HomePage = () => {
                         </li>
                         {/* Arrow Up button in the same row */}
                         <li className="flex items-center">
-                          <a
-                            href=""
+                          <button
+                            onClick={toggleUp}
                             className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
                             md-mobile:px-2 sm-mobile:px-2
                             md-mobile:h-6 sm-mobile:h-6"
                           >
                             <FontAwesomeIcon icon={faArrowUp} />
-                          </a>
+                          </button>
                         </li>
                       </ul>
                     </nav>

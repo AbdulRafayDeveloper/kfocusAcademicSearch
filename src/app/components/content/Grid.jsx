@@ -1,8 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-const GridView = ({ selectedValue }) => {
+const GridView = ({ selectedValue, toggleUp, moveUp }) => {
   const products = [
     {
       title: "The coffee-mango association promotes favorable soil conditions",
@@ -213,14 +213,29 @@ const GridView = ({ selectedValue }) => {
   console.log(selectedValue);
 
   const recordsToDisplay = products.slice(0, selectedValue);
+  console.log("toggle:  ", moveUp);
+
+  const gridRef = useRef();
+
+  useEffect(() => {
+    if (toggleUp && gridRef.current) {
+      if (gridRef.current.scrollTop !== 0) {
+        gridRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        toggleUp(false);
+      }
+    }
+  }, [moveUp]);
 
   return (
-    <div className="relative listheight h-screen overflow-y-auto max-w-[1210px] mobile:h-[76vh]  md-mobile:h-[76vh] sm-mobile:h-[76vh]">
+    <div
+      className="relative listheight h-screen overflow-y-auto max-w-[1210px] mobile:h-[76vh]  md-mobile:h-[76vh] sm-mobile:h-[76vh]"
+      ref={gridRef}
+    >
       <div className="w-full">
         {recordsToDisplay.map((product, index) => (
           <div
             key={index}
-            className="bg-white p-6 border rounded-lg shadow-lg mb-4 flex flex-wrap w-full"
+            className="bg-white p-6 border rounded-lg shadow-lg mb-4 flex flex-wrap w-full hover:bg-gray-100"
           >
             <div className="flex flex-shrink-0 w-[5%] items-start pt-1">
               <input
@@ -262,7 +277,7 @@ const GridView = ({ selectedValue }) => {
               </div>
             </div>
 
-            <div className="laptop:w-[20%] flex flex-col items-end mobile:hidden ">
+            <div className="laptop:w-[20%] flex flex-col items-end mobile:hidden laptop:flex">
               <div className="text-gray-600 text-xs pr-12 border-b border-gray-400">
                 <div className="text-lg">{product.citedBy}</div>
                 <div className="text-xs  pb-2">Citations</div>
@@ -291,6 +306,8 @@ const GridView = ({ selectedValue }) => {
                 <div className="text-xs text-blue-600">
                   <a
                     href={`../../pdfPage/${index}`} // Navigate to the web route
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blue-600 hover:underline focus:outline-none"
                   >
                     {"Ask this paper"}
