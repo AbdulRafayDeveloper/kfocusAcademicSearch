@@ -466,11 +466,9 @@ const HomePage = () => {
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] z-[9999] bg-white shadow-lg"
-                  : "laptop:w-0 w-0"
-              } ${
-                showPdf ? "hidden" : ""
-              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 h-full`}
+                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] shadow-lg"
+                  : "laptop:w-0 mobile:w-0"
+              }  laptop:block laptop:static mobile:fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 `}
             >
               <SidebarFilters
                 activeCategory={activeCategory}

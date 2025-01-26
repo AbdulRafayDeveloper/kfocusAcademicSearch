@@ -33,7 +33,7 @@ const SidebarFilters = ({
 
   //h-[465px]
   return (
-    <div className="w-full bg-white p-4 overflow-y-auto h-screen pb-12 listfilter">
+    <div className="w-full bg-white p-4 overflow-y-auto h-screen pb-4 listfilter">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
