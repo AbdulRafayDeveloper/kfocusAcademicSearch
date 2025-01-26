@@ -56,7 +56,7 @@ const DataDisplayToPDF = ({ data }) => {
   return (
     <div className="pdfHeight flex flex-col overflow-hidden ">
       {/* Main Content */}
-      <div className="pl-20 pr-20 pt-4 bg-blue-50 flex-grow overflow-auto">
+      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow overflow-auto">
         <main
           ref={contentRef}
           className="pl-12 pr-12 pt-12 bg-white"

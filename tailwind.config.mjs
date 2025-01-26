@@ -17,6 +17,8 @@ export default {
         mobile: "425px",
         tablet: "768px",
         laptop: "1024px",
+        "md-mobile": "375px",
+        "sm-mobile": "320px",
       },
     },
   },

@@ -563,7 +563,7 @@ const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
 
   //max-h-[316px]
   return (
-    <div className="h-screen overflow-y-auto listheight sm:overflow-x-auto mobile:h-[76vh]">
+    <div className="h-screen overflow-y-auto listheight sm:overflow-x-auto mobile:h-[76vh] md-mobile:h-[76vh] sm-mobile:h-[76vh]">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-white">
           <tr>

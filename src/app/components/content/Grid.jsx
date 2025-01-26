@@ -215,7 +215,7 @@ const GridView = ({ selectedValue }) => {
   const recordsToDisplay = products.slice(0, selectedValue);
 
   return (
-    <div className="relative listheight h-screen overflow-y-auto max-w-[1210px] mobile:h-[76vh]">
+    <div className="relative listheight h-screen overflow-y-auto max-w-[1210px] mobile:h-[76vh]  md-mobile:h-[76vh] sm-mobile:h-[76vh]">
       <div className="w-full">
         {recordsToDisplay.map((product, index) => (
           <div
