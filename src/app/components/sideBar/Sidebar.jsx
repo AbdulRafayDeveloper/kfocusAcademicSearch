@@ -31,9 +31,10 @@ const SidebarFilters = ({
   const categoriesToDisplay =
     activeCategory === "person" ? personCategories : filterCategories;
 
+  console.log(activeCategory);
   //h-[465px]
   return (
-    <div className="w-full bg-white p-4 overflow-y-auto h-screen  pb-12 listfilter">
+    <div className="w-full bg-white p-4 overflow-y-auto h-screen pb-4 listfilter">
       <div className="flex flex-row items-center">
         {/* Only show the filter icon if activeCategory is "filter" */}
         {activeCategory === "filter" && (
@@ -65,13 +66,13 @@ const SidebarFilters = ({
           <li key={category.name}>
             <button
               className={`flex items-center justify-between w-full text-gray-800 font-medium text-sm hover:text-blue-600 border-b-[0.5px] pb-4 ${
-                activeCategory === category.name
+                activeCategory === "filter" && expandedFilters === category.name
                   ? "text-blue-600 font-bold"
                   : ""
               }`}
               onClick={() => {
-                changeActiveCategory(category.name);
-                toggleFilter(category.name); // Toggle filter when category is clicked
+                changeActiveCategory("filter");
+                toggleFilter(category.name);
               }}
             >
               <span>{category.name}</span>
@@ -80,22 +81,26 @@ const SidebarFilters = ({
               </span>
             </button>
             {expandedFilters === category.name && (
-              <div className="mt-2 pl-4 border-b-[0.5px] pb-2">
+              <div
+                className="mt-2 pl-4 border-b-[0.5px] pb-2"
+                onClick={(event) => event.stopPropagation()}
+              >
                 <ul className="space-y-2">
-                  {/* Show up to 5 labels */}
                   {category.options.slice(0, 5).map((option) => (
                     <li key={option.value}>
-                      <div className="flex flex-col">
-                        <label className="flex items-center space-x-2">
-                          <input
-                            type="checkbox"
-                            className="form-checkbox h-4 w-4 text-blue-600"
-                          />
-                          <span className="text-sm text-gray-600">
-                            {option.label}
-                          </span>
-                        </label>
-                      </div>
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-blue-600"
+                          onClick={(event) => event.stopPropagation()}
+                        />
+                        <span
+                          className="text-sm text-gray-600"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          {option.label}
+                        </span>
+                      </label>
                     </li>
                   ))}
                   <div className="flex flex-row justify-between items-center">

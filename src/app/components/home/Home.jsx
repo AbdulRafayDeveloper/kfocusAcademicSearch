@@ -41,6 +41,12 @@ const HomePage = () => {
   const [pdfIndex, setPdfIndex] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Date (newest)");
+  const [moveUp, setMoveUp] = useState(false);
+
+  const toggleUp = () => {
+    setMoveUp(!moveUp);
+    console.log(moveUp);
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -141,119 +147,119 @@ const HomePage = () => {
       name: "Keywords",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Keyword ${index + 1}`,
-        value: `keyword_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "KeyWords Plus",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Keyword Plus ${index + 1}`,
-        value: `keyword_plus_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Research Areas",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Area ${index + 1}`,
-        value: `area_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Subject Area / Disciplines",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Subject ${index + 1}`,
-        value: `subject_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Sustainable Development Goals",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Goal ${index + 1}`,
-        value: `goal_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Source Title",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Source ${index + 1}`,
-        value: `source_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Source Type",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Source Type ${index + 1}`,
-        value: `source_type_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Publisher",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Publisher ${index + 1}`,
-        value: `publisher_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Author(s)",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Author ${index + 1}`,
-        value: `author_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Institute / Affiliations",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Institute ${index + 1}`,
-        value: `institute_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Funder",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Funder ${index + 1}`,
-        value: `funder_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Country/Territory",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Country ${index + 1}`,
-        value: `country_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "MeSH Heading",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `MeSH Heading ${index + 1}`,
-        value: `mesh_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Chemical Substance",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Substance ${index + 1}`,
-        value: `substance_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Language",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Language ${index + 1}`,
-        value: `language_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Article Status",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Article Status ${index + 1}`,
-        value: `article_status_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
     {
       name: "Top Institutions Logo Grid",
       options: Array.from({ length: 20 }, (_, index) => ({
         label: `Institution ${index + 1}`,
-        value: `institution_${index + 1}`,
+        value: `${index + 1}`,
       })),
     },
   ];
@@ -347,7 +353,7 @@ const HomePage = () => {
       <div
         className={`absolute top-[138px] right-0 z-40 bg-white transition-transform duration-300 ${
           selectedFilter
-            ? "translate-x-0 laptop:w-[730px] mobile:w-[300px]"
+            ? "translate-x-0 laptop:w-[730px] mobile:w-[300px] md-mobile:w-[300px] sm-mobile:w-[300px]"
             : "hidden"
         }`}
       >
@@ -358,10 +364,10 @@ const HomePage = () => {
       </div>
 
       <div className="flex flex-grow ">
-        <div className="laptop:w-[5%] mobile:w-[13%] pt-[0.5px] overflow-y-auto flex flex-col">
+        <div className="laptop:w-[5%] mobile:w-[13%] md-mobile:w-[13%] sm-mobile:w-[13%] pt-[0.5px] overflow-y-auto flex flex-col">
           <a
             href="#"
-            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
+            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 md-mobile:px-0 sm-mobile:px-0 md-mobile:py-4 sm-mobile:py-4 transition duration-200 "
             onClick={() => {
               toggleSidebar();
               changeActiveCategory("filter");
@@ -384,7 +390,7 @@ const HomePage = () => {
           </a>
           <a
             href="#"
-            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
+            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 md-mobile:px-0 sm-mobile:px-0 md-mobile:py-4 sm-mobile:py-4 ${
               activeCategory === "filter"
                 ? "bg-white"
                 : "hover:bg-white hover:text-blue-700"
@@ -409,7 +415,7 @@ const HomePage = () => {
 
           <a
             href="#"
-            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
+            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 md-mobile:px-0 sm-mobile:px-0 md-mobile:py-4 sm-mobile:py-4 ${
               activeCategory === "person"
                 ? "bg-white"
                 : "hover:bg-white hover:text-blue-700"
@@ -433,7 +439,7 @@ const HomePage = () => {
           </a>
           <a
             href="#"
-            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
+            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 md-mobile:px-0 sm-mobile:px-0 md-mobile:py-4 sm-mobile:py-4 transition duration-200 "
             onClick={() => changeActiveCategory("info")}
           >
             <svg
@@ -453,24 +459,22 @@ const HomePage = () => {
           </a>
           <a
             href="#"
-            className="flex items-center justify-center text-xl text-gray-800 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
+            className="flex items-center justify-center text-xl text-gray-800 hover:text-blue-700  hover:bg-white px-4 py-4 md-mobile:px-0 sm-mobile:px-0 md-mobile:py-4 sm-mobile:py-4 transition duration-200 "
             onClick={() => changeActiveCategory("ellipsis")}
           >
             <FontAwesomeIcon icon={faEllipsis} />
           </a>
         </div>
 
-        <div className="flex flex-col mobile:w-[88%] laptop:w-full">
+        <div className="flex flex-col mobile:w-[88%] md-mobile:w-[88%] sm-mobile:w-[88%] laptop:w-full">
           <div className="flex w-full">
             {/* Sidebar */}
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] z-[9999] bg-white shadow-lg"
-                  : "laptop:w-0 w-0"
-              } ${
-                showPdf ? "hidden" : ""
-              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 h-full`}
+                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] "
+                  : "laptop:w-0 mobile:w-0"
+              }  laptop:block laptop:static mobile:fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 `}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
@@ -482,10 +486,10 @@ const HomePage = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-col flex-grow h-screen laptop:flex mobile:overflow-y-auto">
+            <div className="flex flex-col flex-grow h-screen laptop:flex mobile:overflow-y-auto md-mobile:overflow-y-auto sm-mobile:overflow-y-auto">
               {/* Header */}
               <div
-                className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center ${
+                className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center md-mobile:overflow-y-auto sm-mobile:overflow-y-auto ${
                   showPdf ? "hidden" : ""
                 }`}
               >
@@ -493,25 +497,25 @@ const HomePage = () => {
                 <div className="flex flex-row items-center flex-shrink-0 space-x-2">
                   <FontAwesomeIcon
                     icon={faChartSimple}
-                    className="text-[#0076fa] laptop:pr-1 mobile:pr-0"
+                    className="text-[#0076fa] laptop:pr-1 mobile:pr-0 md-mobile:pr-0 sm-mobile:pr-0"
                     style={{
                       fontSize: "16px",
                       width: "16px",
                       height: "16px",
                     }}
                   />
-                  <span className="font-normal laptop:block laptop:text-sm mobile:text-xs pr-4 flex-shrink-0 ">
+                  <span className="font-normal laptop:block laptop:text-sm mobile:text-xs pr-4 flex-shrink-0 md-mobile:text-xs sm-mobile:text-xs">
                     Analyze search results
                   </span>
-                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0 mobile:hidden laptop:block tablet:block">
+                  <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-200 font-normal text-xs flex-shrink-0 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block tablet:block">
                     Search History
                   </span>
                 </div>
 
                 {/* Right Section */}
-                <div className="flex flex-row items-center laptop:space-x-4 mobile:space-x-0">
+                <div className="flex flex-row items-center laptop:space-x-4 mobile:space-x-0 md-mobile:space-x-0 sm-mobile:space-x-0">
                   {/* Sort on Section */}
-                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden laptop:flex">
+                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:flex">
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
                     <button
                       className="flex items-center space-x-1 text-cyan-700 text-xs whitespace-nowrap focus:outline-none"
@@ -550,20 +554,20 @@ const HomePage = () => {
                   </div>
 
                   {/* Total Section */}
-                  <div className="flex flex-row items-center laptop:space-x-2 mobile:space-x-1">
-                    <p className="laptop:text-xs mobile:text-xs text-gray-700 whitespace-nowrap ">
+                  <div className="flex flex-row items-center laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
+                    <p className="laptop:text-xs mobile:text-xs md-mobile:text-xs sm-mobile:text-xs text-gray-700 whitespace-nowrap ">
                       Total:
                     </p>
                     <p className="text-blue-700 text-xs whitespace-nowrap">
                       1,525,452
                     </p>
-                    <p className="laptop:text-xs laptop:block text-gray-700 whitespace-nowrap mobile:hidden">
+                    <p className="laptop:text-xs laptop:block text-gray-700 whitespace-nowrap mobile:hidden md-mobile:hidden sm-mobile:hidden">
                       articles
                     </p>
                   </div>
 
                   {/* Pagination Section */}
-                  <div className="flex flex-row items-center laptop:pl-4 mobile:pl-2 laptop:space-x-2 mobile:space-x-1">
+                  <div className="flex flex-row items-center laptop:pl-4 mobile:pl-2 md-mobile:pl-2  sm-mobile:pl-2  laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
                     <p className="text-xs whitespace-nowrap">2/2600</p>
                     <FontAwesomeIcon
                       icon={faChevronLeft}
@@ -584,22 +588,22 @@ const HomePage = () => {
                     className={` ${
                       showPdf
                         ? "hidden"
-                        : "pt-1 flex flex-row justify-between items-center space-x-2 mobile:overflow-y-auto "
+                        : "pt-1 flex flex-row justify-between items-center space-x-2 mobile:overflow-y-auto md-mobile:overflow-y-auto sm-mobile:overflow-y-auto"
                     }`}
                   >
                     {/* Left Section */}
-                    <div className="flex items-center laptop:space-x-2 mobile:space-x-1 ">
+                    <div className="flex items-center laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
                       <input
                         type="checkbox"
                         id="analyzeCheckbox"
-                        className="laptop:w-4 laptop:h-4 mobile:w-2 mobile:h-2 accent-blue-600 cursor-pointer"
+                        className="laptop:w-4 laptop:h-4 mobile:w-2 mobile:h-2 accent-blue-600 cursor-pointer md-mobile:w-2 sm-mobile:w-2 md-mobile:h-2 sm-mobile:h-2"
                       />
                       <span className="font-normal text-xs text-[#0076fa]">
                         All
                       </span>
                       <FontAwesomeIcon
                         icon={faChevronDown}
-                        className="text-[#017fba] mobile:text-xs laptop:w-[16px] laptop:h-[16px]"
+                        className="text-[#017fba] mobile:text-xs md-mobile:text-xs sm-mobile:text-xs laptop:w-[16px] laptop:h-[16px]"
                       />
                       <span className="font-normal text-xs text-gray-600">
                         Export
@@ -607,10 +611,10 @@ const HomePage = () => {
                       <span className="font-normal text-xs text-gray-600">
                         Download
                       </span>
-                      <span className="font-normal text-xs mobile:hidden laptop:block  text-gray-600">
+                      <span className="font-normal text-xs mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block  text-gray-600">
                         View citation overview
                       </span>
-                      <span className="font-normal text-gray-600 mobile:hidden laptop:block text-xs border-r border-gray-600 laptop:pr-2">
+                      <span className="font-normal text-gray-600 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block text-xs border-r border-gray-600 laptop:pr-2">
                         Save to list
                       </span>
 
@@ -621,7 +625,7 @@ const HomePage = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4 mobile:hidden laptop:block"
+                        className="size-4 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -635,7 +639,7 @@ const HomePage = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4 mobile:hidden laptop:block"
+                        className="size-4 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -650,7 +654,7 @@ const HomePage = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="size-4 mobile:hidden laptop:block"
+                        className="size-4 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:block"
                       >
                         <path
                           strokeLinecap="round"
@@ -661,7 +665,7 @@ const HomePage = () => {
 
                       {/* Mobile Button for toggling options */}
                       <button
-                        className="mobile:block laptop:hidden text-xs text-[#017fba] "
+                        className="mobile:block md-mobile:block sm-mobile:block laptop:hidden text-xs text-[#017fba] "
                         onClick={toggleOptions}
                       >
                         {showOptions ? (
@@ -699,7 +703,13 @@ const HomePage = () => {
 
                       {/* Mobile-specific options */}
                       {showOptions && (
-                        <div className="laptop:hidden mt-2 mobile:flex mobile:flex-row mobile:space-x-2 mobile:mb-1">
+                        <div
+                          className="laptop:hidden mt-2 mobile:flex mobile:flex-row mobile:space-x-2 mobile:mb-1 
+                        md-mobile:flex sm-mobile:flex
+                        md-mobile:flex-row sm-mobile:flex-row
+                        md-mobile:space-x-2 sm-mobile:space-x-2
+                        md-mobile:mb-1 sm-mobile:mb-1"
+                        >
                           <span className="font-normal text-xs text-gray-600">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -754,7 +764,7 @@ const HomePage = () => {
                     {/* Right Section */}
                     <div className="flex flex-row items-center space-x-4">
                       {/* Overall Dropdown */}
-                      <div className="flex items-center space-x-1 laptop:flex mobile:hidden">
+                      <div className="flex items-center space-x-1 laptop:flex mobile:hidden md-mobile:hidden sm-mobile:hidden">
                         <p className="text-xs text-blue-600">Overall</p>
                         <FontAwesomeIcon
                           icon={faArrowDown}
@@ -764,12 +774,12 @@ const HomePage = () => {
 
                       {/* Records/Page Dropdown */}
                       <div className="flex items-center space-x-1">
-                        <p className="text-xs text-gray-700 laptop:block mobile:hidden">
+                        <p className="text-xs text-gray-700 laptop:block mobile:hidden md-mobile:hidden sm-mobile:hidden">
                           Records/Page
                         </p>
-                        <div className="relative mobile:pb-1">
+                        <div className="relative mobile:pb-1 md-mobile:pb-1 sm-mobile:pb-1">
                           <button
-                            className="flex items-center bg-gray-50 border border-gray-300 rounded laptop:px-2 laptop:py-1 mobile:px-[0.5px] mobile:py-[2px] text-xs text-blue-700 hover:bg-gray-200"
+                            className="flex items-center bg-gray-50 border border-gray-300 rounded laptop:px-2 laptop:py-1 mobile:px-[0.5px] mobile:py-[2px] text-xs text-blue-700 hover:bg-gray-200 md-mobile:px-[0.5px] sm-mobile:px-[0.5px] md-mobile:py-[2px] sm-mobile:py-[2px]"
                             type="button"
                             onClick={handleToggle}
                           >
@@ -853,7 +863,11 @@ const HomePage = () => {
                         selectedPaper={cancerResearchPapers[selectedPaperIndex]}
                       />
                     ) : isGridVisible ? (
-                      <GridView selectedValue={selectedValue} />
+                      <GridView
+                        selectedValue={selectedValue}
+                        moveUp={moveUp}
+                        toggleUp={toggleUp}
+                      />
                     ) : showPdf ? (
                       <PdfViewer index={pdfIndex} togglePdf={togglePdf} />
                     ) : (
@@ -861,6 +875,8 @@ const HomePage = () => {
                         toggleAskPaper={toggleAskPaper}
                         selectedValue={selectedValue}
                         togglePdf={togglePdf}
+                        moveUp={moveUp}
+                        toggleUp={toggleUp}
                       />
                     )}
                   </div>
@@ -879,7 +895,10 @@ const HomePage = () => {
                         <li className="pt-2">
                           <a
                             href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6
+                            md-mobile:text-sm sm-mobile:text-sm
+                            md-mobile:px-2 sm-mobile:px-2
+                            md-mobile:h-6 sm-mobile:h-6"
                           >
                             First
                           </a>
@@ -887,7 +906,10 @@ const HomePage = () => {
                         <li>
                           <a
                             href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6
+                             md-mobile:text-sm sm-mobile:text-sm
+                            md-mobile:px-2 sm-mobile:px-2
+                            md-mobile:h-6 sm-mobile:h-6"
                           >
                             Prev
                           </a>
@@ -901,7 +923,9 @@ const HomePage = () => {
                                 index === 0
                                   ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
                                   : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                              } laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6`}
+                              } laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
+                            md-mobile:px-2 sm-mobile:px-2
+                            md-mobile:h-6 sm-mobile:h-6`}
                             >
                               {index + 1}
                             </a>
@@ -910,19 +934,23 @@ const HomePage = () => {
                         <li>
                           <a
                             href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6"
+                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
+                            md-mobile:px-2 sm-mobile:px-2
+                            md-mobile:h-6 sm-mobile:h-6"
                           >
                             Next
                           </a>
                         </li>
                         {/* Arrow Up button in the same row */}
                         <li className="flex items-center">
-                          <a
-                            href=""
-                            className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8  mobile:text-sm mobile:px-2 mobile:h-6"
+                          <button
+                            onClick={toggleUp}
+                            className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
+                            md-mobile:px-2 sm-mobile:px-2
+                            md-mobile:h-6 sm-mobile:h-6"
                           >
                             <FontAwesomeIcon icon={faArrowUp} />
-                          </a>
+                          </button>
                         </li>
                       </ul>
                     </nav>

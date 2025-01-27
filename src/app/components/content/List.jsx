@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
+const ListView = ({
+  toggleAskPaper,
+  selectedValue,
+  togglePdf,
+  toggleUp,
+  moveUp,
+}) => {
   const [expandedRowIndex, setExpandedRowIndex] = useState(null);
   console.log(selectedValue);
 
@@ -561,9 +567,23 @@ const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
   };
 
+  const gridRef = useRef();
+
+  useEffect(() => {
+    if (toggleUp && gridRef.current) {
+      if (gridRef.current.scrollTop !== 0) {
+        gridRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        toggleUp(false);
+      }
+    }
+  }, [moveUp]);
+
   //max-h-[316px]
   return (
-    <div className="h-screen overflow-y-auto listheight sm:overflow-x-auto mobile:h-[76vh]">
+    <div
+      className="h-screen overflow-y-auto listheight sm:overflow-x-auto mobile:h-[76vh] md-mobile:h-[76vh] sm-mobile:h-[76vh]"
+      ref={gridRef}
+    >
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-white">
           <tr>
@@ -645,7 +665,9 @@ const ListView = ({ toggleAskPaper, selectedValue, togglePdf }) => {
                           </button>
                         ) : detail === "Ask this paper" ? (
                           <a
-                            href={`../../pdfPage/${index}`} // Navigate to the web route
+                            href={`../../pdfPage/${index}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-blue-600 hover:underline focus:outline-none"
                           >
                             {detail}

@@ -51,8 +51,8 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
   }, [ListOfFilters]);
 
   return (
-    <div className="p-4 bg-white z-[99999] lg:max-h-[85vh] h-screen overflow-y-auto shadow-lg border border-black">
-      <div className="flex flex-row items-center justify-between mb-4 border-b border-b-gray-300">
+    <div className="p-4 bg-white z-[99999] lg:max-h-[85vh] mobile:max-h-[85vh] md-mobile:max-h-[85vh] sm-mobile:max-h-[85vh] h-screen overflow-y-auto shadow-lg border border-black ">
+      <div className="flex flex-row items-center justify-between mb-4 border-b border-b-gray-300 mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto laptop:flex">
         <div className="flex flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -117,12 +117,12 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </span>
       </label>
 
-      <div className="grid grid-cols-2 gap-2 pt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-5">
         {/* Render the first column */}
         <div>
           {firstColumn.map((filter, index) => (
             <div key={index} className="flex items-center mb-2">
-              <div className="flex items-center mr-40">
+              <div className="flex items-center mr-auto">
                 <input
                   type="checkbox"
                   checked={isCheckedItems[index]}
@@ -144,15 +144,17 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         {/* Render the second column */}
         <div>
           {secondColumn.map((filter, index) => (
-            <div key={index} className="flex items-center  mb-2">
-              <div className="flex items-center mr-40">
+            <div key={index} className="flex items-center mb-2">
+              <div className="flex items-center mr-auto">
                 <input
                   type="checkbox"
                   checked={isCheckedItems[index]}
                   onChange={() => handleCheckboxChangeItems(index)}
-                  className="mr-2  border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                  className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
                 />
-                <span className="text-base">{filter.label}</span>
+                <span className="text-base" style={{ whiteSpace: "nowrap" }}>
+                  {filter.label}
+                </span>
               </div>
               <span
                 className="text-sm text-gray-600 text-right"

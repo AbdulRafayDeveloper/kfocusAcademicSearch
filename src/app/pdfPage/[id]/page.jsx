@@ -797,7 +797,9 @@ const page = ({ params }) => {
       </div>
       <div
         className={`absolute top-[138px] right-0 z-40 bg-white transition-transform duration-300 ${
-          selectedFilter ? "translate-x-0 w-[730px]" : "hidden"
+          selectedFilter
+            ? "translate-x-0 laptop:w-[730px] mobile:w-[300px] md-mobile:w-[300px] sm-mobile:w-[300px]"
+            : "hidden"
         }`}
       >
         <MoreFilters
@@ -806,10 +808,10 @@ const page = ({ params }) => {
         />
       </div>
 
-      <div className="flex flex-grow overflow-">
-        <div className="w-1/16 pt-[0.5px] overflow-y-auto flex flex-col ">
+      <div className="flex flex-grow ">
+        <div className="laptop:w-[5%] mobile:w-[13%] md-mobile:w-[13%] sm-mobile:w-[13%] pt-[0.5px] overflow-y-auto flex flex-col ">
           <a
-            href=""
+            href="#"
             className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
             onClick={() => {
               toggleSidebar();
@@ -909,13 +911,15 @@ const page = ({ params }) => {
           </a>
         </div>
 
-        <div className="flex w-full flex-col ">
+        <div className="flex mobile:w-[88%] md-mobile:w-[88%] sm-mobile:w-[88%] laptop:w-full flex-col ">
           <div className="flex w-full">
             {/* Sidebar */}
             <div
-              className={`${
-                isSidebarVisible ? "w-[300px] " : "w-0"
-              } fixed transition-all duration-300 overflow-hidden z-[999] `}
+              className={`transition-all duration-300 overflow-hidden ${
+                isSidebarVisible
+                  ? "laptop:w-[300px] mobile:w-[200px] z-[9999] bg-white shadow-lg"
+                  : "laptop:w-0 w-0"
+              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 h-full`}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
@@ -927,15 +931,15 @@ const page = ({ params }) => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-row h-screen">
+            <div className="flex flex-row h-screen laptop:flex mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto">
               {/* Left section with more width */}
-              <div className="flex-grow w-1/2">
+              <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4">
                 <DataDisplayToPDF data={selectedProduct} />
               </div>
 
-              {/* Right section with more width */}
-              <div className="w-1/4 bg-white flex flex-col h-screen overflow-y-auto">
-                <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4 p-4">
+              {/* Right section with smaller width */}
+              <div className="laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] bg-white flex flex-col h-screen overflow-y-auto p-4">
+                <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4">
                   <div className="flex flex-row items-end gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -984,7 +988,7 @@ const page = ({ params }) => {
                 </div>
 
                 {/* Footer at the bottom */}
-                <div className="flex flex-col items-center gap-4 p-4 ">
+                <div className="flex flex-col items-center gap-4">
                   <div className="flex flex-col gap-2">
                     <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
                       <p className="text-base truncate font-light">
@@ -1036,7 +1040,7 @@ const page = ({ params }) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-5 h-5 "
+                        className="w-5 h-5"
                       >
                         <path
                           strokeLinecap="round"
@@ -1078,7 +1082,7 @@ const page = ({ params }) => {
                     </div>
                   </form>
                   <p className="text-[#c7d9e1] text-center text-xs">
-                    4 messages left,Reset to 10 on January 12th
+                    4 messages left, Reset to 10 on January 12th
                     <span className="underline"> Upgrade for unlimited</span>
                   </p>
                 </div>

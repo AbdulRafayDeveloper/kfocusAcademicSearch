@@ -7,7 +7,7 @@ import { faWeixin } from "@fortawesome/free-brands-svg-icons";
 const Footer = () => {
   return (
     <div className="w-full">
-      <header className="w-full laptop:pt-6 laptop:pb-4 mobile:pt-4 mobile:pb-2 flex items-center justify-center">
+      <header className="w-full laptop:pt-6 laptop:pb-4 mobile:pt-4 mobile:pb-2 md-mobile:pt-4 sm-mobile:pt-4 md-mobile:pb-2 sm-mobile:pb-2 flex items-center justify-center">
         <div className="max-w-screen-xl mx-auto px-4 md:px-8 flex flex-wrap justify-between">
           {/* About Us Section */}
           <div className="flex flex-col md:flex-row items-center mb-6 md:mb-0">
@@ -28,19 +28,28 @@ const Footer = () => {
                 About us
               </span>
             </div>
-            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
+            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0 md-mobile:space-y-0 sm-mobile:space-y-0">
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Introduction
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Project
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Products & Services
                 </a>
               </li>
@@ -55,7 +64,7 @@ const Footer = () => {
                 writingMode: "horizontal-tb", // Default for mobile view
               }}
             >
-              <span className="block md:hidden mobile:text-sm">
+              <span className="block md:hidden mobile:text-sm md-mobile:text-sm sm-mobile:text-sm">
                 Support Center
               </span>
               <span
@@ -68,37 +77,55 @@ const Footer = () => {
                 Support Center
               </span>
             </div>
-            <div className="flex flex-col md:flex-row laptop:gap-4 mobile:gap-0">
-              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
+            <div className="flex flex-col md:flex-row laptop:gap-4 mobile:gap-0 md-mobile:gap-0 sm-mobile:gap-0">
+              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0 md-mobile:space-y-0 sm-mobile:space-y-0">
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     User Guide
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     Download Center
                   </a>
                 </li>
               </ul>
-              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
+              <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0 md-mobile:space-y-0 sm-mobile:space-y-0">
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     Contact Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     Product Trails
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline mobile:text-xs">
+                  <a
+                    href="#"
+                    className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                  >
                     Feedbacks
                   </a>
                 </li>
@@ -114,7 +141,7 @@ const Footer = () => {
                 writingMode: "horizontal-tb", // Default for mobile view
               }}
             >
-              <span className="block md:hidden mobile:text-sm">
+              <span className="block md:hidden mobile:text-sm md-mobile:text-sm sm-mobile:text-sm">
                 Partnerships
               </span>
               <span
@@ -128,19 +155,28 @@ const Footer = () => {
               </span>
             </div>
 
-            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0">
+            <ul className="text-sm text-gray-600 laptop:space-y-2 mobile:space-y-0 md-mobile:space-y-0 sm-mobile:space-y-0">
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Introduction
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Project
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline mobile:text-xs">
+                <a
+                  href="#"
+                  className="hover:underline mobile:text-xs md-mobile:text-xs sm-mobile:text-xs"
+                >
                   Products & Services
                 </a>
               </li>
@@ -148,7 +184,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Section */}
-          <div className="flex flex-row justify-center md:justify-start items-center space-x-4 pl-20 mobile:space-x-2 mobile:pl-32">
+          <div className="flex flex-row justify-center md:justify-start items-center space-x-4 pl-20 mobile:space-x-2 mobile:pl-32 md-mobile:space-x-2 sm-mobile:space-x-2 md-mobile:pl-32 sm-mobile:pl-32">
             <div className="flex flex-col items-center">
               <FontAwesomeIcon
                 icon={faFacebookF}
@@ -210,11 +246,11 @@ const Footer = () => {
             </div>
 
             {/* Right Section */}
-            <ul className="flex flex-col mobile:flex-row space-y-2 md:space-y-0 md:space-x-2 text-sm font-medium text-white items-center">
+            <ul className="flex flex-col mobile:flex-row md-mobile:flex-row sm-mobile:flex-row space-y-2 md:space-y-0 md:space-x-2 text-sm font-medium text-white items-center">
               <li>
                 <a
                   href="#"
-                  className="hover:underline font-light text-sm mobile:text-xs px-2 py-0.1  md:border-r-[1px] border-white"
+                  className="hover:underline font-light text-sm mobile:text-xs md-mobile:text-xs sm-mobile:text-xs px-2 py-0.1  md:border-r-[1px] border-white"
                   style={{ whiteSpace: "nowrap" }}
                 >
                   © UDLedge
@@ -223,7 +259,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="hover:underline font-light text-sm px-2 py-0.1 mobile:text-xs  md:border-r-[1px] border-white"
+                  className="hover:underline font-light text-sm px-2 py-0.1 mobile:text-xs  md:border-r-[1px] md-mobile:text-xs sm-mobile:text-xs border-white"
                   style={{ whiteSpace: "nowrap" }}
                 >
                   Terms of Use & Privacy
@@ -232,7 +268,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="hover:underline text-sm mobile:text-xs font-light px-2 py-0.1"
+                  className="hover:underline text-sm mobile:text-xs md-mobile:text-xs sm-mobile:text-xs font-light px-2 py-0.1"
                 >
                   Cookies Preferences
                 </a>
