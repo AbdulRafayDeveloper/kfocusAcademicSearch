@@ -2,26 +2,31 @@ import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
+const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
   const [visibleCount, setVisibleCount] = useState(5); // Default number of visible records
-  const totalItems = ListOfFilters.length;
   const [isChecked, setIsChecked] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isCheckedItems, setIsCheckedItems] = useState(
-    new Array(totalItems).fill(false)
-  );
+  const [isCheckedItems, setIsCheckedItems] = useState([]);
   const filtersRef = useRef(null);
 
-  const handleCheckboxChangeItems = (index) => {
+  // Initialize `isCheckedItems` whenever `ListOfFilters` changes
+  useEffect(() => {
+    if (Array.isArray(ListOfFilters)) {
+      setIsCheckedItems(new Array(ListOfFilters.length).fill(false));
+    }
+  }, [ListOfFilters]);
+
+  const handleCheckboxChangeItems = (absoluteIndex) => {
     const updatedChecked = [...isCheckedItems];
-    updatedChecked[index] = !updatedChecked[index];
+    updatedChecked[absoluteIndex] = !updatedChecked[absoluteIndex];
     setIsCheckedItems(updatedChecked);
   };
 
   const filteredFilters = ListOfFilters.slice(0, -1).filter(
     (filter) =>
+      filter?.label &&
       typeof filter.label === "string" &&
-      filter.label.toLowerCase().includes(searchQuery.toLowerCase())
+      filter.label.toLowerCase().includes((searchQuery || "").toLowerCase())
   );
 
   const scrollToTop = () => {
@@ -36,6 +41,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
 
   const maxVisibleFilters = filteredFilters.slice(0, visibleCount);
 
+  // Divide filters into two columns
   const firstColumn = maxVisibleFilters.filter((_, index) => index % 2 === 0);
   const secondColumn = maxVisibleFilters.filter((_, index) => index % 2 !== 0);
 
@@ -43,25 +49,14 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
     setIsChecked(!isChecked);
   };
 
-  const filterName = ListOfFilters[ListOfFilters.length - 1];
-
-  // Effect to reset visibleCount when the filters list changes
-  useEffect(() => {
-    setVisibleCount(8); // Reset visible count whenever filters change
-  }, [ListOfFilters]);
+  const filterName =
+    ListOfFilters[ListOfFilters.length - 1]?.label || "Filters";
 
   return (
     <div className="p-4 bg-white z-[99999] lg:max-h-[85vh] mobile:max-h-[85vh] md-mobile:max-h-[85vh] sm-mobile:max-h-[85vh] h-screen overflow-y-auto shadow-lg border border-black ">
+      {/* Header */}
       <div className="flex flex-row items-center justify-between mb-4 border-b border-b-gray-300 mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto laptop:flex">
         <div className="flex flex-row">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="size-6"
-          >
-            <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
-          </svg>
           <div className="pl-2 text-sm font-semibold">
             {filterName} ({filteredFilters.length})
           </div>
@@ -71,6 +66,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </button>
       </div>
 
+      {/* Search Input */}
       <div ref={filtersRef}>
         <form
           className="max-w-full mx-auto"
@@ -82,7 +78,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
                 type="search"
                 className="block p-2 w-full text-sm bg-gray-50 rounded border focus:ring-blue-500 focus:border-blue-500"
                 placeholder={`Search ${filterName}`}
-                value={searchQuery}
+                value={searchQuery || ""}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
@@ -90,6 +86,7 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </form>
       </div>
 
+      {/* Toggle Include/Exclude */}
       <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md border border-blue-500 bg-blue-50 p-[1px] mt-4">
         <input
           type="checkbox"
@@ -117,57 +114,72 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
         </span>
       </label>
 
+      {/* Filters in Two Columns */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-5">
-        {/* Render the first column */}
+        {/* First Column */}
         <div>
-          {firstColumn.map((filter, index) => (
-            <div key={index} className="flex items-center mb-2">
-              <div className="flex items-center mr-auto">
-                <input
-                  type="checkbox"
-                  checked={isCheckedItems[index]}
-                  onChange={() => handleCheckboxChangeItems(index)}
-                  className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-base">{filter.label}</span>
+          {firstColumn.map((filter, index) => {
+            const absoluteIndex = maxVisibleFilters.indexOf(filter);
+            return (
+              <div key={absoluteIndex} className="flex items-center mb-2">
+                <div className="flex items-center mr-auto">
+                  <input
+                    type="checkbox"
+                    checked={isCheckedItems[absoluteIndex] || false}
+                    onChange={() => handleCheckboxChangeItems(absoluteIndex)}
+                    className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                  />
+                  <div className="flex items-center">
+                    <span className="text-base">{filter.label}</span>
+                    <span
+                      className="text-gray-600 text-sm ml-auto"
+                      style={{
+                        minWidth: "100px",
+                        textAlign: "right",
+                      }}
+                    >
+                      ({filter.value})
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span
-                className="text-sm text-gray-600 text-right"
-                style={{ minWidth: "30px", display: "inline-block" }}
-              >
-                ({filter.value})
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Render the second column */}
+        {/* Second Column */}
         <div>
-          {secondColumn.map((filter, index) => (
-            <div key={index} className="flex items-center mb-2">
-              <div className="flex items-center mr-auto">
-                <input
-                  type="checkbox"
-                  checked={isCheckedItems[index]}
-                  onChange={() => handleCheckboxChangeItems(index)}
-                  className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-base" style={{ whiteSpace: "nowrap" }}>
-                  {filter.label}
-                </span>
+          {secondColumn.map((filter, index) => {
+            const absoluteIndex = maxVisibleFilters.indexOf(filter);
+            return (
+              <div key={absoluteIndex} className="flex items-center mb-2">
+                <div className="flex items-center mr-auto">
+                  <input
+                    type="checkbox"
+                    checked={isCheckedItems[absoluteIndex] || false}
+                    onChange={() => handleCheckboxChangeItems(absoluteIndex)}
+                    className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                  />
+                  <div className="flex items-center">
+                    <span className="text-base">{filter.label}</span>
+                    <span
+                      className="text-gray-600 text-sm ml-auto"
+                      style={{
+                        minWidth: "100px",
+                        textAlign: "right",
+                      }}
+                    >
+                      ({filter.value})
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span
-                className="text-sm text-gray-600 text-right"
-                style={{ minWidth: "30px", display: "inline-block" }}
-              >
-                ({filter.value})
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Show more button */}
+      {/* Show More Button */}
       {visibleCount < filteredFilters.length && (
         <button
           className="mt-4 px-4 py-2 border border-gray-400 rounded-md hover:bg-gray-100"
@@ -178,10 +190,12 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
       )}
 
       <br />
+      {/* Apply Button */}
       <button className="mt-4 px-4 py-2 border bg-blue-500 rounded-md text-white hover:bg-blue-700">
         Apply
       </button>
 
+      {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
         className="absolute bottom-4 right-4 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 mr-4"

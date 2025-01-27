@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const DataDisplayToPDF = ({ data }) => {
+const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1); // State to track zoom level
   const [zoomInPercentage, setZoomInPercentage] = useState(10);
@@ -17,21 +17,79 @@ const DataDisplayToPDF = ({ data }) => {
   const handleDownloadPDF = async () => {
     setIsDownloading(true);
 
-    // Capture the content
     const contentElement = contentRef.current;
+
+    // Save original styles to restore after capturing
+    const originalStyle = {
+      height: contentElement.style.height,
+      overflow: contentElement.style.overflow,
+    };
+
+    // Temporarily adjust styles to capture full content
+    contentElement.style.height = "auto"; // Expand height to fit all content
+    contentElement.style.overflow = "visible"; // Ensure all content is visible
+
     const canvas = await html2canvas(contentElement, { scale: 2 });
 
-    // Convert canvas to an image
-    const imgData = canvas.toDataURL("image/png");
+    // Restore original styles
+    contentElement.style.height = originalStyle.height;
+    contentElement.style.overflow = originalStyle.overflow;
 
-    // Create a new PDF
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    const imgData = canvas.toDataURL("image/png");
+    const contentHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    const pagePadding = 10; // Padding between pages (in mm)
+
+    if (contentHeight <= pdfHeight - pagePadding * 2) {
+      // Single-page content
+      pdf.addImage(imgData, "PNG", 0, pagePadding, pdfWidth, contentHeight);
+    } else {
+      // Multi-page content
+      let currentHeight = 0;
+
+      while (currentHeight < canvas.height) {
+        const pageCanvas = document.createElement("canvas");
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = Math.min(
+          canvas.height - currentHeight,
+          (pdfHeight - pagePadding * 2) * (canvas.width / pdfWidth)
+        );
+
+        const pageContext = pageCanvas.getContext("2d");
+
+        // Draw the portion of the content for the current page
+        pageContext.drawImage(
+          canvas,
+          0,
+          currentHeight,
+          canvas.width,
+          pageCanvas.height,
+          0,
+          0,
+          pageCanvas.width,
+          pageCanvas.height
+        );
+
+        const pageImgData = pageCanvas.toDataURL("image/png");
+        const pageHeight = (pageCanvas.height * pdfWidth) / canvas.width;
+
+        // Add the image with padding
+        pdf.addImage(pageImgData, "PNG", 0, pagePadding, pdfWidth, pageHeight);
+
+        // Move to the next section of the content
+        currentHeight += pageCanvas.height;
+
+        if (currentHeight < canvas.height) {
+          pdf.addPage(); // Add a new page if there's more content
+        }
+      }
+    }
+
     pdf.save("download.pdf");
-
     setIsDownloading(false);
   };
 
@@ -101,7 +159,7 @@ const DataDisplayToPDF = ({ data }) => {
       </div>
 
       {/* Download and Zoom Controls */}
-      <div className="flex flex-row justify-between w-full bg-white pt-2 pb-2 rounded-bl-md">
+      <div className="flex flex-row justify-between w-full bg-white pt-8 pb-4 rounded-bl-md">
         <div className="flex gap-4 pl-8">
           <div className="flex flex-row items-center ">
             <p className="pl-2">{zoomInPercentage}%</p>
@@ -153,10 +211,9 @@ const DataDisplayToPDF = ({ data }) => {
         {/* Download Button (outside the content to not be included in the PDF) */}
         <div className="flex flex-row gap-1">
           <button
-            onClick={handleDownloadPDF}
-            disabled={isDownloading}
+            onClick={toggleChat}
             className={`text-gray-700 px-6 py-3 rounded-md ${
-              isDownloading ? "opacity-50 cursor-not-allowed" : ""
+              closeChat ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             <svg

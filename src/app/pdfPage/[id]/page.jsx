@@ -17,6 +17,11 @@ const page = ({ params }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState();
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
+  const [closeChat, setCloseChat] = useState(false);
+
+  const toggleChat = () => {
+    setCloseChat(!closeChat);
+  };
 
   const products = [
     {
@@ -36,7 +41,7 @@ const page = ({ params }) => {
         "SDGs: 3",
       ],
       abstract:
-        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.",
+        "Abstracts contain most of the following kinds of information in brief form. The body of your paper will, of course, develop and explain these ideas much more fully. As you will see in the samples below, the proportion of your abstract that you devote to each kind of information—and the sequence of that information—will vary, depending on the nature and genre of the paper that you are summarizing in your abstract. And in some cases, some of this information is implied, rather than stated explicitly. The Publication Manual of the American Psychological Association, which is widely used in the social sciences, gives specific guidelines for what to include in the abstract for different kinds of papers—for empirical studies, literature reviews or meta-analyses, theoretical papers, methodological papers, and case studies.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi id eligendi ex cupiditate, est minus ducimus inventore, in porr nesciunt ad. Itaque veritatis pariatur adipisci a porro numquam nostrum reprehenderit! Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum, doloribus ullam sint ducimus inventore repellat ea sunt assumenda quod porro optioaccusamus, ad, pariatur velit distinctio ipsum autem hic! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel vulputate orci, id malesuada neque. Nulla vel quam sit amet dui convallis ultricies. Maecenas tempus tellus a est condimentum tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc vel luctus purus. Proin neque nunc, fringilla sit amet dapibus in, sollicitudin sed dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut orci mi, varius tincidunt nunc vel, vulputate dictum est. Vivamus auctor quam facilisis lobortis lacinia. Maecenas eget ex dictum leo cursus varius quis eu est. Donec cursus venenatis tortor vitae lobortis.Suspendisse augue eros, efficitur et venenatis vitae, accumsan vitae turpis. Aenean ut dapibus ante, at maximus lacus. Aliquam imperdiet vehicula felis sed luctus. Nunc vitae egestas sem. Proin a pulvinar quam. Nam lobortis ornare ornare. Nulla vitae ultricies ligula. Aliquam hendrerit velit eget eros sollicitudin tempor. In hac habitasse platea dictumst.Praesent quis neque ultricies, feugiat nisl vitae, cursus diam. Sed et lectus nec mauris malesuada mattis. Nullam at mauris a sapien aliquam pharetra. Vivamus dictum, ligula vitae placerat porttitor, metus erat tincidunt quam, at congue elit mauris a velit. Maecenas venenatis mi sed rhoncus dictum. Praesent rutrum mauris sit amet mauris molestie ullamcorper. Vivamus malesuada consequat consectetur.Fusce turpis sapien, condimentum vel tellus in, vulputate rutrum ligula. Quisque id velit vitae tellus hendrerit porttitor ut eu felis. Maecenas facilisis efficitur rhoncus. Mauris rhoncus nec velit quis condimentum. Duis ultrices dui sit amet leo tincidunt dictum. Donec enim nibh, vulputate rutrum felis suscipit, vehicula vestibulum libero. Nulla nec enim volutpat, mollis ipsum eget, eleifend nibh. Praesent non quam in ex dignissim feugiat eu auctor enim. Nam varius vestibulum massa eget efficitur. Nam ex nibh, tempor vel lectus vitae, dignissim malesuada mi. Sed eu dapibus velit. Pellentesque vulputate mattis aliquet.Aliquam pellentesque ipsum eu dapibus molestie. Quisque dolor enim, placerat vel magna gravida, venenatis dignissim augue. Proin bibendum felis justo, a ullamcorper massa aliquam vitae. Vivamus nec luctus lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi elementum sapien felis, eu interdum nisl tincidunt ut. Aliquam quis sagittis metus, sit amet interdum lacus. Sed id fermentum dui, at fringilla quam. Donec id lorem et turpis efficitur hendrerit. Donec eros odio, iaculis eget gravida sed, faucibus varius nulla. Vivamus malesuada elit libero, aliquam venenatis nunc fermentum in. Aenean volutpat nec felis nec pharetra. Maecenas ac ante at mi vulputate commodo.Nullam congue arcu non condimentum malesuada. Quisque molestie posuere blandit. Aenean velit arcu, fermentum ac blandit sit amet, fermentum ut augue. Sed hendrerit orci sit amet libero scelerisque ornare. Nulla interdum lacus neque, quis facilisis est tristique ut. Mauris sodales metus elit, quis efficitur neque ornare at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin nibh nisi, condimentum eu suscipit ut, rutrum sed orci. Mauris pretium justo ut aliquet accumsan. Etiam ut quam et ligula maximus viverra sit amet at tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean eu ultricies erat. Proin a massa ac risus sagittis volutpat. Cras elementum tincidunt risus, sed placerat eros finibus vel. Mauris tempor lorem eu nulla vulputate feugiat. Donec accumsan risus lorem, sed lobortis dui laoreet vitae.Donec nunc odio, blandit non tempus eget, sodales in tellus. Aenean tincidunt rhoncus diam at placerat. Aenean tincidunt commodo dui, vitae pharetra ante egestas id. Sed venenatis venenatis nunc, vel interdum augue auctor sit amet. Cras quis lectus quis ante ornare pretium. Morbi pharetra massa nec diam porttitor consectetur. Aenean tincidunt orci odio. Curabitur interdum sit amet nisl sed euismod. Etiam vestibulum magna et ipsum auctor suscipit. Donec non porta risus, in tincidunt sapien. Quisque faucibus condimentum odio vel tempor. Nam luctus mi odio, ut facilisis erat ultrices ut. Cras ac tempus urna. Morbi risus tortor, facilisis at laoreet nec, imperdiet in mi.Cras elit augue, elementum a molestie eget, hendrerit porta dui. Sed sollicitudin pharetra aliquet. Cras laoreet nisl eget tempor gravida. Phasellus risus velit, scelerisque quis tempus sed, porttitor id lectus. Proin feugiat vestibulum lacinia. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis tincidunt sagittis porttitor. Integer ut ultricies nunc. Etiam egestas, libero id ultrices sodales, ipsum sapien euismod lacus, non tristique quam risus vitae ante. Donec lobortis diam sed eros rhoncus, at lobortis urna consectetur. Nam ac tincidunt mi. Morbi consequat, justo sit amet sagittis blandit, enim lacus pulvinar turpis, sed pharetra arcu lorem ac neque. Mauris sollicitudin libero non risus convallis sodales. Nam eget erat a urna mattis pellentesque. Suspendisse placerat viverra odio, ac semper risus convallis vel. Nullam vulputate, ipsum eu congue dapibus, ligula ligula sollicitudin sem, eget interdum diam ex non magna.Duis euismod, metus id convallis tempor, tortor libero dapibus nunc, ac sollicitudin quam odio vitae turpis. Nam sem massa, ornare at mauris ac, porta feugiat nulla. Sed at lorem leo. Morbi id massa at tellus blandit gravida. Proin aliquet, erat ut condimentum auctor, odio nibh hendrerit nisl, ac suscipit eros ligula et magna. Mauris vel lorem quam. Mauris in tortor vel purus facilisis tempor. Vivamus felis massa, dictum id ipsum blandit, dictum posuere risus. Etiam sit amet ipsum id erat finibus finibus. Morbi luctus mollis odio, id mollis ex rhoncus id. Curabitur sit amet rhoncus ex, ac laoreet nulla. Integer varius est sapien, vel faucibus sem elementum at. Etiam sed sem sed neque pharetra accumsan.Proin diam nisl, facilisis ut posuere nec, dignissim id magna. Aenean ut nisi tellus. Maecenas elit ex, dictum quis sapien rhoncus, maximus efficitur turpis. Phasellus luctus, ex eget mattis finibus, risus erat tempus neque, ac condimentum risus libero id metus. Etiam ullamcorper odio non arcu blandit tincidunt. Aliquam quis rhoncus tortor. Vestibulum ultricies, justo pretium tempus consectetur, elit nibh pharetra enim, eu ultricies velit metus et libero. Sed non leo accumsan, efficitur risus id, ullamcorper magna. Praesent at sollicitudin enim. Vestibulum mauris purus, tempor quis pharetra vel, varius at odio. Maecenas accumsan velit ut consequat aliquam.",
       keywords: [
         "coffee-mango association",
         "soil conditions",
@@ -758,12 +763,14 @@ const page = ({ params }) => {
   const [loading, setLoading] = useState(true); // Track loading state
 
   const param = React.use(params); // Correct way to unwrap params in Next.js 13+
+  console.log("id: ", param.id);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const product = products[param.id]; // Fetch product by ID from the products array
         setSelectedProduct(product); // Set the selected product
+        console.log(param.id);
         setLoading(false); // Data is loaded, set loading to false
       } catch (e) {
         console.log("Error fetching data:", e);
@@ -788,129 +795,7 @@ const page = ({ params }) => {
       className="flex flex-col min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url(/images/bg.jpg)" }}
     >
-      <div
-        className={`absolute top-0 right-0 z-40 bg-white transition-transform duration-300 ${
-          isFilterSidebarOpen ? "translate-x-0 w-72" : "hidden"
-        }`}
-      >
-        <Filters toggleFilterSidebar={toggleFilterSidebar} />
-      </div>
-      <div
-        className={`absolute top-[138px] right-0 z-40 bg-white transition-transform duration-300 ${
-          selectedFilter
-            ? "translate-x-0 laptop:w-[730px] mobile:w-[300px] md-mobile:w-[300px] sm-mobile:w-[300px]"
-            : "hidden"
-        }`}
-      >
-        <MoreFilters
-          ListOfFilters={selectedFilterOptions}
-          toggleSideFilter={toggleSideFilter}
-        />
-      </div>
-
       <div className="flex flex-grow ">
-        <div className="laptop:w-[5%] mobile:w-[13%] md-mobile:w-[13%] sm-mobile:w-[13%] pt-[0.5px] overflow-y-auto flex flex-col ">
-          <a
-            href="#"
-            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700 hover:bg-white px-4 py-4 transition duration-200 "
-            onClick={() => {
-              toggleSidebar();
-              changeActiveCategory();
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          </a>
-          <a
-            href="#"
-            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
-              activeCategory === "filter"
-                ? "bg-white"
-                : "hover:bg-white hover:text-blue-700"
-            }`}
-            onClick={() => changeActiveCategory()}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
-              />
-            </svg>
-          </a>
-
-          <a
-            href="#"
-            className={`flex items-center justify-center text-xl text-gray-900 px-4 py-4 transition duration-200 ${
-              activeCategory === "person"
-                ? "bg-white"
-                : "hover:bg-white hover:text-blue-700"
-            }`}
-            onClick={() => changeActiveCategory("person")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
-          </a>
-          <a
-            href=""
-            className="flex items-center justify-center text-xl text-gray-900 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
-            onClick={() => changeActiveCategory("info")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-              />
-            </svg>
-          </a>
-          <a
-            href=""
-            className="flex items-center justify-center text-xl text-gray-800 hover:text-blue-700  hover:bg-white px-4 py-4 transition duration-200 "
-            onClick={() => changeActiveCategory("ellipsis")}
-          >
-            <FontAwesomeIcon icon={faEllipsis} />
-          </a>
-        </div>
-
         <div className="flex mobile:w-[88%] md-mobile:w-[88%] sm-mobile:w-[88%] laptop:w-full flex-col ">
           <div className="flex w-full">
             {/* Sidebar */}
@@ -934,11 +819,21 @@ const page = ({ params }) => {
             <div className="flex flex-row h-screen laptop:flex mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto">
               {/* Left section with more width */}
               <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4">
-                <DataDisplayToPDF data={selectedProduct} />
+                <DataDisplayToPDF
+                  data={selectedProduct}
+                  toggleChat={toggleChat}
+                  closeChat={closeChat}
+                />
               </div>
 
               {/* Right section with smaller width */}
-              <div className="laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] bg-white flex flex-col h-screen overflow-y-auto p-4">
+              <div
+                className={`${
+                  closeChat
+                    ? "hidden"
+                    : "laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw]"
+                } bg-white flex flex-col h-screen overflow-y-auto p-4`}
+              >
                 <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4">
                   <div className="flex flex-row items-end gap-2">
                     <svg
@@ -960,7 +855,7 @@ const page = ({ params }) => {
                       Beta
                     </span>
                   </div>
-                  <button>
+                  <button onClick={toggleChat}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

@@ -17,7 +17,7 @@ import {
   faGripLinesVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import SidebarFilters from "../sideBar/Sidebar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ListView from "../content/List";
 import GridView from "../content/Grid";
 import Filters from "../filters/Filters";
@@ -42,6 +42,12 @@ const HomePage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Date (newest)");
   const [moveUp, setMoveUp] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
+
+  const toggleAll = () => {
+    setSelectAll(!selectAll);
+    console.log(moveUp);
+  };
 
   const toggleUp = () => {
     setMoveUp(!moveUp);
@@ -103,17 +109,6 @@ const HomePage = () => {
     setSelectedFilterIndex(index);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(10); // Default value
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleSelect = (value) => {
-    setSelectedValue(value);
-    setIsOpen(false); // Close the dropdown after selection
-  };
   const filterCategories = [
     {
       name: "Date Range",
@@ -328,6 +323,47 @@ const HomePage = () => {
   const toggleOptions = () => {
     setShowOptions((prevState) => !prevState); // Toggle visibility
   };
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(10);
+  const dropdownRef = useRef(null); // Ref to track the dropdown and button container
+
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleSelect = (value) => {
+    setSelectedValue(value);
+    setIsOpen(false); // Close dropdown after selection
+  };
+
+  const [pagerIndex, setPagerIndex] = useState(0);
+
+  const totalPages = Math.ceil(21 / selectedValue);
+
+  const handlePrevPage = () => {
+    if (pagerIndex > 0) {
+      setPagerIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (pagerIndex < totalPages - 1) {
+      setPagerIndex((prev) => prev + 1);
+    }
+  };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside); // Cleanup on unmount
+    };
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -472,9 +508,9 @@ const HomePage = () => {
             <div
               className={`transition-all duration-300 overflow-hidden ${
                 isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] "
-                  : "laptop:w-0 mobile:w-0"
-              }  laptop:block laptop:static mobile:fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 `}
+                  ? "laptop:w-[300px] mobile:w-[200px] md-mobile:w-[200px] sm-mobile:w-[200px] mobile:z-[9999] md-mobile:z-[9999] sm-mobile:z-[9999]"
+                  : "laptop:w-0 mobile:w-0 md-mobile:w-0 sm-mobile:w-0"
+              }  laptop:block laptop:static mobile:fixed mobile:top-10 mobile:left-12 md-mobile:top-10 sm-mobile:top-10 md-mobile:left-12 sm-mobile:left-12 md-mobile:fixed sm-mobile:fixed`}
             >
               <SidebarFilters
                 activeCategory={activeCategory}
@@ -489,7 +525,7 @@ const HomePage = () => {
             <div className="flex flex-col flex-grow h-screen laptop:flex mobile:overflow-y-auto md-mobile:overflow-y-auto sm-mobile:overflow-y-auto">
               {/* Header */}
               <div
-                className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center md-mobile:overflow-y-auto sm-mobile:overflow-y-auto ${
+                className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center laptop:flex ${
                   showPdf ? "hidden" : ""
                 }`}
               >
@@ -515,7 +551,7 @@ const HomePage = () => {
                 {/* Right Section */}
                 <div className="flex flex-row items-center laptop:space-x-4 mobile:space-x-0 md-mobile:space-x-0 sm-mobile:space-x-0">
                   {/* Sort on Section */}
-                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:flex">
+                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:flex ">
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
                     <button
                       className="flex items-center space-x-1 text-cyan-700 text-xs whitespace-nowrap focus:outline-none"
@@ -554,7 +590,7 @@ const HomePage = () => {
                   </div>
 
                   {/* Total Section */}
-                  <div className="flex flex-row items-center laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
+                  <div className="flex flex-row items-center laptop:space-x-2 mobile:space-x-1 mobile:flex laptop:flex md-mobile:hidden sm-mobile:hidden">
                     <p className="laptop:text-xs mobile:text-xs md-mobile:text-xs sm-mobile:text-xs text-gray-700 whitespace-nowrap ">
                       Total:
                     </p>
@@ -567,15 +603,30 @@ const HomePage = () => {
                   </div>
 
                   {/* Pagination Section */}
-                  <div className="flex flex-row items-center laptop:pl-4 mobile:pl-2 md-mobile:pl-2  sm-mobile:pl-2  laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
-                    <p className="text-xs whitespace-nowrap">2/2600</p>
+                  <div className="flex flex-row items-center laptop:pl-4 mobile:pl-2 md-mobile:pl-2 sm-mobile:pl-2 laptop:space-x-2 mobile:space-x-1 md-mobile:space-x-1 sm-mobile:space-x-1">
+                    {/* Display current page and total pages */}
+                    <p className="text-xs whitespace-nowrap">
+                      {pagerIndex + 1}/{totalPages}
+                    </p>
+                    {/* Left Arrow for Previous Page */}
                     <FontAwesomeIcon
                       icon={faChevronLeft}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px]"
+                      className={`p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px] ${
+                        pagerIndex === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : "cursor-pointer"
+                      }`}
+                      onClick={handlePrevPage}
                     />
+                    {/* Right Arrow for Next Page */}
                     <FontAwesomeIcon
                       icon={faChevronRight}
-                      className="p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px]"
+                      className={`p-1 bg-gray-100 text-gray-700 text-xs border-[0.5px] rounded-sm laptop:w-[14px] laptop:h-[14px] ${
+                        pagerIndex === totalPages - 1
+                          ? "opacity-50 cursor-not-allowed"
+                          : "cursor-pointer"
+                      }`}
+                      onClick={handleNextPage}
                     />
                   </div>
                 </div>
@@ -596,6 +647,7 @@ const HomePage = () => {
                       <input
                         type="checkbox"
                         id="analyzeCheckbox"
+                        onChange={toggleAll}
                         className="laptop:w-4 laptop:h-4 mobile:w-2 mobile:h-2 accent-blue-600 cursor-pointer md-mobile:w-2 sm-mobile:w-2 md-mobile:h-2 sm-mobile:h-2"
                       />
                       <span className="font-normal text-xs text-[#0076fa]">
@@ -777,7 +829,10 @@ const HomePage = () => {
                         <p className="text-xs text-gray-700 laptop:block mobile:hidden md-mobile:hidden sm-mobile:hidden">
                           Records/Page
                         </p>
-                        <div className="relative mobile:pb-1 md-mobile:pb-1 sm-mobile:pb-1">
+                        <div
+                          className="relative mobile:pb-1 md-mobile:pb-1 sm-mobile:pb-1"
+                          ref={dropdownRef}
+                        >
                           <button
                             className="flex items-center bg-gray-50 border border-gray-300 rounded laptop:px-2 laptop:py-1 mobile:px-[0.5px] mobile:py-[2px] text-xs text-blue-700 hover:bg-gray-200 md-mobile:px-[0.5px] sm-mobile:px-[0.5px] md-mobile:py-[2px] sm-mobile:py-[2px]"
                             type="button"
@@ -861,12 +916,16 @@ const HomePage = () => {
                     {isAskPaperOpen ? (
                       <AskPaper
                         selectedPaper={cancerResearchPapers[selectedPaperIndex]}
+                        isSidebarVisible={isSidebarVisible}
                       />
                     ) : isGridVisible ? (
                       <GridView
                         selectedValue={selectedValue}
                         moveUp={moveUp}
                         toggleUp={toggleUp}
+                        isSidebarVisible={isSidebarVisible}
+                        selectAll={selectAll}
+                        pagerIndex={pagerIndex}
                       />
                     ) : showPdf ? (
                       <PdfViewer index={pdfIndex} togglePdf={togglePdf} />
@@ -877,6 +936,8 @@ const HomePage = () => {
                         togglePdf={togglePdf}
                         moveUp={moveUp}
                         toggleUp={toggleUp}
+                        selectAll={selectAll}
+                        pagerIndex={pagerIndex}
                       />
                     )}
                   </div>
@@ -884,70 +945,87 @@ const HomePage = () => {
                   <footer
                     className={`bg-white z-10 text-gray-800 mt-auto flex flex-col justify-center items-center relative p-4 ${
                       isSidebarVisible ? "w-full" : "w-full"
-                    } ${askThisPaper ? "hidden" : "w-full"}
-  ${showPdf ? "hidden" : "w-full"}`}
+                    } ${askThisPaper ? "hidden" : "w-full"} ${
+                      showPdf ? "hidden" : "w-full"
+                    }`}
                   >
                     <nav
                       aria-label="Page navigation example"
                       className="w-full"
                     >
                       <ul className="flex flex-wrap items-center justify-center space-x-2 space-y-2 h-auto text-base">
+                        {/* First Button */}
                         <li className="pt-2">
                           <a
-                            href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6
-                            md-mobile:text-sm sm-mobile:text-sm
-                            md-mobile:px-2 sm-mobile:px-2
-                            md-mobile:h-6 sm-mobile:h-6"
+                            href="#"
+                            onClick={() => setPagerIndex(0)} // Set pagerIndex to 0 for "First"
+                            className={`flex items-center justify-center leading-tight ${
+                              pagerIndex === 0
+                                ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                                : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            } laptop:text-normal laptop:px-4 laptop:h-10 mobile:text-sm mobile:px-2 mobile:h-6 md-mobile:text-sm sm-mobile:text-sm md-mobile:px-2 sm-mobile:px-2 md-mobile:h-6 sm-mobile:h-6`}
                           >
                             First
                           </a>
                         </li>
+
+                        {/* Prev Button */}
                         <li>
                           <a
-                            href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6
-                             md-mobile:text-sm sm-mobile:text-sm
-                            md-mobile:px-2 sm-mobile:px-2
-                            md-mobile:h-6 sm-mobile:h-6"
+                            href="#"
+                            onClick={() =>
+                              setPagerIndex((prev) => Math.max(prev - 1, 0))
+                            } // Decrement pagerIndex, but not below 0
+                            className={`flex items-center justify-center leading-tight ${
+                              pagerIndex === 0
+                                ? "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                                : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            } laptop:text-normal laptop:px-4 laptop:h-10 mobile:text-sm mobile:px-2 mobile:h-6 md-mobile:text-sm sm-mobile:text-sm md-mobile:px-2 sm-mobile:px-2 md-mobile:h-6 sm-mobile:h-6`}
                           >
                             Prev
                           </a>
                         </li>
-                        {/* Page numbers */}
+
+                        {/* Page Numbers */}
                         {Array.from({ length: 9 }, (_, index) => (
                           <li key={index}>
                             <a
-                              href=""
+                              href="#"
+                              onClick={() => setPagerIndex(index)} // Set pagerIndex to the clicked page number
                               className={`flex items-center justify-center leading-tight ${
-                                index === 0
+                                pagerIndex === index
                                   ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
                                   : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                              } laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
-                            md-mobile:px-2 sm-mobile:px-2
-                            md-mobile:h-6 sm-mobile:h-6`}
+                              } laptop:text-normal laptop:px-4 laptop:h-10 mobile:text-sm mobile:px-2 mobile:h-6 md-mobile:text-sm sm-mobile:text-sm md-mobile:px-2 sm-mobile:px-2 md-mobile:h-6 sm-mobile:h-6`}
                             >
                               {index + 1}
                             </a>
                           </li>
                         ))}
+
+                        {/* Next Button */}
                         <li>
                           <a
-                            href=""
-                            className="flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 laptop:text-normal  laptop:text-normal laptop:px-4 laptop:h-10  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
-                            md-mobile:px-2 sm-mobile:px-2
-                            md-mobile:h-6 sm-mobile:h-6"
+                            href="#"
+                            onClick={
+                              () =>
+                                setPagerIndex((prev) => Math.min(prev + 1, 8)) // Increment pagerIndex, but not above 8
+                            }
+                            className={`flex items-center justify-center leading-tight ${
+                              pagerIndex === 8
+                                ? "text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                                : "text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            } laptop:text-normal laptop:px-4 laptop:h-10 mobile:text-sm mobile:px-2 mobile:h-6 md-mobile:text-sm sm-mobile:text-sm md-mobile:px-2 sm-mobile:px-2 md-mobile:h-6 sm-mobile:h-6`}
                           >
                             Next
                           </a>
                         </li>
-                        {/* Arrow Up button in the same row */}
+
+                        {/* Arrow Up Button */}
                         <li className="flex items-center">
                           <button
                             onClick={toggleUp}
-                            className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8  mobile:text-sm mobile:px-2 mobile:h-6  md-mobile:text-sm sm-mobile:text-sm
-                            md-mobile:px-2 sm-mobile:px-2
-                            md-mobile:h-6 sm-mobile:h-6"
+                            className="flex items-center justify-center rounded-md bg-[#0076fa] text-white shadow-md hover:bg-[#005bb5] laptop:text-normal laptop:px-3 laptop:h-8 mobile:text-sm mobile:px-2 mobile:h-6 md-mobile:text-sm sm-mobile:text-sm md-mobile:px-2 sm-mobile:px-2 md-mobile:h-6 sm-mobile:h-6"
                           >
                             <FontAwesomeIcon icon={faArrowUp} />
                           </button>
