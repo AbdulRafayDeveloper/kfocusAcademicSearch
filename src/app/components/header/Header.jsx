@@ -15,6 +15,84 @@ const Header = ({ toggleFilterSidebar }) => {
   };
 
   const [selectedKeyword, setSelectedKeyword] = useState("Keywords");
+  const [query, setQuery] = useState(""); // User input
+  const [suggestions, setSuggestions] = useState([]); // Auto-suggestions
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown visibility
+  const [isLoading, setIsLoading] = useState(false); // Loading indicator
+  const searchBarRef = useRef(null); // Ref for the search bar container
+
+  // Mock API call to fetch suggestions
+  const fetchSuggestions = async (searchQuery) => {
+    setIsLoading(true);
+
+    // Mock data (replace with real API)
+    const mockData = [
+      "React",
+      "React Native",
+      "JavaScript",
+      "TypeScript",
+      "Node.js",
+      "Next.js",
+      "Angular",
+      "Vue.js",
+      "Webpack",
+      "Babel",
+    ];
+
+    // Simulate API call with a delay
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const filtered = mockData.filter((item) =>
+          item.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        resolve(filtered);
+        setIsLoading(false);
+      }, 500); // 500ms delay to simulate API response time
+    });
+  };
+
+  // Dynamically fetch suggestions when user types
+  useEffect(() => {
+    if (query) {
+      const debounceFetch = setTimeout(() => {
+        fetchSuggestions(query).then((results) => setSuggestions(results));
+      }, 300); // Debounce: Fetch after 300ms of typing
+
+      return () => clearTimeout(debounceFetch); // Cleanup debounce on new input
+    } else {
+      setSuggestions([]); // Clear suggestions if the input is empty
+    }
+  }, [query]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false); // Close dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+    setIsDropdownOpen(true); // Open dropdown when typing
+  };
+
+  const handleSearchBarClick = () => {
+    setIsDropdownOpen(true); // Open dropdown when search bar is clicked
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setQuery(suggestion);
+    setSuggestions([]); // Clear suggestions after selection
+    setIsDropdownOpen(false); // Close dropdown
+  };
 
   const dropdownRef = useRef(null);
   const handleSelectKeyword = (keyword) => {
@@ -193,36 +271,83 @@ const Header = ({ toggleFilterSidebar }) => {
               </div>
 
               {/* Keywords Button */}
-              <div className="flex rounded-full border-[1px] overflow-hidden searchinput mx-auto font-[sans-serif]">
-                <input
-                  type="text"
-                  placeholder="Search Something..."
-                  className="flex-grow outline-none bg-white text-gray-600 text-sm px-4 py-2"
-                />
-
-                <div className="w-[1px] bg-gray-300 mx-1 mt-2 mb-2"></div>
-
-                <button className="flex items-center justify-center">
-                  <img
-                    src="/icons/icons8-ai-32.png"
-                    className=" w-6 h-6"
-                    alt="AI Icon"
-                  />
-                </button>
-                <div className="w-[1px] h-[60%] bg-gray-300 mx-1 self-center"></div>
-                <button
-                  type="button"
-                  className="flex items-center justify-center bg-[#0076fa] px-4 border-0"
+              <div
+                className="relative mx-auto"
+                style={{ maxWidth: "450px" }}
+                ref={searchBarRef} // Attach ref to the container
+              >
+                {/* Search Input */}
+                <div
+                  className="flex rounded-full border-[1px] overflow-hidden searchinput font-[sans-serif] relative"
+                  onClick={handleSearchBarClick} // Handle click to open dropdown
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 192.904 192.904"
-                    width="16px"
-                    className="fill-white"
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={handleInputChange}
+                    placeholder="Search Something..."
+                    className="flex-grow outline-none bg-white text-gray-600 text-sm px-4 py-2"
+                  />
+                  <div className="w-[1px] bg-gray-300 mx-1 mt-2 mb-2"></div>
+                  <button className="flex items-center justify-center">
+                    <img
+                      src="/icons/icons8-ai-32.png"
+                      className="w-6 h-6"
+                      alt="AI Icon"
+                    />
+                  </button>
+                  <div className="w-[1px] h-[60%] bg-gray-300 mx-1 self-center"></div>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center bg-[#0076fa] px-4 border-0"
                   >
-                    <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 192.904 192.904"
+                      width="16px"
+                      className="fill-white"
+                    >
+                      <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Suggestions Dropdown */}
+                {isDropdownOpen && suggestions.length > 0 && (
+                  <ul
+                    className="absolute top-full left-0 bg-white border-[1px] border-gray-300 rounded-lg shadow-lg mt-2 w-full z-10"
+                    style={{
+                      listStyleType: "none",
+                      padding: "0",
+                    }}
+                  >
+                    {suggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                      >
+                        <div className="flex flex-row gap-3 items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="gray"
+                            className="size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                            />
+                          </svg>
+                          {suggestion}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>

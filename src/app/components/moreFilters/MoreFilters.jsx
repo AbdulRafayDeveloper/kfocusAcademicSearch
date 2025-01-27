@@ -120,50 +120,68 @@ const MoreFilters = ({ ListOfFilters, toggleSideFilter }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-5">
         {/* Render the first column */}
         <div>
-          {firstColumn.map((filter, index) => (
-            <div key={index} className="flex items-center mb-2">
-              <div className="flex items-center mr-auto">
-                <input
-                  type="checkbox"
-                  checked={isCheckedItems[index]}
-                  onChange={() => handleCheckboxChangeItems(index)}
-                  className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-base">{filter.label}</span>
+          {firstColumn.map((filter, globalIndex) => {
+            const actualIndex = maxVisibleFilters.indexOf(filter); // Find the global index
+            return (
+              <div key={actualIndex} className="flex items-center mb-2">
+                {/* Label and Value Section */}
+                <div className="flex items-center mr-auto">
+                  <input
+                    type="checkbox"
+                    checked={isCheckedItems[actualIndex]} // Use global index
+                    onChange={() => handleCheckboxChangeItems(actualIndex)} // Pass global index
+                    className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                  />
+                  {/* Label and Value with consistent alignment */}
+                  <div className="flex items-center">
+                    <span className="text-base">{filter.label}</span>
+                    <span
+                      className="text-gray-600 text-sm ml-auto"
+                      style={{
+                        minWidth: "100px", // Ensure consistent width for the value
+                        textAlign: "right", // Align values to the right
+                      }}
+                    >
+                      ({filter.value})
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span
-                className="text-sm text-gray-600 text-right"
-                style={{ minWidth: "30px", display: "inline-block" }}
-              >
-                ({filter.value})
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Render the second column */}
         <div>
-          {secondColumn.map((filter, index) => (
-            <div key={index} className="flex items-center mb-2">
-              <div className="flex items-center mr-auto">
-                <input
-                  type="checkbox"
-                  checked={isCheckedItems[index]}
-                  onChange={() => handleCheckboxChangeItems(index)}
-                  className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-base" style={{ whiteSpace: "nowrap" }}>
-                  {filter.label}
-                </span>
+          {secondColumn.map((filter, globalIndex) => {
+            const actualIndex = maxVisibleFilters.indexOf(filter); // Find the global index
+            return (
+              <div key={actualIndex} className="flex items-center mb-2">
+                {/* Label and Value Section */}
+                <div className="flex items-center mr-auto">
+                  <input
+                    type="checkbox"
+                    checked={isCheckedItems[actualIndex]} // Use global index
+                    onChange={() => handleCheckboxChangeItems(actualIndex)} // Pass global index
+                    className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                  />
+                  {/* Label and Value with consistent alignment */}
+                  <div className="flex items-center">
+                    <span className="text-base">{filter.label}</span>
+                    <span
+                      className="text-gray-600 text-sm ml-auto"
+                      style={{
+                        minWidth: "100px", // Ensure consistent width for the value
+                        textAlign: "right", // Align values to the right
+                      }}
+                    >
+                      ({filter.value})
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span
-                className="text-sm text-gray-600 text-right"
-                style={{ minWidth: "30px", display: "inline-block" }}
-              >
-                ({filter.value})
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

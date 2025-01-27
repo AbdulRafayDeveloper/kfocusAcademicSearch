@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-const AskPaper = () => {
+const AskPaper = ({ isSidebarVisible }) => {
   // Dummy data for selectedPaper
   const selectedPaper = {
     title: "Research on AI in Healthcare",
@@ -15,7 +15,11 @@ const AskPaper = () => {
   };
 
   return (
-    <div className="relative max-w-[1200px] askPaper h-screen overflow-y-auto bg-blue-50 p-6 shadow-md">
+    <div
+      className={`relative askPaper h-screen overflow-y-auto bg-blue-50 p-6 shadow-md ${
+        isSidebarVisible ? "max-w-[1200px]" : "w-full"
+      }`}
+    >
       <div className="w-full">
         <h2 className="text-2xl font-bold mb-4">{selectedPaper.title}</h2>
         <p className="text-sm text-gray-600 mb-2">
