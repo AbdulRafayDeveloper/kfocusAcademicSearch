@@ -9,13 +9,14 @@ const ListView = ({
   toggleUp,
   moveUp,
   selectAll,
+  pagerIndex,
 }) => {
   const [expandedRowIndex, setExpandedRowIndex] = useState(null);
-  console.log(selectedValue);
 
   const products = [
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "1 The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -41,7 +42,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "2. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -67,7 +69,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "3. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -93,7 +96,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "4. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -119,7 +123,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "5. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -145,7 +150,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "6. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -171,7 +177,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "7. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -197,7 +204,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "8. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -223,7 +231,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "9. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -249,7 +258,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "10. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -275,7 +285,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "11. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -301,7 +312,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "12. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -327,7 +339,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "13. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -353,7 +366,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "14. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -379,7 +393,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "15. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -405,7 +420,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "16. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -431,7 +447,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "17. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -457,7 +474,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "18. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -483,7 +501,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "19. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -509,7 +528,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "20. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -535,7 +555,8 @@ const ListView = ({
       ],
     },
     {
-      title: "The coffee-mango association promotes favorable soil conditions",
+      title:
+        "21. The coffee-mango association promotes favorable soil conditions",
       authors: "Pan, L., Liu, Y., Yao, L., Grätzel, M., Hagfeldt, A.",
       afiliated_nation: "5",
       year: 2020,
@@ -562,7 +583,10 @@ const ListView = ({
     },
   ];
 
-  const recordsToDisplay = products.slice(0, selectedValue);
+  // Calculate the records to display based on the pagerIndex and selectedValue
+  const startIndex = pagerIndex * selectedValue;
+  const endIndex = startIndex + selectedValue;
+  const recordsToDisplay = products.slice(startIndex, endIndex);
 
   const toggleAbstract = (index) => {
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
@@ -579,7 +603,6 @@ const ListView = ({
     }
   }, [moveUp]);
 
-  //max-h-[316px]
   return (
     <div
       className="h-screen overflow-y-auto listheight sm:overflow-x-auto mobile:h-[76vh] md-mobile:h-[76vh] sm-mobile:h-[76vh]"
@@ -628,123 +651,127 @@ const ListView = ({
           </tr>
         </thead>
         <tbody>
-          {recordsToDisplay.map((product, index) => (
-            <React.Fragment key={index}>
-              <tr
-                className={`
-                   bg-white hover:bg-gray-100 border-b`}
-              >
-                <td className="px-4 py-4 text-left align-top">
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      checked={selectAll}
-                      onChange={() => {}}
-                    />
-                    <span>{index + 1}</span>
-                  </div>
-                </td>
+          {recordsToDisplay.length > 0 ? (
+            recordsToDisplay.map((product, index) => (
+              <React.Fragment key={index}>
+                <tr className={`bg-white hover:bg-gray-100 border-b`}>
+                  <td className="px-4 py-4 text-left align-top">
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        checked={selectAll}
+                        onChange={() => {}}
+                      />
+                      <span>{startIndex + index + 1}</span>
+                    </div>
+                  </td>
 
-                <td className="px-4 py-2 text-left align-top">
-                  <p className="text-xs text-gray-500">Article</p>
-                  <div className="font-medium text-gray-900">
-                    {product.title}
-                  </div>
-                  <div className="text-xs text-blue-600 space-x-2 mt-10">
-                    {product.details.map((detail, i) => (
-                      <span key={i} className="cursor-pointer hover:underline">
-                        {detail === "View abstract" ? (
-                          <button
-                            onClick={() => toggleAbstract(index)}
-                            className="text-blue-600 hover:underline focus:outline-none"
-                          >
-                            {detail}
-                            <FontAwesomeIcon
-                              icon={
-                                expandedRowIndex === index
-                                  ? faChevronUp
-                                  : faChevronDown
-                              }
-                              className="ml-1 text-xs"
-                            />
-                          </button>
-                        ) : detail === "Ask this paper" ? (
-                          <a
-                            href={`../../pdfPage/${index}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline focus:outline-none"
-                          >
-                            {detail}
-                          </a>
-                        ) : (
-                          detail
-                        )}
+                  <td className="px-4 py-2 text-left align-top">
+                    <p className="text-xs text-gray-500">Article</p>
+                    <div className="font-medium text-gray-900">
+                      {product.title}
+                    </div>
+                    <div className="text-xs text-blue-600 space-x-2 mt-10">
+                      {product.details.map((detail, i) => (
+                        <span
+                          key={i}
+                          className="cursor-pointer hover:underline"
+                        >
+                          {detail === "View abstract" ? (
+                            <button
+                              onClick={() => toggleAbstract(index)}
+                              className="text-blue-600 hover:underline focus:outline-none"
+                            >
+                              {detail}
+                              <FontAwesomeIcon
+                                icon={
+                                  expandedRowIndex === index
+                                    ? faChevronUp
+                                    : faChevronDown
+                                }
+                                className="ml-1 text-xs"
+                              />
+                            </button>
+                          ) : detail === "Ask this paper" ? (
+                            <a
+                              href={`../../pdfPage/${index}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:underline focus:outline-none"
+                            >
+                              {detail}
+                            </a>
+                          ) : (
+                            detail
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-left align-top">
+                    <div className="font-normal text-gray-900">
+                      {product.authors}
+                    </div>
+                    <div className="text-xs text-gray-500 space-x-1 mt-2">
+                      <span className="font-semibold">Affiliated nation:</span>
+                      <span>{product.afiliated_nation}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-left align-top">
+                    {product.year}
+                  </td>
+                  <td className="px-4 py-4 text-left align-top">
+                    <div className="font-normal text-gray-900">
+                      {product.source}
+                    </div>
+                    <div className="text-xs text-gray-500 space-x-1 mt-2">
+                      <span className="font-semibold text-blue-700">
+                        Indexed In:
                       </span>
-                    ))}
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-left align-top">
-                  <div className="font-normal text-gray-900">
-                    {product.authors}
-                  </div>
-                  <div className="text-xs text-gray-500 space-x-1 mt-2">
-                    <span className="font-semibold">Affiliated nation:</span>
-                    <span>{product.afiliated_nation}</span>
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-left align-top">
-                  {product.year}
-                </td>
-                <td className="px-4 py-4 text-left align-top">
-                  <div className="font-normal text-gray-900">
-                    {product.source}
-                  </div>
-                  <div className="text-xs text-gray-500 space-x-1 mt-2">
-                    <span className="font-semibold text-blue-700">
-                      Indexed In:
-                    </span>
-                    <span>{product.indexIn}</span>
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-left align-top">
-                  <div className="font-normal text-gray-900">
-                    {product.citedBy}
-                  </div>
-                  <div className="text-xs text-gray-500 space-x-1 mt-12">
-                    <span className="font-semibold">Ref:</span>
-                    <span>{product.ref}</span>
-                  </div>
-                </td>
-              </tr>
-              {expandedRowIndex === index && (
-                <tr className="border-b-gray-500">
-                  <td colSpan={6} className="bg-gray-100 px-3 py-4 pl-[87px]">
-                    <div className="relative flex flex-col">
-                      {/* Close button */}
-
-                      {/* Abstract content */}
-                      <div className="text-gray-800 mt-2 pl-2">
-                        <p>{product.abstract || "No abstract available."}</p>
-                      </div>
-                      {/* Keywords section */}
-                      {product.keywords && product.keywords.length > 0 && (
-                        <div className="mt-3 flex items-start pl-2">
-                          <h5 className="text-md font-semibold text-gray-700 mr-2">
-                            Keywords:
-                          </h5>
-                          <p className="text-gray-600 text-sm">
-                            {product.keywords.join("; ")}
-                          </p>
-                        </div>
-                      )}
+                      <span>{product.indexIn}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-left align-top">
+                    <div className="font-normal text-gray-900">
+                      {product.citedBy}
+                    </div>
+                    <div className="text-xs text-gray-500 space-x-1 mt-12">
+                      <span className="font-semibold">Ref:</span>
+                      <span>{product.ref}</span>
                     </div>
                   </td>
                 </tr>
-              )}
-            </React.Fragment>
-          ))}
+                {expandedRowIndex === index && (
+                  <tr className="border-b-gray-500">
+                    <td colSpan={6} className="bg-gray-100 px-3 py-4 pl-[87px]">
+                      <div className="relative flex flex-col">
+                        <div className="text-gray-800 mt-2 pl-2">
+                          <p>{product.abstract || "No abstract available."}</p>
+                        </div>
+                        {product.keywords && product.keywords.length > 0 && (
+                          <div className="mt-3 flex items-start pl-2">
+                            <h5 className="text-md font-semibold text-gray-700 mr-2">
+                              Keywords:
+                            </h5>
+                            <p className="text-gray-600 text-sm">
+                              {product.keywords.join("; ")}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={6} className="text-center text-gray-500 py-4">
+                No records available for this page.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

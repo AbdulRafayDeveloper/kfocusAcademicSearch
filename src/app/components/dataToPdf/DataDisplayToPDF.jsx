@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-const DataDisplayToPDF = ({ data }) => {
+const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1); // State to track zoom level
   const [zoomInPercentage, setZoomInPercentage] = useState(10);
@@ -211,10 +211,9 @@ const DataDisplayToPDF = ({ data }) => {
         {/* Download Button (outside the content to not be included in the PDF) */}
         <div className="flex flex-row gap-1">
           <button
-            onClick={handleDownloadPDF}
-            disabled={isDownloading}
+            onClick={toggleChat}
             className={`text-gray-700 px-6 py-3 rounded-md ${
-              isDownloading ? "opacity-50 cursor-not-allowed" : ""
+              closeChat ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             <svg

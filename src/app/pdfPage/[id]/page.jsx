@@ -17,6 +17,11 @@ const page = ({ params }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [activeCategory, setActiveCategory] = useState();
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
+  const [closeChat, setCloseChat] = useState(false);
+
+  const toggleChat = () => {
+    setCloseChat(!closeChat);
+  };
 
   const products = [
     {
@@ -814,11 +819,21 @@ const page = ({ params }) => {
             <div className="flex flex-row h-screen laptop:flex mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto">
               {/* Left section with more width */}
               <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4">
-                <DataDisplayToPDF data={selectedProduct} />
+                <DataDisplayToPDF
+                  data={selectedProduct}
+                  toggleChat={toggleChat}
+                  closeChat={closeChat}
+                />
               </div>
 
               {/* Right section with smaller width */}
-              <div className="laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] bg-white flex flex-col h-screen overflow-y-auto p-4">
+              <div
+                className={`${
+                  closeChat
+                    ? "hidden"
+                    : "laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw]"
+                } bg-white flex flex-col h-screen overflow-y-auto p-4`}
+              >
                 <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4">
                   <div className="flex flex-row items-end gap-2">
                     <svg
@@ -840,7 +855,7 @@ const page = ({ params }) => {
                       Beta
                     </span>
                   </div>
-                  <button>
+                  <button onClick={toggleChat}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
