@@ -253,6 +253,20 @@ const GridView = ({
 
   // Slice the records to display based on indices
   const recordsToDisplay = products.slice(startIndex, endIndex);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
+    products.map(() => false) // Initialize all checkboxes to "unchecked"
+  );
+
+  const toggleCheckbox = (index) => {
+    if (!selectAll) {
+      // Allow toggling individual checkboxes only when "Select All" is false
+      setSelectedCheckboxes((prev) => {
+        const updated = [...prev];
+        updated[index] = !updated[index]; // Toggle the specific checkbox
+        return updated;
+      });
+    }
+  };
 
   return (
     <div
@@ -273,9 +287,9 @@ const GridView = ({
                 <input
                   type="checkbox"
                   id={`checkbox-${index}`}
+                  checked={selectAll || selectedCheckboxes[index]} // Check if "Select All" is true or the specific checkbox is true
+                  onChange={() => toggleCheckbox(index)} // Toggle individual checkbox
                   className="checkbox-input"
-                  checked={selectAll} // Bind the checkbox to the "select all" state
-                  onChange={() => {}} // Keep empty since `checked` is controlled
                 />
               </div>
 

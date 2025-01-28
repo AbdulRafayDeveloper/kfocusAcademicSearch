@@ -592,6 +592,21 @@ const ListView = ({
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
   };
 
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
+    products.map(() => false) // Initialize all checkboxes to "unchecked"
+  );
+
+  const toggleCheckbox = (index) => {
+    if (!selectAll) {
+      // Allow toggling individual checkboxes only when "Select All" is false
+      setSelectedCheckboxes((prev) => {
+        const updated = [...prev];
+        updated[index] = !updated[index]; // Toggle the specific checkbox
+        return updated;
+      });
+    }
+  };
+
   const gridRef = useRef();
 
   useEffect(() => {
@@ -659,9 +674,10 @@ const ListView = ({
                     <div className="flex items-center">
                       <input
                         type="checkbox"
-                        className="mr-2"
-                        checked={selectAll}
-                        onChange={() => {}}
+                        id={`checkbox-${index}`}
+                        checked={selectAll || selectedCheckboxes[index]} // Check if "Select All" is true or the specific checkbox is true
+                        onChange={() => toggleCheckbox(index)} // Toggle individual checkbox
+                        className="checkbox-input"
                       />
                       <span>{startIndex + index + 1}</span>
                     </div>

@@ -115,26 +115,28 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
       </label>
 
       {/* Filters in Two Columns */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 pt-5">
         {/* First Column */}
         <div>
           {firstColumn.map((filter, index) => {
             const absoluteIndex = maxVisibleFilters.indexOf(filter);
             return (
               <div key={absoluteIndex} className="flex items-center mb-2">
-                <div className="flex items-center mr-auto">
+                <div className="flex items-center w-full">
                   <input
                     type="checkbox"
                     checked={isCheckedItems[absoluteIndex] || false}
                     onChange={() => handleCheckboxChangeItems(absoluteIndex)}
                     className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
                   />
-                  <div className="flex items-center">
-                    <span className="text-base">{filter.label}</span>
+                  <div className="flex justify-between items-center w-full">
+                    {/* Label */}
+                    <span className="text-base truncate">{filter.label}</span>
+                    {/* Value */}
                     <span
-                      className="text-gray-600 text-sm ml-auto"
+                      className="text-gray-600 text-sm"
                       style={{
-                        minWidth: "100px",
+                        minWidth: "100px", // Ensures consistent alignment
                         textAlign: "right",
                       }}
                     >
@@ -153,19 +155,21 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
             const absoluteIndex = maxVisibleFilters.indexOf(filter);
             return (
               <div key={absoluteIndex} className="flex items-center mb-2">
-                <div className="flex items-center mr-auto">
+                <div className="flex items-center w-full">
                   <input
                     type="checkbox"
                     checked={isCheckedItems[absoluteIndex] || false}
                     onChange={() => handleCheckboxChangeItems(absoluteIndex)}
                     className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
                   />
-                  <div className="flex items-center">
-                    <span className="text-base">{filter.label}</span>
+                  <div className="flex justify-between items-center w-full">
+                    {/* Label */}
+                    <span className="text-base truncate">{filter.label}</span>
+                    {/* Value */}
                     <span
-                      className="text-gray-600 text-sm ml-auto"
+                      className="text-gray-600 text-sm"
                       style={{
-                        minWidth: "100px",
+                        minWidth: "100px", // Ensures consistent alignment
                         textAlign: "right",
                       }}
                     >

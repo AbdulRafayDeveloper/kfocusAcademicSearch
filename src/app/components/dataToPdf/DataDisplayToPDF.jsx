@@ -212,9 +212,7 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         <div className="flex flex-row gap-1">
           <button
             onClick={toggleChat}
-            className={`text-gray-700 px-6 py-3 rounded-md ${
-              closeChat ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={"text-gray-700 px-6 py-3 rounded-md  cursor-allowed"}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

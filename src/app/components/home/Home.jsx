@@ -45,8 +45,9 @@ const HomePage = () => {
   const [selectAll, setSelectAll] = useState(false);
 
   const toggleAll = () => {
-    setSelectAll(!selectAll);
-    console.log(moveUp);
+    const newState = !selectAll;
+    setSelectAll(newState);
+    setSelectedCheckboxes(products.map(() => newState)); // Set all checkboxes to match "selectAll"
   };
 
   const toggleUp = () => {
@@ -351,6 +352,21 @@ const HomePage = () => {
       setPagerIndex((prev) => prev + 1);
     }
   };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -551,7 +567,10 @@ const HomePage = () => {
                 {/* Right Section */}
                 <div className="flex flex-row items-center laptop:space-x-4 mobile:space-x-0 md-mobile:space-x-0 sm-mobile:space-x-0">
                   {/* Sort on Section */}
-                  <div className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:flex ">
+                  <div
+                    className="relative flex flex-row items-center pr-4 space-x-2 mobile:hidden md-mobile:hidden sm-mobile:hidden laptop:flex"
+                    ref={dropdownRef}
+                  >
                     <p className="text-xs whitespace-nowrap">Sort on:</p>
                     <button
                       className="flex items-center space-x-1 text-cyan-700 text-xs whitespace-nowrap focus:outline-none"
@@ -648,6 +667,7 @@ const HomePage = () => {
                         type="checkbox"
                         id="analyzeCheckbox"
                         onChange={toggleAll}
+                        checked={selectAll}
                         className="laptop:w-4 laptop:h-4 mobile:w-2 mobile:h-2 accent-blue-600 cursor-pointer md-mobile:w-2 sm-mobile:w-2 md-mobile:h-2 sm-mobile:h-2"
                       />
                       <span className="font-normal text-xs text-[#0076fa]">
@@ -926,6 +946,7 @@ const HomePage = () => {
                         isSidebarVisible={isSidebarVisible}
                         selectAll={selectAll}
                         pagerIndex={pagerIndex}
+                        setSelectAll={setSelectAll}
                       />
                     ) : showPdf ? (
                       <PdfViewer index={pdfIndex} togglePdf={togglePdf} />
@@ -938,6 +959,7 @@ const HomePage = () => {
                         toggleUp={toggleUp}
                         selectAll={selectAll}
                         pagerIndex={pagerIndex}
+                        setSelectAll={setSelectAll}
                       />
                     )}
                   </div>
