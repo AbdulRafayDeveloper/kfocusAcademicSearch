@@ -268,7 +268,7 @@ const GridView = ({
   return (
     <div
       className={`relative listheight h-screen overflow-y-auto ${
-        isSidebarVisible ? "max-w-[1210px]" : "w-full"
+        isSidebarVisible ? "max-w-[1290px]" : "w-full"
       } mobile:h-[76vh] md-mobile:h-[76vh] sm-mobile:h-[76vh]`}
       ref={gridRef}
     >

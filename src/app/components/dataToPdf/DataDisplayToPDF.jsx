@@ -103,54 +103,63 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   };
 
   return (
-    <div className="pdfHeight flex flex-col overflow-hidden h-screen">
+    <div className="pdfHeight flex flex-col">
       {/* Main Content */}
-      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow ">
-        <main
-          ref={contentRef}
-          className="pl-12 pr-12 pt-12 bg-white"
+      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow overflow-hidden">
+        <div
+          className="relative w-full h-full overflow-hidden"
           style={{
-            height: "calc(105vh - 140px)",
-            transform: `scale(${zoomLevel})`,
-            transformOrigin: "center center",
-            overflow: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {/* Logo inside the main content area */}
-          <div className="flex items-center mb-4 mt-12">
-            <img
-              src="/icons/future_logo.png"
-              alt="Logo"
-              className="w-50 h-10 mr-4"
-            />
-          </div>
+          <main
+            ref={contentRef}
+            className="pl-12 pr-12 pt-12 bg-white"
+            style={{
+              height: "calc(105vh - 140px)",
+              transform: `scale(${zoomLevel})`,
+              transformOrigin: "center top",
+              overflow: "auto", // Allow scrolling
+            }}
+          >
+            {/* Logo inside the main content area */}
+            <div className="flex items-center mb-4 mt-12">
+              <img
+                src="/icons/future_logo.png"
+                alt="Logo"
+                className="w-50 h-10 mr-4"
+              />
+            </div>
 
-          <hr className="flex-grow border-t-2 border-gray-800 mb-12" />
-          {/* Title inside the main content area */}
-          <h2 className="text-3xl font-bold mb-8">
-            {data?.title || "No Data Title"}
-          </h2>
+            <hr className="flex-grow border-t-2 border-gray-800 mb-12" />
+            {/* Title inside the main content area */}
+            <h2 className="text-3xl font-bold mb-8">
+              {data?.title || "No Data Title"}
+            </h2>
 
-          {/* Data content in a spread-out format */}
-          <div className="space-y-6">
-            {data ? (
-              <>
-                <div className="flex justify-between">
-                  <h3 className="text-xl font-semibold">{data.title}</h3>
-                  <p className="text-sm text-gray-400">{data.year}</p>
-                </div>
-                <p className="text-gray-700">{data.abstract}</p>
-                <p className="text-gray-500">Authors: {data.authors}</p>
-              </>
-            ) : (
-              <p>No data available.</p>
-            )}
-          </div>
-        </main>
+            {/* Data content in a spread-out format */}
+            <div className="space-y-6">
+              {data ? (
+                <>
+                  <div className="flex justify-between">
+                    <h3 className="text-xl font-semibold">{data.title}</h3>
+                    <p className="text-sm text-gray-400">{data.year}</p>
+                  </div>
+                  <p className="text-gray-700">{data.abstract}</p>
+                  <p className="text-gray-500">Authors: {data.authors}</p>
+                </>
+              ) : (
+                <p>No data available.</p>
+              )}
+            </div>
+          </main>
+        </div>
       </div>
 
       {/* Download and Zoom Controls */}
-      <div className="flex flex-row justify-between w-full bg-white  pb-4 rounded-bl-md">
+      <div className="flex flex-row justify-between w-full bg-white pt-8 pb-4 rounded-bl-md">
         <div className="flex gap-4 pl-8">
           <div className="flex flex-row items-center ">
             <p className="pl-2">{zoomInPercentage}%</p>

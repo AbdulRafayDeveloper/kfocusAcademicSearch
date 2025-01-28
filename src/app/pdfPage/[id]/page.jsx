@@ -794,26 +794,13 @@ const page = ({ params }) => {
         <div className="flex mobile:w-[88%] md-mobile:w-[88%] sm-mobile:w-[88%] laptop:w-full flex-col ">
           <div className="flex w-full">
             {/* Sidebar */}
-            <div
-              className={`transition-all duration-300 overflow-hidden ${
-                isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] z-[9999] bg-white shadow-lg"
-                  : "laptop:w-0 w-0"
-              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 h-full`}
-            >
-              <SidebarFilters
-                activeCategory={activeCategory}
-                changeActiveCategory={changeActiveCategory}
-                toggleSideFilter={toggleSideFilter}
-                className="overflow-y-scroll "
-                filterCategories={filterCategories}
-              />
-            </div>
 
             {/* Main Content Area */}
             <div className="flex flex-row  laptop:flex ">
               {/* Left section with more width */}
-              <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4 h-screen">
+              <div
+                className={`flex-grow laptop:min-w-[50vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] p-4 h-screen overflow-hidden`}
+              >
                 <DataDisplayToPDF
                   data={selectedProduct}
                   toggleChat={toggleChat}
