@@ -78,7 +78,7 @@ const Filters = ({ toggleFilterSidebar }) => {
   };
 
   const handleCountrySearch = (term) => {
-    setCountrySearchTerm(term); // Use setCountrySearchTerm here
+    setCountrySearchTerm(term);
     const filtered = countryNames.filter((country) =>
       country.toLowerCase().includes(term.toLowerCase())
     );

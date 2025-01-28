@@ -47,7 +47,7 @@ const HomePage = () => {
   const toggleAll = () => {
     const newState = !selectAll;
     setSelectAll(newState);
-    setSelectedCheckboxes(products.map(() => newState)); // Set all checkboxes to match "selectAll"
+    setSelectedCheckboxes(products.map(() => newState));
   };
 
   const toggleUp = () => {
@@ -319,14 +319,14 @@ const HomePage = () => {
     },
   ];
 
-  const [showOptions, setShowOptions] = useState(false); // State for mobile options visibility
+  const [showOptions, setShowOptions] = useState(false);
 
   const toggleOptions = () => {
-    setShowOptions((prevState) => !prevState); // Toggle visibility
+    setShowOptions((prevState) => !prevState);
   };
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(10);
-  const dropdownRef = useRef(null); // Ref to track the dropdown and button container
+  const dropdownRef = useRef(null);
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -334,7 +334,7 @@ const HomePage = () => {
 
   const handleSelect = (value) => {
     setSelectedValue(value);
-    setIsOpen(false); // Close dropdown after selection
+    setIsOpen(false);
   };
 
   const [pagerIndex, setPagerIndex] = useState(0);
@@ -353,11 +353,10 @@ const HomePage = () => {
     }
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false); // Close the dropdown
+        setIsDropdownOpen(false);
       }
     };
 
@@ -367,17 +366,16 @@ const HomePage = () => {
     };
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false); // Close dropdown
+        setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // Cleanup on unmount
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   useEffect(() => {
@@ -538,7 +536,7 @@ const HomePage = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-col flex-grow h-screen laptop:flex mobile:overflow-y-auto md-mobile:overflow-y-auto sm-mobile:overflow-y-auto">
+            <div className="flex flex-col flex-grow  laptop:flex mobile:overflow-y-auto md-mobile:overflow-y-auto sm-mobile:overflow-y-auto">
               {/* Header */}
               <div
                 className={`bg-white pt-2 pb-2 pr-1 pl-[8.5px] flex flex-row justify-between items-center laptop:flex ${

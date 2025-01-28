@@ -27,16 +27,16 @@ const Header = ({ toggleFilterSidebar }) => {
 
     // Mock data (replace with real API)
     const mockData = [
-      "React",
-      "React Native",
-      "JavaScript",
-      "TypeScript",
-      "Node.js",
-      "Next.js",
-      "Angular",
-      "Vue.js",
-      "Webpack",
-      "Babel",
+      "Journal",
+      "Writer",
+      "Blog",
+      "Headline",
+      "Quiz",
+      "Facts",
+      "Explore",
+      "Knowledge",
+      "Update",
+      "Review",
     ];
 
     // Simulate API call with a delay

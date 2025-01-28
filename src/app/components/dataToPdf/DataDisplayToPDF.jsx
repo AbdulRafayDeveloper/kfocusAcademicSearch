@@ -4,12 +4,11 @@ import jsPDF from "jspdf";
 
 const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1); // State to track zoom level
+  const [zoomLevel, setZoomLevel] = useState(1);
   const [zoomInPercentage, setZoomInPercentage] = useState(10);
   const [zoomOutPercentage, setZoomOutPercentage] = useState(10);
-  const contentRef = useRef(null); // Ref to capture content
+  const contentRef = useRef(null);
 
-  // Log data on component mount or when data changes
   useEffect(() => {
     console.log("Received data:", data);
   }, [data]);
@@ -19,19 +18,16 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
     const contentElement = contentRef.current;
 
-    // Save original styles to restore after capturing
     const originalStyle = {
       height: contentElement.style.height,
       overflow: contentElement.style.overflow,
     };
 
-    // Temporarily adjust styles to capture full content
-    contentElement.style.height = "auto"; // Expand height to fit all content
-    contentElement.style.overflow = "visible"; // Ensure all content is visible
+    contentElement.style.height = "auto";
+    contentElement.style.overflow = "visible";
 
     const canvas = await html2canvas(contentElement, { scale: 2 });
 
-    // Restore original styles
     contentElement.style.height = originalStyle.height;
     contentElement.style.overflow = originalStyle.overflow;
 
@@ -42,13 +38,11 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
     const imgData = canvas.toDataURL("image/png");
     const contentHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    const pagePadding = 10; // Padding between pages (in mm)
+    const pagePadding = 10;
 
     if (contentHeight <= pdfHeight - pagePadding * 2) {
-      // Single-page content
       pdf.addImage(imgData, "PNG", 0, pagePadding, pdfWidth, contentHeight);
     } else {
-      // Multi-page content
       let currentHeight = 0;
 
       while (currentHeight < canvas.height) {
@@ -61,7 +55,6 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
         const pageContext = pageCanvas.getContext("2d");
 
-        // Draw the portion of the content for the current page
         pageContext.drawImage(
           canvas,
           0,
@@ -77,14 +70,12 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         const pageImgData = pageCanvas.toDataURL("image/png");
         const pageHeight = (pageCanvas.height * pdfWidth) / canvas.width;
 
-        // Add the image with padding
         pdf.addImage(pageImgData, "PNG", 0, pagePadding, pdfWidth, pageHeight);
 
-        // Move to the next section of the content
         currentHeight += pageCanvas.height;
 
         if (currentHeight < canvas.height) {
-          pdf.addPage(); // Add a new page if there's more content
+          pdf.addPage();
         }
       }
     }
@@ -95,18 +86,18 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
   const handleZoomIn = () => {
     setZoomLevel((prevZoom) => {
-      const newZoom = Math.min(prevZoom + 0.1, 2); // Max zoom level of 2
-      setZoomInPercentage(Math.round(newZoom * 10)); // Update zoom-in percentage
-      setZoomOutPercentage(Math.round(newZoom * 10)); // Keep zoom-out percentage same
+      const newZoom = Math.min(prevZoom + 0.1, 2);
+      setZoomInPercentage(Math.round(newZoom * 10));
+      setZoomOutPercentage(Math.round(newZoom * 10));
       return newZoom;
     });
   };
 
   const handleZoomOut = () => {
     setZoomLevel((prevZoom) => {
-      const newZoom = Math.max(prevZoom - 0.1, 0.5); // Min zoom level of 0.5
-      setZoomInPercentage(Math.round(newZoom * 10)); // Update zoom-in percentage
-      setZoomOutPercentage(Math.round(newZoom * 10)); // Keep zoom-out percentage same
+      const newZoom = Math.max(prevZoom - 0.1, 0.5);
+      setZoomInPercentage(Math.round(newZoom * 10));
+      setZoomOutPercentage(Math.round(newZoom * 10));
       return newZoom;
     });
   };
@@ -114,15 +105,15 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   return (
     <div className="pdfHeight flex flex-col overflow-hidden ">
       {/* Main Content */}
-      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow overflow-auto">
+      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow ">
         <main
           ref={contentRef}
           className="pl-12 pr-12 pt-12 bg-white"
           style={{
             height: "calc(105vh - 140px)",
-            transform: `scale(${zoomLevel})`, // Apply zoom scale
-            transformOrigin: "center center", // Ensure zoom happens from center
-            overflow: "auto", // Ensure content is scrollable if zoomed in
+            transform: `scale(${zoomLevel})`,
+            transformOrigin: "center center",
+            overflow: "auto",
           }}
         >
           {/* Logo inside the main content area */}
@@ -159,7 +150,7 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
       </div>
 
       {/* Download and Zoom Controls */}
-      <div className="flex flex-row justify-between w-full bg-white pt-8 pb-4 rounded-bl-md">
+      <div className="flex flex-row justify-between w-full bg-white  pb-4 rounded-bl-md">
         <div className="flex gap-4 pl-8">
           <div className="flex flex-row items-center ">
             <p className="pl-2">{zoomInPercentage}%</p>
@@ -212,23 +203,43 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         <div className="flex flex-row gap-1">
           <button
             onClick={toggleChat}
-            className={"text-gray-700 px-6 py-3 rounded-md  cursor-allowed"}
+            className="text-gray-700 px-6 py-3 rounded-md cursor-pointer"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-              />
-            </svg>
+            {closeChat ? (
+              // Arrow Down Icon (when closeChat is true)
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m19.5 4.5-15 15m0 0h11.25m-11.25 0V8.25"
+                />
+              </svg>
+            ) : (
+              // Current Icon (when closeChat is false)
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                />
+              </svg>
+            )}
           </button>
+
           <button
             onClick={handleDownloadPDF}
             disabled={isDownloading}

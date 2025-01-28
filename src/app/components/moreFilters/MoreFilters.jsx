@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
-  const [visibleCount, setVisibleCount] = useState(5); // Default number of visible records
+  const [visibleCount, setVisibleCount] = useState(5);
   const [isChecked, setIsChecked] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isCheckedItems, setIsCheckedItems] = useState([]);
   const filtersRef = useRef(null);
 
-  // Initialize `isCheckedItems` whenever `ListOfFilters` changes
   useEffect(() => {
     if (Array.isArray(ListOfFilters)) {
       setIsCheckedItems(new Array(ListOfFilters.length).fill(false));
@@ -41,7 +40,6 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
 
   const maxVisibleFilters = filteredFilters.slice(0, visibleCount);
 
-  // Divide filters into two columns
   const firstColumn = maxVisibleFilters.filter((_, index) => index % 2 === 0);
   const secondColumn = maxVisibleFilters.filter((_, index) => index % 2 !== 0);
 
@@ -70,7 +68,7 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
       <div ref={filtersRef}>
         <form
           className="max-w-full mx-auto"
-          onSubmit={(e) => e.preventDefault()} // Prevent form submission
+          onSubmit={(e) => e.preventDefault()}
         >
           <div className="flex">
             <div className="relative w-full">
@@ -127,7 +125,7 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
                     type="checkbox"
                     checked={isCheckedItems[absoluteIndex] || false}
                     onChange={() => handleCheckboxChangeItems(absoluteIndex)}
-                    className="mr-2 border-5 border-gray-400 rounded focus:ring-2 focus:ring-blue-500"
+                    className="mr-2 border-5 border-gray-400 rounded "
                   />
                   <div className="flex justify-between items-center w-full">
                     {/* Label */}
@@ -136,7 +134,7 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
                     <span
                       className="text-gray-600 text-sm"
                       style={{
-                        minWidth: "100px", // Ensures consistent alignment
+                        minWidth: "100px",
                         textAlign: "right",
                       }}
                     >
@@ -169,7 +167,7 @@ const MoreFilters = ({ ListOfFilters = [], toggleSideFilter }) => {
                     <span
                       className="text-gray-600 text-sm"
                       style={{
-                        minWidth: "100px", // Ensures consistent alignment
+                        minWidth: "100px",
                         textAlign: "right",
                       }}
                     >

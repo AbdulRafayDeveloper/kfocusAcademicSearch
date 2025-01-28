@@ -247,22 +247,19 @@ const GridView = ({
     }
   }, [moveUp]);
 
-  // Calculate start and end indices for slicing records
   const startIndex = pagerIndex * selectedValue;
   const endIndex = startIndex + selectedValue;
 
-  // Slice the records to display based on indices
   const recordsToDisplay = products.slice(startIndex, endIndex);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(
-    products.map(() => false) // Initialize all checkboxes to "unchecked"
+    products.map(() => false)
   );
 
   const toggleCheckbox = (index) => {
     if (!selectAll) {
-      // Allow toggling individual checkboxes only when "Select All" is false
       setSelectedCheckboxes((prev) => {
         const updated = [...prev];
-        updated[index] = !updated[index]; // Toggle the specific checkbox
+        updated[index] = !updated[index];
         return updated;
       });
     }
@@ -287,8 +284,8 @@ const GridView = ({
                 <input
                   type="checkbox"
                   id={`checkbox-${index}`}
-                  checked={selectAll || selectedCheckboxes[index]} // Check if "Select All" is true or the specific checkbox is true
-                  onChange={() => toggleCheckbox(index)} // Toggle individual checkbox
+                  checked={selectAll || selectedCheckboxes[index]}
+                  onChange={() => toggleCheckbox(index)}
                   className="checkbox-input"
                 />
               </div>
@@ -355,7 +352,7 @@ const GridView = ({
                   </div>
                   <div className="text-xs text-blue-600">
                     <a
-                      href={`../../pdfPage/${index}`} // Navigate to the web route
+                      href={`../../pdfPage/${index}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline focus:outline-none"

@@ -133,6 +133,9 @@ ul::-webkit-scrollbar-track {
   .askPaper{
     height: 120vh;
   }
+  .searchinput{
+    width: 600px;
+  }
 }
 
 @media (min-width: 1440px) and (min-height: 951px) {
@@ -141,6 +144,9 @@ ul::-webkit-scrollbar-track {
   }
   .listfilter {
     max-height: 84.8vh; 
+  }
+  .searchinput{
+    width: 900px;
   }
 }
 
@@ -253,7 +259,7 @@ ul::-webkit-scrollbar-track {
     max-height: 72.4vh; 
   }
   .searchinput{
-    width: 520px;
+    width: 500px;
   }
   .pdfHeight{
     height: 100vh;

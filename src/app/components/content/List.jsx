@@ -583,7 +583,6 @@ const ListView = ({
     },
   ];
 
-  // Calculate the records to display based on the pagerIndex and selectedValue
   const startIndex = pagerIndex * selectedValue;
   const endIndex = startIndex + selectedValue;
   const recordsToDisplay = products.slice(startIndex, endIndex);
@@ -593,15 +592,14 @@ const ListView = ({
   };
 
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(
-    products.map(() => false) // Initialize all checkboxes to "unchecked"
+    products.map(() => false)
   );
 
   const toggleCheckbox = (index) => {
     if (!selectAll) {
-      // Allow toggling individual checkboxes only when "Select All" is false
       setSelectedCheckboxes((prev) => {
         const updated = [...prev];
-        updated[index] = !updated[index]; // Toggle the specific checkbox
+        updated[index] = !updated[index];
         return updated;
       });
     }
@@ -675,8 +673,8 @@ const ListView = ({
                       <input
                         type="checkbox"
                         id={`checkbox-${index}`}
-                        checked={selectAll || selectedCheckboxes[index]} // Check if "Select All" is true or the specific checkbox is true
-                        onChange={() => toggleCheckbox(index)} // Toggle individual checkbox
+                        checked={selectAll || selectedCheckboxes[index]}
+                        onChange={() => toggleCheckbox(index)}
                         className="checkbox-input"
                       />
                       <span>{startIndex + index + 1}</span>
