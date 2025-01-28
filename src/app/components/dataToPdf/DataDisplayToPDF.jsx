@@ -97,13 +97,13 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
     setZoomLevel((prevZoom) => {
       const newZoom = Math.max(prevZoom - 0.1, 0.5);
       setZoomInPercentage(Math.round(newZoom * 10));
-      setZoomOutPercentage(Math.round(newZoom * 10));
+      setZoomOutPercentage(Math.round(newZoom * 10)); // Keep zoom-out percentage same
       return newZoom;
     });
   };
 
   return (
-    <div className="pdfHeight flex flex-col overflow-hidden ">
+    <div className="pdfHeight flex flex-col overflow-hidden h-screen">
       {/* Main Content */}
       <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow ">
         <main
@@ -203,43 +203,23 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         <div className="flex flex-row gap-1">
           <button
             onClick={toggleChat}
-            className="text-gray-700 px-6 py-3 rounded-md cursor-pointer"
+            className={"text-gray-700 px-6 py-3 rounded-md  cursor-allowed"}
           >
-            {closeChat ? (
-              // Arrow Down Icon (when closeChat is true)
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m19.5 4.5-15 15m0 0h11.25m-11.25 0V8.25"
-                />
-              </svg>
-            ) : (
-              // Current Icon (when closeChat is false)
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                />
-              </svg>
-            )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+              />
+            </svg>
           </button>
-
           <button
             onClick={handleDownloadPDF}
             disabled={isDownloading}

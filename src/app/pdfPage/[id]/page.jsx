@@ -813,9 +813,7 @@ const page = ({ params }) => {
             {/* Main Content Area */}
             <div className="flex flex-row  laptop:flex ">
               {/* Left section with more width */}
-              <div
-                className={`flex-grow laptop:min-w-[50vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] p-4 h-screen overflow-hidden`}
-              >
+              <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4 h-screen">
                 <DataDisplayToPDF
                   data={selectedProduct}
                   toggleChat={toggleChat}
@@ -828,19 +826,19 @@ const page = ({ params }) => {
                 className={`${
                   closeChat
                     ? "hidden"
-                    : "laptop:min-w-[25vw] md-mobile:min-w-[75vw] sm-mobile:min-w-[90vw] mobile:min-w-[95vw]"
+                    : "laptop:min-w-[25vw] md-mobile:min-w-[80vw] sm-mobile:min-w-[90vw] mobile:min-w-[95vw]"
                 } bg-white flex flex-col h-screen p-4`}
               >
                 {/* Header */}
                 <div className="flex flex-row justify-between items-center mt-4 border-b border-gray-300 pb-4">
-                  <div className="flex flex-row items-center gap-2">
+                  <div className="flex flex-row items-end gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-7 h-7"
+                      className="w-6 h-6 sm-mobile:w-5 sm-mobile:h-5"
                     >
                       <path
                         strokeLinecap="round"
@@ -848,8 +846,8 @@ const page = ({ params }) => {
                         d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
                       />
                     </svg>
-                    <p className="text-base">Ask Paper</p>
-                    <span className="text-blue-600 px-2 py-1 bg-blue-100 font-normal text-xs rounded-lg">
+                    <p className="text-sm sm-mobile:text-xs">Ask paper</p>
+                    <span className="text-blue-600 px-2 py-1 bg-blue-100 font-normal text-xs sm-mobile:text-[10px] rounded-lg">
                       Beta
                     </span>
                   </div>
@@ -860,7 +858,7 @@ const page = ({ params }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6"
+                      className="w-5 h-5 sm-mobile:w-4 sm-mobile:h-4"
                     >
                       <path
                         strokeLinecap="round"
@@ -871,9 +869,9 @@ const page = ({ params }) => {
                   </button>
                 </div>
 
-                {/* Centered Text */}
+                {/* Centered text */}
                 <div className="flex-grow flex justify-center items-center text-center">
-                  <p className="text-[#7295a7] text-sm sm-mobile:text-xs">
+                  <p className="text-[#7295a7] text-base md-mobile:text-sm sm-mobile:text-xs">
                     What would you like to know
                     <br />
                     about this paper?
@@ -882,7 +880,7 @@ const page = ({ params }) => {
 
                 {/* Footer */}
                 <div className="flex flex-col items-center gap-4">
-                  {/* Question Buttons */}
+                  {/* Questions */}
                   <div className="flex flex-col gap-2 w-full">
                     {[
                       "Summarize the paper in few sentences",
@@ -891,16 +889,18 @@ const page = ({ params }) => {
                     ].map((text, index) => (
                       <div
                         key={index}
-                        className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-3 rounded-lg shadow-sm"
+                        className="flex flex-row justify-between items-center bg-[#dfeeff] px-4 py-2 rounded-lg"
                       >
-                        <p className="text-sm truncate font-light">{text}</p>
+                        <p className="text-sm md-mobile:text-xs sm-mobile:text-[10px] truncate font-light">
+                          {text}
+                        </p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-5 h-5"
+                          className="w-4 h-4 sm-mobile:w-3 sm-mobile:h-3"
                         >
                           <path
                             strokeLinecap="round"
@@ -912,19 +912,19 @@ const page = ({ params }) => {
                     ))}
                   </div>
 
-                  {/* Input Field */}
-                  <form className="max-w-md w-full">
+                  {/* Search */}
+                  <form className="w-full">
                     <div className="relative">
                       <input
                         type="search"
                         id="default-search"
-                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        className="block w-full p-4 ps-10 text-sm sm-mobile:text-xs text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Ask this paper..."
                         required
                       />
                       <button
                         type="submit"
-                        className="text-white absolute end-2.5 bottom-2.5 bg-[#79c2f7] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-3"
+                        className="text-white absolute end-2.5 bottom-2.5 bg-[#79c2f7] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-3 sm-mobile:p-2"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -932,7 +932,7 @@ const page = ({ params }) => {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4"
+                          className="w-4 h-4 sm-mobile:w-3 sm-mobile:h-3"
                         >
                           <path
                             strokeLinecap="round"
