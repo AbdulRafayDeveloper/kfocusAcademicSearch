@@ -583,13 +583,26 @@ const ListView = ({
     },
   ];
 
-  // Calculate the records to display based on the pagerIndex and selectedValue
   const startIndex = pagerIndex * selectedValue;
   const endIndex = startIndex + selectedValue;
   const recordsToDisplay = products.slice(startIndex, endIndex);
 
   const toggleAbstract = (index) => {
     setExpandedRowIndex(expandedRowIndex === index ? null : index);
+  };
+
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
+    products.map(() => false)
+  );
+
+  const toggleCheckbox = (index) => {
+    if (!selectAll) {
+      setSelectedCheckboxes((prev) => {
+        const updated = [...prev];
+        updated[index] = !updated[index];
+        return updated;
+      });
+    }
   };
 
   const gridRef = useRef();
@@ -659,9 +672,10 @@ const ListView = ({
                     <div className="flex items-center">
                       <input
                         type="checkbox"
-                        className="mr-2"
-                        checked={selectAll}
-                        onChange={() => {}}
+                        id={`checkbox-${index}`}
+                        checked={selectAll || selectedCheckboxes[index]}
+                        onChange={() => toggleCheckbox(index)}
+                        className="checkbox-input"
                       />
                       <span>{startIndex + index + 1}</span>
                     </div>

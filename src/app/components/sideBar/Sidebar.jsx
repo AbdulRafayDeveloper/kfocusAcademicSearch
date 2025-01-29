@@ -20,11 +20,11 @@ const SidebarFilters = ({
     "Report create about cancer",
   ];
 
-  const [expandedFilters, setExpandedFilters] = useState(null); // Hold only one category name
+  const [expandedFilters, setExpandedFilters] = useState(null);
 
   const toggleFilter = (category) => {
-    setExpandedFilters(
-      (prevCategory) => (prevCategory === category ? null : category) // Close the category if it's already open, else open the new category
+    setExpandedFilters((prevCategory) =>
+      prevCategory === category ? null : category
     );
   };
 

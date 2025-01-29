@@ -4,12 +4,11 @@ import jsPDF from "jspdf";
 
 const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
   const [isDownloading, setIsDownloading] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1); // State to track zoom level
+  const [zoomLevel, setZoomLevel] = useState(1);
   const [zoomInPercentage, setZoomInPercentage] = useState(10);
   const [zoomOutPercentage, setZoomOutPercentage] = useState(10);
-  const contentRef = useRef(null); // Ref to capture content
+  const contentRef = useRef(null);
 
-  // Log data on component mount or when data changes
   useEffect(() => {
     console.log("Received data:", data);
   }, [data]);
@@ -19,19 +18,16 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
     const contentElement = contentRef.current;
 
-    // Save original styles to restore after capturing
     const originalStyle = {
       height: contentElement.style.height,
       overflow: contentElement.style.overflow,
     };
 
-    // Temporarily adjust styles to capture full content
-    contentElement.style.height = "auto"; // Expand height to fit all content
-    contentElement.style.overflow = "visible"; // Ensure all content is visible
+    contentElement.style.height = "auto";
+    contentElement.style.overflow = "visible";
 
     const canvas = await html2canvas(contentElement, { scale: 2 });
 
-    // Restore original styles
     contentElement.style.height = originalStyle.height;
     contentElement.style.overflow = originalStyle.overflow;
 
@@ -42,13 +38,11 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
     const imgData = canvas.toDataURL("image/png");
     const contentHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    const pagePadding = 10; // Padding between pages (in mm)
+    const pagePadding = 10;
 
     if (contentHeight <= pdfHeight - pagePadding * 2) {
-      // Single-page content
       pdf.addImage(imgData, "PNG", 0, pagePadding, pdfWidth, contentHeight);
     } else {
-      // Multi-page content
       let currentHeight = 0;
 
       while (currentHeight < canvas.height) {
@@ -61,7 +55,6 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
         const pageContext = pageCanvas.getContext("2d");
 
-        // Draw the portion of the content for the current page
         pageContext.drawImage(
           canvas,
           0,
@@ -77,14 +70,12 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         const pageImgData = pageCanvas.toDataURL("image/png");
         const pageHeight = (pageCanvas.height * pdfWidth) / canvas.width;
 
-        // Add the image with padding
         pdf.addImage(pageImgData, "PNG", 0, pagePadding, pdfWidth, pageHeight);
 
-        // Move to the next section of the content
         currentHeight += pageCanvas.height;
 
         if (currentHeight < canvas.height) {
-          pdf.addPage(); // Add a new page if there's more content
+          pdf.addPage();
         }
       }
     }
@@ -95,67 +86,76 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
 
   const handleZoomIn = () => {
     setZoomLevel((prevZoom) => {
-      const newZoom = Math.min(prevZoom + 0.1, 2); // Max zoom level of 2
-      setZoomInPercentage(Math.round(newZoom * 10)); // Update zoom-in percentage
-      setZoomOutPercentage(Math.round(newZoom * 10)); // Keep zoom-out percentage same
+      const newZoom = Math.min(prevZoom + 0.1, 2);
+      setZoomInPercentage(Math.round(newZoom * 10));
+      setZoomOutPercentage(Math.round(newZoom * 10));
       return newZoom;
     });
   };
 
   const handleZoomOut = () => {
     setZoomLevel((prevZoom) => {
-      const newZoom = Math.max(prevZoom - 0.1, 0.5); // Min zoom level of 0.5
-      setZoomInPercentage(Math.round(newZoom * 10)); // Update zoom-in percentage
+      const newZoom = Math.max(prevZoom - 0.1, 0.5);
+      setZoomInPercentage(Math.round(newZoom * 10));
       setZoomOutPercentage(Math.round(newZoom * 10)); // Keep zoom-out percentage same
       return newZoom;
     });
   };
 
   return (
-    <div className="pdfHeight flex flex-col overflow-hidden ">
+    <div className="pdfHeight flex flex-col">
       {/* Main Content */}
-      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow overflow-auto">
-        <main
-          ref={contentRef}
-          className="pl-12 pr-12 pt-12 bg-white"
+      <div className="laptop:pl-20 laptop:pr-20 laptop:pt-4 mobile:pl-4 mobile:pr-4 mobile:pt-1 md-mobile:pl-4 sm-mobile:pl-4 md-mobile:pr-4 sm-mobile:pr-4 md-mobile:pt-1 sm-mobile:pt-1 bg-blue-50 flex-grow overflow-hidden">
+        <div
+          className="relative w-full h-full overflow-hidden"
           style={{
-            height: "calc(105vh - 140px)",
-            transform: `scale(${zoomLevel})`, // Apply zoom scale
-            transformOrigin: "center center", // Ensure zoom happens from center
-            overflow: "auto", // Ensure content is scrollable if zoomed in
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {/* Logo inside the main content area */}
-          <div className="flex items-center mb-4 mt-12">
-            <img
-              src="/icons/future_logo.png"
-              alt="Logo"
-              className="w-50 h-10 mr-4"
-            />
-          </div>
+          <main
+            ref={contentRef}
+            className="pl-12 pr-12 pt-12 bg-white"
+            style={{
+              height: "calc(105vh - 140px)",
+              transform: `scale(${zoomLevel})`,
+              transformOrigin: "center top",
+              overflow: "auto", // Allow scrolling
+            }}
+          >
+            {/* Logo inside the main content area */}
+            <div className="flex items-center mb-4 mt-12">
+              <img
+                src="/icons/future_logo.png"
+                alt="Logo"
+                className="w-50 h-10 mr-4"
+              />
+            </div>
 
-          <hr className="flex-grow border-t-2 border-gray-800 mb-12" />
-          {/* Title inside the main content area */}
-          <h2 className="text-3xl font-bold mb-8">
-            {data?.title || "No Data Title"}
-          </h2>
+            <hr className="flex-grow border-t-2 border-gray-800 mb-12" />
+            {/* Title inside the main content area */}
+            <h2 className="text-3xl font-bold mb-8">
+              {data?.title || "No Data Title"}
+            </h2>
 
-          {/* Data content in a spread-out format */}
-          <div className="space-y-6">
-            {data ? (
-              <>
-                <div className="flex justify-between">
-                  <h3 className="text-xl font-semibold">{data.title}</h3>
-                  <p className="text-sm text-gray-400">{data.year}</p>
-                </div>
-                <p className="text-gray-700">{data.abstract}</p>
-                <p className="text-gray-500">Authors: {data.authors}</p>
-              </>
-            ) : (
-              <p>No data available.</p>
-            )}
-          </div>
-        </main>
+            {/* Data content in a spread-out format */}
+            <div className="space-y-6">
+              {data ? (
+                <>
+                  <div className="flex justify-between">
+                    <h3 className="text-xl font-semibold">{data.title}</h3>
+                    <p className="text-sm text-gray-400">{data.year}</p>
+                  </div>
+                  <p className="text-gray-700">{data.abstract}</p>
+                  <p className="text-gray-500">Authors: {data.authors}</p>
+                </>
+              ) : (
+                <p>No data available.</p>
+              )}
+            </div>
+          </main>
+        </div>
       </div>
 
       {/* Download and Zoom Controls */}
@@ -212,9 +212,7 @@ const DataDisplayToPDF = ({ data, toggleChat, closeChat }) => {
         <div className="flex flex-row gap-1">
           <button
             onClick={toggleChat}
-            className={`text-gray-700 px-6 py-3 rounded-md ${
-              closeChat ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={"text-gray-700 px-6 py-3 rounded-md  cursor-allowed"}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

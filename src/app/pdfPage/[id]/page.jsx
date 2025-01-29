@@ -1,16 +1,11 @@
 "use client";
-import Header from "../../components/header/Header";
-//import Footer from "../../components/header/Footer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+
 import SidebarFilters from "../../components/sideBar/Sidebar";
 import React, { useState, useEffect } from "react";
-import Filters from "../../components/filters/Filters";
-import MoreFilters from "../../components/moreFilters/MoreFilters";
+
 import Footer from "@/app/components/footer/Footer";
 import DataDisplayToPDF from "@/app/components/dataToPdf/DataDisplayToPDF";
-import { useSearchParams, usePathname } from "next/navigation";
+
 import Loader from "@/app/components/loader/Loader";
 
 const page = ({ params }) => {
@@ -760,21 +755,21 @@ const page = ({ params }) => {
     selectedFilterOptions = [selectedFilterindex];
   }
 
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
 
-  const param = React.use(params); // Correct way to unwrap params in Next.js 13+
+  const param = React.use(params);
   console.log("id: ", param.id);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const product = products[param.id]; // Fetch product by ID from the products array
-        setSelectedProduct(product); // Set the selected product
+        const product = products[param.id];
+        setSelectedProduct(product);
         console.log(param.id);
-        setLoading(false); // Data is loaded, set loading to false
+        setLoading(false);
       } catch (e) {
         console.log("Error fetching data:", e);
-        setLoading(false); // Even on error, stop loading
+        setLoading(false);
       }
     };
 
@@ -799,26 +794,13 @@ const page = ({ params }) => {
         <div className="flex mobile:w-[88%] md-mobile:w-[88%] sm-mobile:w-[88%] laptop:w-full flex-col ">
           <div className="flex w-full">
             {/* Sidebar */}
-            <div
-              className={`transition-all duration-300 overflow-hidden ${
-                isSidebarVisible
-                  ? "laptop:w-[300px] mobile:w-[200px] z-[9999] bg-white shadow-lg"
-                  : "laptop:w-0 w-0"
-              } laptop:block laptop:static fixed mobile:top-10 mobile:left-12 h-full`}
-            >
-              <SidebarFilters
-                activeCategory={activeCategory}
-                changeActiveCategory={changeActiveCategory}
-                toggleSideFilter={toggleSideFilter}
-                className="overflow-y-scroll "
-                filterCategories={filterCategories}
-              />
-            </div>
 
             {/* Main Content Area */}
-            <div className="flex flex-row h-screen laptop:flex mobile:overflow-x-auto md-mobile:overflow-x-auto sm-mobile:overflow-x-auto">
+            <div className="flex flex-row  laptop:flex ">
               {/* Left section with more width */}
-              <div className="flex-grow laptop:min-w-[50vw] mobile:min-w-[160vw] md-mobile:min-w-[160vw] sm-mobile:min-w-[160vw] p-4">
+              <div
+                className={`flex-grow laptop:min-w-[50vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw] p-4 h-screen overflow-hidden`}
+              >
                 <DataDisplayToPDF
                   data={selectedProduct}
                   toggleChat={toggleChat}
@@ -831,10 +813,11 @@ const page = ({ params }) => {
                 className={`${
                   closeChat
                     ? "hidden"
-                    : "laptop:min-w-[25vw] mobile:min-w-[90vw] md-mobile:min-w-[90vw] sm-mobile:min-w-[90vw]"
-                } bg-white flex flex-col h-screen overflow-y-auto p-4`}
+                    : "laptop:min-w-[25vw] md-mobile:min-w-[80vw] sm-mobile:min-w-[90vw] mobile:min-w-[95vw]"
+                } bg-white flex flex-col h-screen p-4`}
               >
-                <div className="flex flex-row justify-between mt-4 items-center border-b border-gray-300 pb-4">
+                {/* Header */}
+                <div className="flex flex-row justify-between items-center mt-4 border-b border-gray-300 pb-4">
                   <div className="flex flex-row items-end gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -842,7 +825,7 @@ const page = ({ params }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-7"
+                      className="w-6 h-6 sm-mobile:w-5 sm-mobile:h-5"
                     >
                       <path
                         strokeLinecap="round"
@@ -850,8 +833,8 @@ const page = ({ params }) => {
                         d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
                       />
                     </svg>
-                    <p>Ask paper</p>
-                    <span className="text-blue-600 p-[0.5] py-[0.5px] px-2 bg-blue-100 font-normal text-xs flex-shrink-0 rounded-lg mb-[2px]">
+                    <p className="text-sm sm-mobile:text-xs">Ask paper</p>
+                    <span className="text-blue-600 px-2 py-1 bg-blue-100 font-normal text-xs sm-mobile:text-[10px] rounded-lg">
                       Beta
                     </span>
                   </div>
@@ -862,7 +845,7 @@ const page = ({ params }) => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="size-5"
+                      className="w-5 h-5 sm-mobile:w-4 sm-mobile:h-4"
                     >
                       <path
                         strokeLinecap="round"
@@ -875,89 +858,60 @@ const page = ({ params }) => {
 
                 {/* Centered text */}
                 <div className="flex-grow flex justify-center items-center text-center">
-                  <p className="text-[#7295a7]">
+                  <p className="text-[#7295a7] text-base md-mobile:text-sm sm-mobile:text-xs">
                     What would you like to know
                     <br />
                     about this paper?
                   </p>
                 </div>
 
-                {/* Footer at the bottom */}
+                {/* Footer */}
                 <div className="flex flex-col items-center gap-4">
-                  <div className="flex flex-col gap-2">
-                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
-                      <p className="text-base truncate font-light">
-                        Summarize the paper in few sentence
-                      </p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-5 h-5"
+                  {/* Questions */}
+                  <div className="flex flex-col gap-2 w-full">
+                    {[
+                      "Summarize the paper in few sentences",
+                      "Were there any conflicts of interest?",
+                      "Did the author mention limitations?",
+                    ].map((text, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-row justify-between items-center bg-[#dfeeff] px-4 py-2 rounded-lg"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                        />
-                      </svg>
-                    </div>
-
-                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
-                      <p className="text-base truncate font-light">
-                        Were there any conflicts of interest?
-                      </p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                        />
-                      </svg>
-                    </div>
-
-                    <div className="flex flex-row justify-between items-center bg-[#dfeeff] px-5 py-2 rounded-l-lg rounded-tr-lg">
-                      <p className="text-base truncate font-light">
-                        Did the author mention limitations?
-                      </p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                        />
-                      </svg>
-                    </div>
+                        <p className="text-sm md-mobile:text-xs sm-mobile:text-[10px] truncate font-light">
+                          {text}
+                        </p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4 sm-mobile:w-3 sm-mobile:h-3"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                          />
+                        </svg>
+                      </div>
+                    ))}
                   </div>
 
-                  <form className="max-w-md mx-auto w-full">
+                  {/* Search */}
+                  <form className="w-full">
                     <div className="relative">
                       <input
                         type="search"
                         id="default-search"
-                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        className="block w-full p-4 ps-10 text-sm sm-mobile:text-xs text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Ask this paper..."
                         required
                       />
                       <button
                         type="submit"
-                        className="text-white absolute end-2.5 bottom-2.5 bg-[#79c2f7] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-3 mt-2"
+                        className="text-white absolute end-2.5 bottom-2.5 bg-[#79c2f7] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-3 sm-mobile:p-2"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -965,7 +919,7 @@ const page = ({ params }) => {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="size-4"
+                          className="w-4 h-4 sm-mobile:w-3 sm-mobile:h-3"
                         >
                           <path
                             strokeLinecap="round"
@@ -976,7 +930,9 @@ const page = ({ params }) => {
                       </button>
                     </div>
                   </form>
-                  <p className="text-[#c7d9e1] text-center text-xs">
+
+                  {/* Footer Text */}
+                  <p className="text-[#c7d9e1] text-center text-xs sm-mobile:text-[10px]">
                     4 messages left, Reset to 10 on January 12th
                     <span className="underline"> Upgrade for unlimited</span>
                   </p>

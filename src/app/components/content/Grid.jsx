@@ -247,17 +247,28 @@ const GridView = ({
     }
   }, [moveUp]);
 
-  // Calculate start and end indices for slicing records
   const startIndex = pagerIndex * selectedValue;
   const endIndex = startIndex + selectedValue;
 
-  // Slice the records to display based on indices
   const recordsToDisplay = products.slice(startIndex, endIndex);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(
+    products.map(() => false)
+  );
+
+  const toggleCheckbox = (index) => {
+    if (!selectAll) {
+      setSelectedCheckboxes((prev) => {
+        const updated = [...prev];
+        updated[index] = !updated[index];
+        return updated;
+      });
+    }
+  };
 
   return (
     <div
       className={`relative listheight h-screen overflow-y-auto ${
-        isSidebarVisible ? "max-w-[1210px]" : "w-full"
+        isSidebarVisible ? "max-w-[1290px]" : "w-full"
       } mobile:h-[76vh] md-mobile:h-[76vh] sm-mobile:h-[76vh]`}
       ref={gridRef}
     >
@@ -273,9 +284,9 @@ const GridView = ({
                 <input
                   type="checkbox"
                   id={`checkbox-${index}`}
+                  checked={selectAll || selectedCheckboxes[index]}
+                  onChange={() => toggleCheckbox(index)}
                   className="checkbox-input"
-                  checked={selectAll} // Bind the checkbox to the "select all" state
-                  onChange={() => {}} // Keep empty since `checked` is controlled
                 />
               </div>
 
@@ -341,7 +352,7 @@ const GridView = ({
                   </div>
                   <div className="text-xs text-blue-600">
                     <a
-                      href={`../../pdfPage/${index}`} // Navigate to the web route
+                      href={`../../pdfPage/${index}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline focus:outline-none"

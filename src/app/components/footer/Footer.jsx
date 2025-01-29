@@ -14,14 +14,14 @@ const Footer = () => {
             <div
               className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "horizontal-tb", // Default for mobile view
+                writingMode: "horizontal-tb",
               }}
             >
               <span className="block md:hidden text-sm">About us</span>
               <span
                 className="hidden md:block"
                 style={{
-                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  writingMode: "vertical-rl",
                   transform: "rotate(360deg)",
                 }}
               >
@@ -61,7 +61,7 @@ const Footer = () => {
             <div
               className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "horizontal-tb", // Default for mobile view
+                writingMode: "horizontal-tb",
               }}
             >
               <span className="block md:hidden mobile:text-sm md-mobile:text-sm sm-mobile:text-sm">
@@ -70,7 +70,7 @@ const Footer = () => {
               <span
                 className="hidden md:block"
                 style={{
-                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  writingMode: "vertical-rl",
                   transform: "rotate(360deg)",
                 }}
               >
@@ -138,7 +138,7 @@ const Footer = () => {
             <div
               className="text-[#001727] font-semibold mb-4 md:mb-0 md:mr-2 text-normal"
               style={{
-                writingMode: "horizontal-tb", // Default for mobile view
+                writingMode: "horizontal-tb",
               }}
             >
               <span className="block md:hidden mobile:text-sm md-mobile:text-sm sm-mobile:text-sm">
@@ -147,7 +147,7 @@ const Footer = () => {
               <span
                 className="hidden md:block"
                 style={{
-                  writingMode: "vertical-rl", // Vertical text for medium and larger screens
+                  writingMode: "vertical-rl",
                   transform: "rotate(360deg)",
                 }}
               >
